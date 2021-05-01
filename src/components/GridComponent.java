@@ -5,7 +5,7 @@ import minesweeper.MainFrame;
 
 import java.awt.*;
 
-
+//233
 public class GridComponent extends BasicComponent {
     public static int gridSize = 30;
 
