@@ -5,9 +5,7 @@ import minesweeper.MainFrame;
 
 import java.awt.*;
 
-/**
- * 这是个很牛逼的类。
- */
+
 public class GridComponent extends BasicComponent {
     public static int gridSize = 30;
 
