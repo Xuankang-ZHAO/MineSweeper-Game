@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
         this.setTitle("2021 CS102A Project Demo 2");
         this.setLayout(null);//清空布局管理器
         this.setSize(yCount * GridComponent.gridSize + 20, xCount * GridComponent.gridSize + 200);
+        //this.setSize(999,999);
         this.setLocationRelativeTo(null);
 
         Player p1 = new Player();

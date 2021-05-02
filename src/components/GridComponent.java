@@ -5,6 +5,7 @@ import minesweeper.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.ImageObserver;
 
 //233
 public class GridComponent extends BasicComponent {
@@ -15,6 +16,8 @@ public class GridComponent extends BasicComponent {
     private int col;
     private GridStatus status = GridStatus.Covered;
     private int content = 0;
+    ImageIcon 钻石=new ImageIcon("钻石.PNG");
+    Image diamond=钻石.getImage();
 
     public GridComponent(int x, int y) {
         this.setSize(gridSize, gridSize);
@@ -49,9 +52,6 @@ public class GridComponent extends BasicComponent {
     public void draw(Graphics g) {
 
         if (this.status == GridStatus.Covered) {
-            //ImageIcon grassCube=new ImageIcon("F:\\2021年春季学期\\JAVA\\project\\MineSweeper-Demo\\src\\pictures\\草方块.PNG");
-            //Image grass=grassCube.getImage();
-            //g=grass;
             g.setColor(Color.CYAN);//覆盖的时候是蓝绿色
             g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
             //其实是fill rectangular
@@ -64,7 +64,6 @@ public class GridComponent extends BasicComponent {
             g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
         }
         if (this.status == GridStatus.Flag) {
-
             g.setColor(Color.LIGHT_GRAY);
             g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
             g.setColor(Color.RED);
