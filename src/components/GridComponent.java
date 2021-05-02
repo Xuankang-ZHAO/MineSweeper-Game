@@ -3,6 +3,7 @@ package components;
 import entity.GridStatus;
 import minesweeper.MainFrame;
 
+import javax.swing.*;
 import java.awt.*;
 
 //233
@@ -48,6 +49,9 @@ public class GridComponent extends BasicComponent {
     public void draw(Graphics g) {
 
         if (this.status == GridStatus.Covered) {
+            //ImageIcon grassCube=new ImageIcon("F:\\2021年春季学期\\JAVA\\project\\MineSweeper-Demo\\src\\pictures\\草方块.PNG");
+            //Image grass=grassCube.getImage();
+            //g=grass;
             g.setColor(Color.CYAN);//覆盖的时候是蓝绿色
             g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
             //其实是fill rectangular
