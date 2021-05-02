@@ -6,7 +6,7 @@ import java.awt.*;
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            MainFrame mainFrame = new MainFrame();
+            MainFrame mainFrame = new MainFrame(16,30,99);
             mainFrame.setVisible(true);
 
         });

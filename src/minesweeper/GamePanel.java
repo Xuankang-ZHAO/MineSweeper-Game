@@ -14,7 +14,9 @@ public class GamePanel extends JPanel {
     private int yCount;
     private int mineCount;
 
-    /**
+    private int LeiCode = -1;
+
+    /*
      * 初始化一个具有指定行列数格子、并埋放了指定雷数的雷区。
      *
      * @param xCount    count of grid in column
@@ -23,22 +25,26 @@ public class GamePanel extends JPanel {
      */
     //注意：xCount代表行数，yCount代表列数
     public GamePanel(int xCount, int yCount, int mineCount) {
+        this.xCount=xCount;
+        this.yCount=yCount;
+        this.mineCount=mineCount;
+
         this.setVisible(true);
         this.setFocusable(true);
         this.setLayout(null);
         this.setBackground(Color.WHITE);
         this.setSize(GridComponent.gridSize * yCount, GridComponent.gridSize * xCount);
 
-        initialGame(xCount, yCount, mineCount);
+        initialGame();
 
         repaint();
     }
 
-    public void initialGame(int xCount, int yCount, int mineCount) {
+    public void initialGame() {
         mineField = new GridComponent[xCount][yCount];
-
-        generateChessBoard(xCount, yCount, mineCount);//初始化棋盘
-
+        //初始化棋盘
+        generateChessBoard();
+        //对按钮们进行了初始化
         for (int i = 0; i < xCount; i++) {
             for (int j = 0; j < yCount; j++) {
                 GridComponent gridComponent = new GridComponent(i, j);
@@ -50,8 +56,8 @@ public class GamePanel extends JPanel {
         }
     }
 
-    //不同棋盘大小对应不同数量的雷
-    public int findBoardSize(int xCount, int yCount, int mineCount) {
+    //todo:不同棋盘大小对应不同数量的雷，对不合法的输入怎么办
+    public int findBoardSize() {
         if (xCount == 9 && yCount == 9)
             return 10;
         if (xCount == 16 && yCount == 16)
@@ -69,64 +75,64 @@ public class GamePanel extends JPanel {
         }
     }
 
-    public void generateChessBoard(int xCount, int yCount, int mineCount) {
+    //产生雷场并将格子们正确地赋值
+    public void generateChessBoard() {
         //todo: generate chessboard by your own algorithm
         chessboard = new int[xCount][yCount];//定义棋盘大小
         int count = 0;
-        //埋下指定数量的雷数
+        //埋下指定数量的雷数，现在只写了-1
         for (int i = 0; i < xCount; i++) {
             for (int j = 0; j < yCount; j++) {
-                if (count <= findBoardSize(xCount, yCount, mineCount)) {
+                if (count <= findBoardSize()) {
                     chessboard[i][j] = -1;
                     count++;
                 }
             }
         }
-        //计算周边雷的数量
-        for (int i=0;i<ROW;i++){
-            for(int j=0;j<COL;j++){
-                if(data[i][j]==LeiCode){
+        //先将雷们打乱一次
+        resetMine();
+        //如果打乱后出现9雷，重新洗牌直至无9雷
+        while (checkMine()) {
+            resetMine();
+        }
+        //计算周边雷的数量，初始化其他格子的数字
+        for (int i = 0; i < xCount; i++) {
+            for (int j = 0; j < yCount; j++) {
+                if (chessboard[i][j] == LeiCode) {
                     continue;
                 }
-                int tempCount=0;
-                if(i>0&&j>0&&data[i-1][j-1]==LeiCode){
+                int tempCount = 0;
+                if (i > 0 && j > 0 && chessboard[i - 1][j - 1] == LeiCode) {
                     tempCount++;
                 }
-                if(i>0&&data[i-1][j]==LeiCode){
+                if (i > 0 && chessboard[i - 1][j] == LeiCode) {
                     tempCount++;
                 }
-                if(i>0&&j<COL-1&&data[i-1][j+1]==LeiCode){
+                if (i > 0 && j < yCount - 1 && chessboard[i - 1][j + 1] == LeiCode) {
                     tempCount++;
                 }
-                if(j>0&&data[i][j-1]==LeiCode){
+                if (j > 0 && chessboard[i][j - 1] == LeiCode) {
                     tempCount++;
                 }
-                if(j<COL-1&&data[i][j+1]==LeiCode){
+                if (j < yCount - 1 && chessboard[i][j + 1] == LeiCode) {
                     tempCount++;
                 }
-                if(i<ROW-1&&j>0&&data[i+1][j-1]==LeiCode){
+                if (i < xCount - 1 && j > 0 && chessboard[i + 1][j - 1] == LeiCode) {
                     tempCount++;
                 }
-                if(i<ROW-1&&data[i+1][j]==LeiCode){
+                if (i < xCount - 1 && chessboard[i + 1][j] == LeiCode) {
                     tempCount++;
                 }
-                if(i<ROW-1&&j<COL-1&&data[i+1][j+1]==LeiCode){
+                if (i < xCount - 1 && j < yCount - 1 && chessboard[i + 1][j + 1] == LeiCode) {
                     tempCount++;
                 }
-                data[i][j]=tempCount;
+                chessboard[i][j] = tempCount;
             }
-        }
-        resetMine(xCount,yCount);
-        //如果打乱后出现9雷，重新洗牌直至无9雷，赋值
-        while (checkMine(xCount, yCount)){
-            resetMine(xCount,yCount);
         }
     }
 
-
-    public boolean checkMine(int xCount, int yCount) {
-        //检查雷的分布
-        //找9个雷的情况
+    //检查雷的分布，找9个雷的情况
+    public boolean checkMine() {
         boolean check = false;
         for (int i = 0; i < xCount; i++) {
             for (int j = 0; j < yCount; j++) {
@@ -159,11 +165,11 @@ public class GamePanel extends JPanel {
                     count++;
                 }
                 if (count == 9) {//有9雷是true；
-                    check=true;
+                    check = true;
                     break;
                 }
             }
-            if(check){
+            if (check) {
                 break;
             }
         }
@@ -171,13 +177,14 @@ public class GamePanel extends JPanel {
         // 暂时还没有满足用户第一次点到雷的情况
     }
 
-    public void resetMine(int xCount, int yCount) {
-        while (this.checkMine(xCount, yCount)) {//有9雷
+    //洗雷，使得雷重新分布
+    public void resetMine() {
+        while (this.checkMine()) {//有9雷
             //以下用洗牌算法防止雷区过度密集
             //对每一行重新洗牌 i在外层，j在内层
             for (int i = xCount - 1; i >= 0; i--) {
                 for (int j = yCount - 1; j > 0; j--) {
-                    int a = random.nextInt(j - 1);//小心数组越界！！！
+                    int a = random.nextInt(j );//小心数组越界！！！
                     int rem = chessboard[i][a];
                     chessboard[i][a] = chessboard[i][j];//得记住之前的数啊，是交换！！！
                     chessboard[i][j] = rem;
@@ -185,11 +192,11 @@ public class GamePanel extends JPanel {
             }
             //对每一列重新洗牌，i在内，j在外
             for (int j = yCount - 1; j >= 0; j--) {
-                for (int i = xCount - 1; i >0; i--) {
-                    int b = random.nextInt(i - 1);
-                    int rem=chessboard[b][j];
+                for (int i = xCount - 1; i > 0; i--) {
+                    int b = random.nextInt(i );
+                    int rem = chessboard[b][j];
                     chessboard[b][j] = chessboard[i][j];
-                    chessboard[i][j]=rem;
+                    chessboard[i][j] = rem;
                 }
             }
 

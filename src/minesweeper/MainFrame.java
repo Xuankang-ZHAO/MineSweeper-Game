@@ -13,12 +13,12 @@ public class MainFrame extends JFrame {
     private int yCount;
     private int mineCount;
 
-    public MainFrame() {
+    public MainFrame(int xCount,int yCount,int mineCount) {
         //todo: change the count of xCount, yCount and mineCount by passing parameters from constructor
         //下面写的是确定大小的雷区的参数
-        this.xCount = 12;//grid of row
-        this.yCount = 10;// grid of column
-        this.mineCount = 20;// mine count
+        this.xCount = xCount;
+        this.yCount = yCount;
+        this.mineCount = mineCount;
 
         this.setTitle("2021 CS102A Project Demo 2");
         this.setLayout(null);//清空布局管理器
