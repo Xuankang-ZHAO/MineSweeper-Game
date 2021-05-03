@@ -1,20 +1,26 @@
 package minesweeper;
 
 import components.GridComponent;
+import entity.GridStatus;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.Random;
 
 public class GamePanel extends JPanel {
     private GridComponent[][] mineField;
     private int[][] chessboard;
+    private int[][] currentState;
+    //用于记录雷区的状态，0代表未点开（covered)，-1代表点开是雷(bombed)，
+    // 1代表是雷并正确插旗(flag)，2代表点开了，但是安全数字(clicked),-2代表错误插旗(wrong)
     private final Random random = new Random();
     private int xCount;
     private int yCount;
     private int mineCount;
 
     private int LeiCode = -1;
+
 
     /*
      * 初始化一个具有指定行列数格子、并埋放了指定雷数的雷区。
@@ -25,9 +31,9 @@ public class GamePanel extends JPanel {
      */
     //注意：xCount代表行数，yCount代表列数
     public GamePanel(int xCount, int yCount, int mineCount) {
-        this.xCount=xCount;
-        this.yCount=yCount;
-        this.mineCount=mineCount;
+        this.xCount = xCount;
+        this.yCount = yCount;
+        this.mineCount = mineCount;
 
         this.setVisible(true);
         this.setFocusable(true);
@@ -47,13 +53,15 @@ public class GamePanel extends JPanel {
         //对按钮们进行了初始化
         for (int i = 0; i < xCount; i++) {
             for (int j = 0; j < yCount; j++) {
-                GridComponent gridComponent = new GridComponent(i, j);
+                GridComponent gridComponent = new GridComponent(i, j, chessboard[i][j]);
                 gridComponent.setContent(chessboard[i][j]);
                 gridComponent.setLocation(j * GridComponent.gridSize, i * GridComponent.gridSize);
                 mineField[i][j] = gridComponent;
                 this.add(mineField[i][j]);
             }
         }
+        //对所记录的按钮们的状态进行了初始化，默认是0即未点开
+        generateState();
     }
 
     //todo:不同棋盘大小对应不同数量的雷，对不合法的输入怎么办
@@ -131,6 +139,15 @@ public class GamePanel extends JPanel {
         }
     }
 
+    public void generateState() {
+        currentState = new int[xCount][yCount];
+        for (int m = 0; m < xCount; m++) {
+            for (int n = 0; n < yCount; n++) {
+                currentState[m][n] = 0;
+            }
+        }
+    }
+
     //检查雷的分布，找9个雷的情况
     public boolean checkMine() {
         boolean check = false;
@@ -184,7 +201,7 @@ public class GamePanel extends JPanel {
             //对每一行重新洗牌 i在外层，j在内层
             for (int i = xCount - 1; i >= 0; i--) {
                 for (int j = yCount - 1; j > 0; j--) {
-                    int a = random.nextInt(j );//小心数组越界！！！
+                    int a = random.nextInt(j);//小心数组越界！！！
                     int rem = chessboard[i][a];
                     chessboard[i][a] = chessboard[i][j];//得记住之前的数啊，是交换！！！
                     chessboard[i][j] = rem;
@@ -193,7 +210,7 @@ public class GamePanel extends JPanel {
             //对每一列重新洗牌，i在内，j在外
             for (int j = yCount - 1; j >= 0; j--) {
                 for (int i = xCount - 1; i > 0; i--) {
-                    int b = random.nextInt(i );
+                    int b = random.nextInt(i);
                     int rem = chessboard[b][j];
                     chessboard[b][j] = chessboard[i][j];
                     chessboard[i][j] = rem;
@@ -223,5 +240,53 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+    }
+
+    public int[][] getChessboard() {
+        return chessboard;
+    }
+
+    public int getxCount() {
+        return xCount;
+    }
+
+    public int getyCount() {
+        return yCount;
+    }
+
+
+
+    public int[][] getCurrentState() {
+        return currentState;
+    }
+
+    //本方法用于对格子的状态进行时刻更新
+    public void updateCurrentState() {
+        for (int i = 0; i < xCount; i++) {
+            for (int j = 0; j < yCount; j++) {
+                switch (mineField[i][j].getStatus()) {
+                    case Flag: {
+                        currentState[i][j] = 1;
+                        break;
+                    }
+                    case Wrong:{
+                        currentState[i][j]=-2;
+                        break;
+                    }
+                    case Covered:{
+                        currentState[i][j]=0;
+                        break;
+                    }
+                    case Clicked:{
+                        currentState[i][j]=2;
+                        break;
+                    }
+                    case Bombed:{
+                        currentState[i][j]=-1;
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

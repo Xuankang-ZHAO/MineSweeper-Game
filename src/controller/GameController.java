@@ -4,6 +4,7 @@ import minesweeper.GamePanel;
 import entity.Player;
 import minesweeper.ScoreBoard;
 
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -14,6 +15,8 @@ public class GameController {
     private Player p2;
 
     private Player onTurn;
+
+
 
     private GamePanel gamePanel;
     private ScoreBoard scoreBoard;
@@ -50,20 +53,23 @@ public class GameController {
             onTurn = p1;
         }
         System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
-        scoreBoard.update();
+        scoreBoard.update();//回合结束更新分数表
+        gamePanel.updateCurrentState();//回合结束更新棋子们的打开状态
         //TODO: 在每个回合结束的时候，还需要做什么 (例如...检查游戏是否结束？)
 
     }
 
+
+    public Player getOnTurn() {
+        return onTurn;
+    }
 
     /**
      * 获取正在进行当前回合的玩家。
      *
      * @return 正在进行当前回合的玩家
      */
-    public Player getOnTurnPlayer() {
-        return onTurn;
-    }
+
 
 
     public Player getP1() {
@@ -121,19 +127,52 @@ public class GameController {
 
     //存档,传入一个arraylist，其中元素为Integer 形式的二维数组，以代表棋盘的状态
     //todo:传入一个参数，以明确这是要存哪个档
-    public  void saveFileData(ArrayList<ArrayList<Integer>> demo) throws IOException {
-        File file = new File("F:\\save.txt");
+    //该存档用于存雷场
+    public  void writeInitialDataToFile(String s) throws IOException {
+        File file = new File("E:\\project 的存档",s);
         if (file.exists()) {
             file.createNewFile();
         }
         FileWriter fileWriter = new FileWriter(file);
-        for (int i = 0; i < demo.size(); i++) {
-            for (int j = 0; j < demo.get(i).size(); j++) {
-                fileWriter.write(demo.get(i).get(j) + "\t");
+        for (int i = 0; i < gamePanel.getxCount(); i++) {
+            for (int j = 0; j < gamePanel.getyCount(); j++) {
+                fileWriter.write(gamePanel.getChessboard()[i][j] + "\t");
             }
             fileWriter.write("\r\n");
         }
         fileWriter.close();
     }
+    //该存档用于存点击状态
+    public  void writeCurrentDataToFile(String s) throws IOException {
+        File file = new File("E:\\project 的存档",s+"state");
+        if (file.exists()) {
+            file.createNewFile();
+        }
+        FileWriter fileWriter = new FileWriter(file);
+        for (int i = 0; i < gamePanel.getxCount(); i++) {
+            for (int j = 0; j < gamePanel.getyCount(); j++) {
+                fileWriter.write(gamePanel.getCurrentState()[i][j] + "\t");
+            }
+            fileWriter.write("\r\n");
+        }
+        fileWriter.close();
+    }
+    //该存档用于存玩家分数
+    public  void writePlayerDataToFile(String s) throws IOException {
+        File file = new File("E:\\project 的存档",s+"playerState");
+        if (file.exists()) {
+            file.createNewFile();
+        }
+        FileWriter fileWriter = new FileWriter(file);
+        for (int i = 0; i < gamePanel.getxCount(); i++) {
+            for (int j = 0; j < gamePanel.getyCount(); j++) {
+                fileWriter.write(gamePanel.getChessboard()[i][j] + "\t");
+            }
+            fileWriter.write("\r\n");
+        }
+        fileWriter.close();
+    }
+
+
 
 }

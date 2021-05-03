@@ -1,7 +1,10 @@
 package components;
 
 import entity.GridStatus;
+import entity.Player;
+import minesweeper.GamePanel;
 import minesweeper.MainFrame;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,22 +17,31 @@ public class GridComponent extends BasicComponent {
 
     private int row;
     private int col;
+    private int value;//用于记住该component下标记是雷或者探测得到的雷数的数字
+
     private GridStatus status = GridStatus.Covered;
     private int content = 0;
-    ImageIcon 钻石=new ImageIcon("钻石.PNG");
-    Image diamond=钻石.getImage();
+    ImageIcon 钻石 = new ImageIcon("钻石.PNG");
+    Image diamond = 钻石.getImage();
 
-    public GridComponent(int x, int y) {
-        this.setSize(gridSize, gridSize);
-        this.row = x;
-        this.col = y;
+    public GridComponent(int x, int y, int num) {
+        this.setSize(gridSize, gridSize);//设置component组件的大小
+        this.row = x;//记住component所在的行
+        this.col = y;//记住component所在的列
+        this.value = num;//记住该component下标记是雷或者探测得到的雷数的数字
     }
 
     @Override
     public void onMouseLeftClicked() {
         System.out.printf("Gird (%d,%d) is left-clicked.\n", row, col);
         if (this.status == GridStatus.Covered) {
-            this.status = GridStatus.Clicked;
+            if (value == -1) {
+                this.status=GridStatus.Bombed;
+                MainFrame.controller.getOnTurn().addMistake();
+                MainFrame.controller.getOnTurn().costScore();
+            }else {
+                this.status = GridStatus.Clicked;
+            }
             repaint();
             MainFrame.controller.nextTurn();
         }
@@ -41,7 +53,14 @@ public class GridComponent extends BasicComponent {
     public void onMouseRightClicked() {
         System.out.printf("Gird (%d,%d) is right-clicked.\n", row, col);
         if (this.status == GridStatus.Covered) {
-            this.status = GridStatus.Flag;
+            if (value == -1) {
+                this.status = GridStatus.Flag;
+                MainFrame.controller.getOnTurn().addScore();
+            } else {
+                this.status=GridStatus.Wrong;
+                MainFrame.controller.getOnTurn().addMistake();
+                MainFrame.controller.getOnTurn().costScore();
+            }
             repaint();
             MainFrame.controller.nextTurn();
         }
@@ -79,5 +98,9 @@ public class GridComponent extends BasicComponent {
     public void paintComponent(Graphics g) {
         super.printComponents(g);
         draw(g);
+    }
+
+    public GridStatus getStatus() {
+        return status;
     }
 }

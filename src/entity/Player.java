@@ -1,5 +1,7 @@
 package entity;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.util.Random;
 
 public class Player {
@@ -11,43 +13,56 @@ public class Player {
 
     /**
      * 通过特定名字初始化一个玩家对象。
+     *
      * @param userName 玩家的名字
      */
-    public Player(String userName){
+    public Player(String userName) {
         this.userName = userName;
     }
 
     /**
      * 通过默认名字初始化一个玩家对象。
      */
-    public Player(){
-        userName = "User#"+(ran.nextInt(9000)+1000);
+    public Player() {
+        userName = "User#" + (ran.nextInt(9000) + 1000);
     }
 
     /**
      * 为玩家加一分。
      */
-    public void addScore(){
+    public void addScore() {
+
         score++;
     }
 
     /**
      * 为玩家扣一分。
      */
-    public void costScore(){
+    public void costScore() {
         score--;
     }
 
     /**
      * 为玩家增加一次失误数。
      */
-    public void addMistake() { mistake++; }
+    public void addMistake() {
+        mistake++;
+    }
 
 
-    public int getScore(){
+    public int getScore() {
         return score;
     }
-    public String getUserName(){ return userName; }
-    public int getMistake(){ return mistake; }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public int getMistake() {
+        return mistake;
+    }
+
+
+
 
 }

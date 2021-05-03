@@ -6,9 +6,11 @@ import controller.GameController;
 import entity.Player;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class MainFrame extends JFrame {
     public static GameController controller;
+    public static GamePanel gamePanel;
     private int xCount;
     private int yCount;
     private int mineCount;
@@ -23,7 +25,6 @@ public class MainFrame extends JFrame {
         this.setTitle("2021 CS102A Project Demo 2");
         this.setLayout(null);//清空布局管理器
         this.setSize(yCount * GridComponent.gridSize + 20, xCount * GridComponent.gridSize + 200);
-        //this.setSize(999,999);
         this.setLocationRelativeTo(null);
 
         Player p1 = new Player();
@@ -47,8 +48,20 @@ public class MainFrame extends JFrame {
             String fileName = JOptionPane.showInputDialog(this, "input here");
             System.out.println("fileName :"+fileName);
 
-//            controller.readFileData(fileName);
-//            controller.writeDataToFile(fileName);
+//           controller.readFileData(fileName);\
+            //存档
+            //存雷场
+            try {
+                controller.writeInitialDataToFile(fileName);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            //存棋子打开状态
+            try {
+                controller.writeCurrentDataToFile(fileName);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         });
 
         this.setVisible(true);

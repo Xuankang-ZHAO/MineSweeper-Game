@@ -5,6 +5,7 @@ import entity.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 
 /**
@@ -15,6 +16,7 @@ public class ScoreBoard extends JPanel {
 
     Player p1;
     Player p2;
+
 
     JLabel score1 = new JLabel();
     JLabel score2 = new JLabel();
@@ -92,8 +94,8 @@ public class ScoreBoard extends JPanel {
         return panelOfPlayer1;
     }*/
     public void update() {
-        score1.setText(String.format("%s : %d score (+ %d mistake)", p1.getUserName(), p1.getScore(), p1.getMistake()));
-        score2.setText(String.format("%s : %d score (+ %d mistake)", p2.getUserName(), p2.getScore(), p1.getMistake()));
+        score1.setText(String.format("%s : %d score  and %d mistake", p1.getUserName(), p1.getScore(), p1.getMistake()));
+        score2.setText(String.format("%s : %d score  and %d mistake", p2.getUserName(), p2.getScore(), p2.getMistake()));
     }
     //该方法用于改变贴图时图片的大小
     /*public ImageIcon change(ImageIcon picture,double rate){
@@ -103,5 +105,6 @@ public class ScoreBoard extends JPanel {
         ImageIcon pic2=new ImageIcon(pic);
         return pic2;
     }*/
+
 
 }
