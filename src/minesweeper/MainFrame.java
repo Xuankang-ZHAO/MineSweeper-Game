@@ -8,13 +8,15 @@ import entity.Player;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
     public static GameController controller;
-    public static GamePanel gamePanel;
     private int xCount;
     private int yCount;
     private int mineCount;
+    private ArrayList<ArrayList<Integer>> saveOfMines;
+
 
 
     public MainFrame(int xCount,int yCount,int mineCount) {
@@ -42,12 +44,12 @@ public class MainFrame extends JFrame {
         this.add(scoreBoard);
 
 
-        JButton clickBtn = new JButton("存档进度");
-        clickBtn.setSize(100, 20);
-        clickBtn.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight());
-        add(clickBtn);
-        clickBtn.addActionListener(e -> {
-            String fileName = JOptionPane.showInputDialog(this, "input here");
+        JButton clickBtn1= new JButton("存档进度");
+        clickBtn1.setSize(100, 20);
+        clickBtn1.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight());
+        add(clickBtn1);
+        clickBtn1.addActionListener(e -> {
+            String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
             System.out.println("fileName :"+fileName);
 
 //           controller.readFileData(fileName);\
@@ -76,16 +78,14 @@ public class MainFrame extends JFrame {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-
         });
 
-
-        JButton clickBtnPLus = new JButton("存档雷场");
-        clickBtnPLus.setSize(100, 20);
-        clickBtnPLus.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight()+clickBtn.getHeight()+5);
-        add(clickBtnPLus);
-        clickBtnPLus.addActionListener(e -> {
-            String fileName = JOptionPane.showInputDialog(this, "input here");
+        JButton clickBtn2 = new JButton("存档雷场");
+        clickBtn2.setSize(100, 20);
+        clickBtn2.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight()+clickBtn1.getHeight()+5);
+        add(clickBtn2);
+        clickBtn2.addActionListener(e -> {
+            String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
             System.out.println("fileName :"+fileName);
 
 //           controller.readFileData(fileName);\
@@ -97,19 +97,34 @@ public class MainFrame extends JFrame {
                 ioException.printStackTrace();
             }
         });
-        //这里可以用一个面板来管理按钮们
-        /*JPanel save=new JPanel(new GridLayout(2,1) );
-        save.setSize(120,50);
-        save.add(clickBtn);
-        save.add(clickBtnPLus);*/
 
 
+        JButton clickBtn3 = new JButton("读取存档");
+        clickBtn3.setSize(100, 20);
+        clickBtn3.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight());
+        add(clickBtn3);
+
+        //讲道理，需要其他窗口，而不是将他们浓缩到一个窗口上，这样好难
+        JButton clickBtn4 = new JButton("读取雷场");
+        clickBtn4.setSize(100, 20);
+        clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight()+clickBtn1.getHeight()+5);
+        add(clickBtn4);
+        clickBtn2.addActionListener(e -> {
+            String fileName = JOptionPane.showInputDialog(this, "What is the name of the game archive you want to read");
+            System.out.println("fileName :"+fileName);
+
+//           controller.readFileData(fileName);\
 
 
-
+        });
 
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public void restart(){
 
     }
+
+
 }

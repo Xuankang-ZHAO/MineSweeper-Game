@@ -115,9 +115,9 @@ public class GameController {
      public void writeDataToFile(String fileName){
          //todo: write data into file
      }*/
-    public  ArrayList<ArrayList<Integer>> readFileData() throws IOException {
+    public  void readInitialDataToFile(String name) throws IOException {
         ArrayList<ArrayList<Integer>> readDemo = new ArrayList<>();
-        File file = new File("F:\\save.txt");
+        File file = new File("E:\\project 的存档",name);
         Reader reader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(reader);
         if (file.exists()) {
@@ -132,8 +132,12 @@ public class GameController {
             }
         }
         bufferedReader.close();
-        return readDemo;
     }
+
+
+
+
+
 
     //存档,传入一个arraylist，其中元素为Integer 形式的二维数组，以代表棋盘的状态
     //todo:传入一个参数，以明确这是要存哪个档

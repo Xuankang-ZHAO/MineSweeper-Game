@@ -6,12 +6,14 @@ import entity.GridStatus;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GamePanel extends JPanel {
     private GridComponent[][] mineField;
     private int[][] chessboard;
-    private int[][] currentState;
+    private int[][] currentState;//记录格子们的当前打开状态
+    private ArrayList<ArrayList<Integer>>  saveOfMine;//存档中的雷场
     //用于记录雷区的状态，0代表未点开（covered)，-1代表点开是雷(bombed)，
     // 1代表是雷并正确插旗(flag)，2代表点开了，但是安全数字(clicked),-2代表错误插旗(wrong)
     private final Random random = new Random();
@@ -30,6 +32,7 @@ public class GamePanel extends JPanel {
      * @param mineCount mine count
      */
     //注意：xCount代表行数，yCount代表列数
+    //直接生成游戏界面
     public GamePanel(int xCount, int yCount, int mineCount) {
         this.xCount = xCount;
         this.yCount = yCount;
@@ -41,15 +44,54 @@ public class GamePanel extends JPanel {
         this.setBackground(Color.WHITE);
         this.setSize(GridComponent.gridSize * yCount, GridComponent.gridSize * xCount);
 
-        initialGame();
+        initialGame1();
 
         repaint();
     }
 
-    public void initialGame() {
+    //根据存档生成游戏界面
+    public GamePanel(ArrayList<ArrayList<Integer>> mineDemo){
+        this.saveOfMine=mineDemo;
+        this.xCount=saveOfMine.size();
+        this.yCount=saveOfMine.get(0).size();
+
+        this.setVisible(true);
+        this.setFocusable(true);
+        this.setLayout(null);
+        this.setBackground(Color.WHITE);
+        this.setSize(GridComponent.gridSize * yCount, GridComponent.gridSize * xCount);
+
+        initialGame2();
+        repaint();
+    }
+
+    //直接生成雷场和按钮们
+    public void initialGame1() {
         mineField = new GridComponent[xCount][yCount];
         //初始化棋盘
         generateChessBoard();
+        //对按钮们进行了初始化
+        for (int i = 0; i < xCount; i++) {
+            for (int j = 0; j < yCount; j++) {
+                GridComponent gridComponent = new GridComponent(i, j, chessboard[i][j]);
+                gridComponent.setContent(chessboard[i][j]);
+                gridComponent.setLocation(j * GridComponent.gridSize, i * GridComponent.gridSize);
+                mineField[i][j] = gridComponent;
+                this.add(mineField[i][j]);
+            }
+        }
+        //对所记录的按钮们的状态进行了初始化，默认是0即未点开
+        generateState();
+    }
+    //根据存档生成雷场和按钮们
+    public void initialGame2() {
+        mineField = new GridComponent[xCount][yCount];
+        //根据存档初始化雷场
+        for (int i=0;i<xCount;i++){
+            for (int j=0;j<yCount;j++){
+                chessboard[i][j]=saveOfMine.get(i).get(j);
+            }
+        }
         //对按钮们进行了初始化
         for (int i = 0; i < xCount; i++) {
             for (int j = 0; j < yCount; j++) {
@@ -139,6 +181,7 @@ public class GamePanel extends JPanel {
         }
     }
 
+    //初始化记录格子打开状态的数组为0，即未打开
     public void generateState() {
         currentState = new int[xCount][yCount];
         for (int m = 0; m < xCount; m++) {
@@ -219,6 +262,7 @@ public class GamePanel extends JPanel {
 
         }
     }
+
 
     /**
      * 获取一个指定坐标的格子。
