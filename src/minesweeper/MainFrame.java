@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
     private int yCount;
     private int mineCount;
 
+
     public MainFrame(int xCount,int yCount,int mineCount) {
         //todo: change the count of xCount, yCount and mineCount by passing parameters from constructor
         //下面写的是确定大小的雷区的参数
