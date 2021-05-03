@@ -85,8 +85,20 @@ public class GridComponent extends BasicComponent {
         if (this.status == GridStatus.Flag) {
             g.setColor(Color.LIGHT_GRAY);
             g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
-            g.setColor(Color.RED);
+            g.setColor(Color.GREEN);
             g.drawString("F", getWidth() / 2 - 5, getHeight() / 2 + 5);
+        }
+        if (this.status == GridStatus.Bombed) {
+            g.setColor(Color.LIGHT_GRAY);
+            g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
+            g.setColor(Color.YELLOW);
+            g.drawString("B", getWidth() / 2 - 5, getHeight() / 2 + 5);
+        }
+        if (this.status == GridStatus.Wrong) {
+            g.setColor(Color.LIGHT_GRAY);
+            g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
+            g.setColor(Color.RED);
+            g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
         }
     }
 

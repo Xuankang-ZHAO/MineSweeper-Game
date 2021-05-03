@@ -62,6 +62,19 @@ public class MainFrame extends JFrame {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+            //存玩家们的当前分数和失误次数
+            try {
+                controller.writePlayerDataToFile(fileName);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            //存玩家们的id(姓名）
+            try {
+                controller.writePlayerIDToFile(fileName);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
         });
 
         this.setVisible(true);

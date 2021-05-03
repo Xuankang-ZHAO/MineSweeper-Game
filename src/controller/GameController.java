@@ -14,6 +14,9 @@ public class GameController {
     private Player p1;
     private Player p2;
 
+    int playerNUm;
+    ArrayList<Player> playerList;
+
     private Player onTurn;
 
 
@@ -21,9 +24,15 @@ public class GameController {
     private GamePanel gamePanel;
     private ScoreBoard scoreBoard;
 
-    public GameController(Player p1, Player p2) {
+    public GameController(Player p1,Player p2) {
         this.init(p1, p2);
         this.onTurn = p1;
+    }
+    //todo:多人模式
+    public GameController(int playerNUm){
+        this.playerNUm=playerNUm;
+        this.playerList=new ArrayList<>(playerNUm);
+        this.onTurn=playerList.get(0);
     }
 
     /**
@@ -53,8 +62,9 @@ public class GameController {
             onTurn = p1;
         }
         System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
-        scoreBoard.update();//回合结束更新分数表
+        scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
         gamePanel.updateCurrentState();//回合结束更新棋子们的打开状态
+        scoreBoard.updatePlayerScores();//回合结束更新玩家的分数和失误次数表，用于存档
         //TODO: 在每个回合结束的时候，还需要做什么 (例如...检查游戏是否结束？)
 
     }
@@ -158,17 +168,30 @@ public class GameController {
         fileWriter.close();
     }
     //该存档用于存玩家分数
+
     public  void writePlayerDataToFile(String s) throws IOException {
-        File file = new File("E:\\project 的存档",s+"playerState");
+        File file = new File("E:\\project 的存档",s+"playerScores");
         if (file.exists()) {
             file.createNewFile();
         }
         FileWriter fileWriter = new FileWriter(file);
-        for (int i = 0; i < gamePanel.getxCount(); i++) {
-            for (int j = 0; j < gamePanel.getyCount(); j++) {
-                fileWriter.write(gamePanel.getChessboard()[i][j] + "\t");
+        for (int i = 0; i < scoreBoard.getPlayerScores().length; i++) {
+            for (int j = 0; j < 2; j++) {//因为目前只有分数和失误次数两个数据需要考虑
+                fileWriter.write(scoreBoard.getPlayerScores()[i][j] + "\t");
             }
             fileWriter.write("\r\n");
+        }
+        fileWriter.close();
+    }
+
+    public  void writePlayerIDToFile(String s) throws IOException {
+        File file = new File("E:\\project 的存档",s+"playerID");
+        if (file.exists()) {
+            file.createNewFile();
+        }
+        FileWriter fileWriter = new FileWriter(file);
+        for (int i = 0; i < scoreBoard.getNameList().length; i++) {
+                fileWriter.write(scoreBoard.getNameList()[i] + "\t");
         }
         fileWriter.close();
     }
