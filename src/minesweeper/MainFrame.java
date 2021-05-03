@@ -6,6 +6,7 @@ import controller.GameController;
 import entity.Player;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class MainFrame extends JFrame {
@@ -40,8 +41,8 @@ public class MainFrame extends JFrame {
         this.add(scoreBoard);
 
 
-        JButton clickBtn = new JButton("Click");
-        clickBtn.setSize(80, 20);
+        JButton clickBtn = new JButton("存档进度");
+        clickBtn.setSize(100, 20);
         clickBtn.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight());
         add(clickBtn);
         clickBtn.addActionListener(e -> {
@@ -76,6 +77,35 @@ public class MainFrame extends JFrame {
             }
 
         });
+
+
+        JButton clickBtnPLus = new JButton("存档雷场");
+        clickBtnPLus.setSize(100, 20);
+        clickBtnPLus.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight()+clickBtn.getHeight()+5);
+        add(clickBtnPLus);
+        clickBtnPLus.addActionListener(e -> {
+            String fileName = JOptionPane.showInputDialog(this, "input here");
+            System.out.println("fileName :"+fileName);
+
+//           controller.readFileData(fileName);\
+            //存档
+            //存雷场
+            try {
+                controller.writeInitialDataToFile(fileName);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        //这里可以用一个面板来管理按钮们
+        /*JPanel save=new JPanel(new GridLayout(2,1) );
+        save.setSize(120,50);
+        save.add(clickBtn);
+        save.add(clickBtnPLus);*/
+
+
+
+
+
 
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
