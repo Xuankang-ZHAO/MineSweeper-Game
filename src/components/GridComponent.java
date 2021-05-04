@@ -14,6 +14,8 @@ import java.awt.image.ImageObserver;
 public class GridComponent extends BasicComponent {
     public static int gridSize = 30;
 
+    //todo:是否可以设置一个点击次数的变量，以防止第一步就踩雷呢？  addByZXK
+    private int counter=0;//用于防止第一步踩到雷
 
     private int row;
     private int col;
