@@ -104,7 +104,7 @@ public class MainFrame extends JFrame {
         clickBtn3.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight());
         add(clickBtn3);
 
-        //讲道理，需要其他窗口，而不是将他们浓缩到一个窗口上，这样好难
+        //讲道理，需要其他窗口，而不是将他们浓缩到一个窗口上，这样好难，去刷新雷场
         JButton clickBtn4 = new JButton("读取雷场");
         clickBtn4.setSize(100, 20);
         clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight()+clickBtn1.getHeight()+5);
