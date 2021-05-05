@@ -20,7 +20,7 @@ public class InitialPanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(image,0,0,600,400,null);
+        g.drawImage(image,0,0,900,600,null);
     }
 }
 

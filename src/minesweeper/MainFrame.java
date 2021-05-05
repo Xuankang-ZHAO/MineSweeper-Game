@@ -99,28 +99,22 @@ public class MainFrame extends JFrame {
         });
 
 
-        JButton clickBtn3 = new JButton("读取存档");
+        JButton clickBtn3 = new JButton("开始界面");
         clickBtn3.setSize(100, 20);
         clickBtn3.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight());
         add(clickBtn3);
 
-        //讲道理，需要其他窗口，而不是将他们浓缩到一个窗口上，这样好难，去刷新雷场
-        JButton clickBtn4 = new JButton("读取雷场");
+
+        JButton clickBtn4 = new JButton("透视雷场");
         clickBtn4.setSize(100, 20);
         clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight()+clickBtn1.getHeight()+5);
         add(clickBtn4);
-        clickBtn2.addActionListener(e -> {
-            String fileName = JOptionPane.showInputDialog(this, "What is the name of the game archive you want to read");
-            System.out.println("fileName :"+fileName);
-
-//           controller.readFileData(fileName);\
 
 
-        });
 
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }
+}
 
     public void restart(){
 
