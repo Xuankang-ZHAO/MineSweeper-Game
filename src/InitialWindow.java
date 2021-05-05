@@ -3,10 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class LoginFrame extends JFrame implements ActionListener{
+public class InitialWindow extends JFrame implements ActionListener{
 
 
     private JButton newButton;
@@ -16,16 +14,16 @@ public class LoginFrame extends JFrame implements ActionListener{
     private JLabel TitleLabel;
 
 
-    public LoginFrame() {
+    public InitialWindow() {
 
-        this.setSize(900, 600);
+        this.setSize(600, 400);
         this.setUndecorated(true);
         this.setLocationRelativeTo(null);
 
         TitleLabel = new JLabel("MyMine");
-        TitleLabel.setBounds(350, 70, 200, 55);
+        TitleLabel.setBounds(250, 70, 200, 55);
         TitleLabel.setForeground(Color.BLACK);
-        TitleLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+        TitleLabel.setFont(new Font("times new roman", Font.ITALIC, 30));
         this.add(TitleLabel);
 
 
@@ -34,7 +32,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 
         newButton = new JButton("创建新的游戏");
         newButton.setFont(new Font("微软雅黑",Font.PLAIN,18));
-        newButton.setBounds(350, 130, 100, 35);
+        newButton.setBounds(250, 130, 100, 35);
         newButton.setForeground(Color.BLACK);
         newButton.setOpaque(false);
         newButton.setContentAreaFilled(false);
@@ -44,7 +42,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 
         getSaveBtn1 = new JButton("进入游戏存档");
         getSaveBtn1.setFont(new Font("微软雅黑",Font.PLAIN,18));
-        getSaveBtn1.setBounds(350, 180, 100, 35);
+        getSaveBtn1.setBounds(250, 180, 100, 35);
         getSaveBtn1.setForeground(Color.BLACK);
         getSaveBtn1.setOpaque(false);
         getSaveBtn1.setContentAreaFilled(false);
@@ -54,7 +52,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 
         getSaveBTn2 = new JButton("进入存档雷场");
         getSaveBTn2.setFont(new Font("微软雅黑",Font.PLAIN,18));
-        getSaveBTn2.setBounds(350, 230, 100, 35);
+        getSaveBTn2.setBounds(250, 230, 100, 35);
         getSaveBTn2.setForeground(Color.BLACK);
         getSaveBTn2.setOpaque(false);
         getSaveBTn2.setContentAreaFilled(false);
@@ -63,13 +61,13 @@ public class LoginFrame extends JFrame implements ActionListener{
 
         cancelButton = new JButton("Cancel");
         cancelButton.setFont(new Font("微软雅黑",Font.PLAIN,18));
-        cancelButton.setBounds(350, 280, 100, 35);
+        cancelButton.setBounds(250, 280, 100, 35);
         cancelButton.setOpaque(false);
         cancelButton.setContentAreaFilled(false);
         cancelButton.setForeground(Color.BLACK);
         this.add(cancelButton);
         cancelButton.addActionListener(this);
-        this.add(new LoginPanel());
+        this.add(new InitialPanel());
         this.setVisible(true);
 
 
@@ -94,7 +92,7 @@ public class LoginFrame extends JFrame implements ActionListener{
             @Override
 
             public void run() {
-                new LoginFrame().setVisible(true);
+                new InitialWindow().setVisible(true);
 
             }
 

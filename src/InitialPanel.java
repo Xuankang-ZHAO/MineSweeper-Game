@@ -5,9 +5,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class LoginPanel  extends JPanel {
+public class InitialPanel extends JPanel {
     private Image image;
-    public LoginPanel()
+    public InitialPanel()
     {
         try {
             image= ImageIO.read(new File("src/pictures/背景.PNG"));
@@ -20,7 +20,7 @@ public class LoginPanel  extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(image,0,0,900,600,null);
+        g.drawImage(image,0,0,600,400,null);
     }
 }
 
