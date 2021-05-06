@@ -1,3 +1,4 @@
+package openWindow;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

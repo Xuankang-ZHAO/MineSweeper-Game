@@ -1,21 +1,31 @@
+package openWindow;
+
+import ModeOfGame.NewGame;
+import ModeOfGame.ReadMine;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
+
 
 public class InitialWindow extends JFrame implements ActionListener{
-
+    //在任何地方通过InitialWindow.window获得对象
+    public static InitialWindow window;
 
     private JButton newButton;
     private JButton getSaveBtn1;
     private JButton getSaveBTn2;
     private JButton cancelButton;
     private JLabel TitleLabel;
+    private ArrayList<ArrayList<Integer>> copyOfMine;
 
 
     public InitialWindow() {
-
+        window = this;
         this.setSize(900, 600);
         this.setUndecorated(true);
         this.setLocationRelativeTo(null);
@@ -58,6 +68,27 @@ public class InitialWindow extends JFrame implements ActionListener{
         getSaveBTn2.setContentAreaFilled(false);
         this.add(getSaveBTn2);
         getSaveBTn2.addActionListener(this);
+        getSaveBTn2.addActionListener(e -> {
+            String fileName = JOptionPane.showInputDialog(this, "Input the name you want to read");
+            System.out.println("fileName :"+fileName);
+            try {
+                ArrayList<ArrayList<Integer>> copyOfMine= new ArrayList<>(readInitialDataToFile(fileName));
+                this.copyOfMine=copyOfMine;
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+            dispose();
+            new ReadMine();
+        });
+
+
+
+
+
+
+
+
 
         cancelButton = new JButton("Cancel");
         cancelButton.setFont(new Font("微软雅黑",Font.PLAIN,18));
@@ -100,5 +131,28 @@ public class InitialWindow extends JFrame implements ActionListener{
     }
 
 
+    //读取之前的雷场，需要传入一个参数，以明确读取的名字
+    public  ArrayList<ArrayList<Integer>> readInitialDataToFile(String name) throws IOException {
+        ArrayList<ArrayList<Integer>> readDemo = new ArrayList<>();
+        File file = new File("E:\\project 的存档",name);
+        Reader reader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        if (file.exists()) {
+            String s;
+            while ((s = bufferedReader.readLine()) != null) {
+                String[] strings = s.split("\t");
+                readDemo.add(new ArrayList());
+                for (int i = 0; i < strings.length; i++) {
+                    int num = Integer.parseInt(strings[i]);
+                    readDemo.get(readDemo.size() - 1).add(i, num);
+                }
+            }
+        }
+        bufferedReader.close();
+        return readDemo;
+    }
 
+    public ArrayList<ArrayList<Integer>> getCopyOfMine() {
+        return copyOfMine;
+    }
 }

@@ -83,10 +83,11 @@ public class GamePanel extends JPanel {
         //对所记录的按钮们的状态进行了初始化，默认是0即未点开
         generateState();
     }
-    //根据存档生成雷场和按钮们
+    //根据存档生成雷场和按钮们，这里只读取之前的雷场，不读取玩家游戏状态
     public void initialGame2() {
         mineField = new GridComponent[xCount][yCount];
         //根据存档初始化雷场
+        chessboard=new int[xCount][yCount];
         for (int i=0;i<xCount;i++){
             for (int j=0;j<yCount;j++){
                 chessboard[i][j]=saveOfMine.get(i).get(j);
@@ -125,7 +126,7 @@ public class GamePanel extends JPanel {
         }
     }
 
-    //产生雷场并将格子们正确地赋值
+    //产生雷场并将格子们正确地赋值，是雷还是周围的雷数
     public void generateChessBoard() {
         //todo: generate chessboard by your own algorithm
         chessboard = new int[xCount][yCount];//定义棋盘大小

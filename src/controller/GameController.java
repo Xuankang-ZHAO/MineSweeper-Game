@@ -115,26 +115,6 @@ public class GameController {
      public void writeDataToFile(String fileName){
          //todo: write data into file
      }*/
-    public  void readInitialDataToFile(String name) throws IOException {
-        ArrayList<ArrayList<Integer>> readDemo = new ArrayList<>();
-        File file = new File("E:\\project 的存档",name);
-        Reader reader = new FileReader(file);
-        BufferedReader bufferedReader = new BufferedReader(reader);
-        if (file.exists()) {
-            String s;
-            while ((s = bufferedReader.readLine()) != null) {
-                String[] strings = s.split("\t");
-                readDemo.add(new ArrayList());
-                for (int i = 0; i < strings.length; i++) {
-                    int num = Integer.parseInt(strings[i]);
-                    readDemo.get(readDemo.size() - 1).add(i, num);
-                }
-            }
-        }
-        bufferedReader.close();
-    }
-
-
 
 
 
