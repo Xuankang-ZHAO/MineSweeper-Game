@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ReadMine extends JFrame  {
 
-    ArrayList<ArrayList<Integer>> mapOfMine;
+    private ArrayList<ArrayList<Integer>> mapOfMine;
     public ReadMine(){
         super("ModeOfGame.ReadMine");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

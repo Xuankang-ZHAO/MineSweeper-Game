@@ -12,7 +12,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class InitialWindow extends JFrame implements ActionListener{
+public class InitialWindow extends JFrame implements ActionListener {
     //在任何地方通过InitialWindow.window获得对象
     public static InitialWindow window;
 
@@ -22,7 +22,9 @@ public class InitialWindow extends JFrame implements ActionListener{
     private JButton cancelButton;
     private JLabel TitleLabel;
     private ArrayList<ArrayList<Integer>> copyOfMine;
-
+    private ArrayList<ArrayList<Integer>> copyOfState;
+    private ArrayList<ArrayList<Integer>> copyOfScore;
+    private ArrayList<ArrayList<String>> copyOfName;
 
     public InitialWindow() {
         window = this;
@@ -30,18 +32,15 @@ public class InitialWindow extends JFrame implements ActionListener{
         this.setUndecorated(true);
         this.setLocationRelativeTo(null);
 
-        TitleLabel = new JLabel("MyMine");
+        TitleLabel = new JLabel("Minemine");
         TitleLabel.setBounds(360, 70, 200, 55);
         TitleLabel.setForeground(Color.BLACK);
         TitleLabel.setFont(new Font("times new roman", Font.ITALIC, 30));
         this.add(TitleLabel);
 
 
-
-
-
         newButton = new JButton("创建新的游戏");
-        newButton.setFont(new Font("微软雅黑",Font.PLAIN,18));
+        newButton.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         newButton.setBounds(350, 200, 150, 45);
         newButton.setForeground(Color.BLACK);
         newButton.setOpaque(false);
@@ -51,29 +50,40 @@ public class InitialWindow extends JFrame implements ActionListener{
 
 
         getSaveBtn1 = new JButton("进入游戏存档");
-        getSaveBtn1.setFont(new Font("微软雅黑",Font.PLAIN,18));
+        getSaveBtn1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         getSaveBtn1.setBounds(350, 260, 150, 35);
         getSaveBtn1.setForeground(Color.BLACK);
         getSaveBtn1.setOpaque(false);
         getSaveBtn1.setContentAreaFilled(false);
         this.add(getSaveBtn1);
         getSaveBtn1.addActionListener(this);
-
-
-        getSaveBTn2 = new JButton("进入存档雷场");
-        getSaveBTn2.setFont(new Font("微软雅黑",Font.PLAIN,18));
-        getSaveBTn2.setBounds(350, 320, 150, 35);
-        getSaveBTn2.setForeground(Color.BLACK);
-        getSaveBTn2.setOpaque(false);
-        getSaveBTn2.setContentAreaFilled(false);
-        this.add(getSaveBTn2);
-        getSaveBTn2.addActionListener(this);
-        getSaveBTn2.addActionListener(e -> {
+        getSaveBtn1.addActionListener(e -> {
             String fileName = JOptionPane.showInputDialog(this, "Input the name you want to read");
-            System.out.println("fileName :"+fileName);
+            System.out.println("fileName :" + fileName);
             try {
-                ArrayList<ArrayList<Integer>> copyOfMine= new ArrayList<>(readInitialDataToFile(fileName));
-                this.copyOfMine=copyOfMine;
+                ArrayList<ArrayList<Integer>> copyOfMine = new ArrayList<>(readInitialDataToFile(fileName));
+                this.copyOfMine = copyOfMine;
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+            try {
+                ArrayList<ArrayList<Integer>> copyOfState = new ArrayList<>(readInitialDataToFile(fileName + "state"));
+                this.copyOfState = copyOfState;
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+            try {
+                ArrayList<ArrayList<Integer>> copyOfScore = new ArrayList<>(readInitialDataToFile(fileName + "playerScores"));
+                this.copyOfScore = copyOfScore;
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+            try {
+                ArrayList<ArrayList<String>> copyOfName = new ArrayList<>(readUserNameToFile(fileName + "playerID"));
+                this.copyOfName = copyOfName;
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -83,15 +93,31 @@ public class InitialWindow extends JFrame implements ActionListener{
         });
 
 
+        getSaveBTn2 = new JButton("进入存档雷场");
+        getSaveBTn2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        getSaveBTn2.setBounds(350, 320, 150, 35);
+        getSaveBTn2.setForeground(Color.BLACK);
+        getSaveBTn2.setOpaque(false);
+        getSaveBTn2.setContentAreaFilled(false);
+        this.add(getSaveBTn2);
+        getSaveBTn2.addActionListener(this);
+        getSaveBTn2.addActionListener(e -> {
+            String fileName = JOptionPane.showInputDialog(this, "Input the name you want to read");
+            System.out.println("fileName :" + fileName);
+            try {
+                ArrayList<ArrayList<Integer>> copyOfMine = new ArrayList<>(readInitialDataToFile(fileName));
+                this.copyOfMine = copyOfMine;
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+            dispose();
+            new ReadMine();
+        });
 
 
-
-
-
-
-
-        cancelButton = new JButton("Cancel");
-        cancelButton.setFont(new Font("微软雅黑",Font.PLAIN,18));
+        cancelButton = new JButton("退出游戏");
+        cancelButton.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         cancelButton.setBounds(350, 380, 150, 35);
         cancelButton.setOpaque(false);
         cancelButton.setContentAreaFilled(false);
@@ -103,10 +129,11 @@ public class InitialWindow extends JFrame implements ActionListener{
 
 
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton bt=(JButton) e.getSource();
-        if(bt.equals(newButton)){
+        JButton bt = (JButton) e.getSource();
+        if (bt.equals(newButton)) {
             dispose();
             new NewGame();
         }
@@ -132,9 +159,9 @@ public class InitialWindow extends JFrame implements ActionListener{
 
 
     //读取之前的雷场，需要传入一个参数，以明确读取的名字
-    public  ArrayList<ArrayList<Integer>> readInitialDataToFile(String name) throws IOException {
+    public ArrayList<ArrayList<Integer>> readInitialDataToFile(String name) throws IOException {
         ArrayList<ArrayList<Integer>> readDemo = new ArrayList<>();
-        File file = new File("E:\\project 的存档",name);
+        File file = new File("E:\\project 的存档", name);
         Reader reader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(reader);
         if (file.exists()) {
@@ -152,7 +179,39 @@ public class InitialWindow extends JFrame implements ActionListener{
         return readDemo;
     }
 
+
+    public ArrayList<ArrayList<String>> readUserNameToFile(String name) throws IOException {
+        ArrayList<ArrayList<String>> readDemo = new ArrayList<>();
+        File file = new File("E:\\project 的存档", name);
+        Reader reader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        if (file.exists()) {
+            String s;
+            while ((s = bufferedReader.readLine()) != null) {
+                String[] strings = s.split("\t");
+                readDemo.add(new ArrayList());
+                for (int i = 0; i < strings.length; i++) {
+                    readDemo.get(readDemo.size() - 1).add(i, strings[i]);
+                }
+            }
+        }
+        bufferedReader.close();
+        return readDemo;
+    }
+
     public ArrayList<ArrayList<Integer>> getCopyOfMine() {
         return copyOfMine;
+    }
+
+    public ArrayList<ArrayList<Integer>> getCopyOfState() {
+        return copyOfState;
+    }
+
+    public ArrayList<ArrayList<Integer>> getCopyOfScore() {
+        return copyOfScore;
+    }
+
+    public ArrayList<ArrayList<String>> getCopyOfName() {
+        return copyOfName;
     }
 }

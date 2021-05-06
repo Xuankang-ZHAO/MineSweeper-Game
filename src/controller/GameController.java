@@ -152,7 +152,6 @@ public class GameController {
         fileWriter.close();
     }
     //该存档用于存玩家分数
-
     public  void writePlayerDataToFile(String s) throws IOException {
         File file = new File("E:\\project 的存档",s+"playerScores");
         if (file.exists()) {
@@ -167,7 +166,7 @@ public class GameController {
         }
         fileWriter.close();
     }
-
+    //该存档用于存玩家名称
     public  void writePlayerIDToFile(String s) throws IOException {
         File file = new File("E:\\project 的存档",s+"playerID");
         if (file.exists()) {

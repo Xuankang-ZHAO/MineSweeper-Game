@@ -4,8 +4,6 @@ import components.GridComponent;
 import entity.Player;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 
 
 /**

@@ -4,9 +4,9 @@ package minesweeper;
 import components.GridComponent;
 import controller.GameController;
 import entity.Player;
+import openWindow.InitialWindow;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -103,6 +103,10 @@ public class MainFrame extends JFrame {
         clickBtn3.setSize(100, 20);
         clickBtn3.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight());
         add(clickBtn3);
+        clickBtn3.addActionListener(e -> {
+            dispose();
+            new InitialWindow();
+        });
 
 
         JButton clickBtn4 = new JButton("透视雷场");
@@ -200,6 +204,10 @@ public class MainFrame extends JFrame {
         clickBtn3.setSize(100, 20);
         clickBtn3.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight());
         add(clickBtn3);
+        clickBtn3.addActionListener(e -> {
+            dispose();
+            new InitialWindow();
+        });
 
 
         JButton clickBtn4 = new JButton("透视雷场");
