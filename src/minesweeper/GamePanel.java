@@ -2,10 +2,10 @@ package minesweeper;
 
 import components.GridComponent;
 import entity.GridStatus;
+import openWindow.InitialWindow;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,7 +13,7 @@ public class GamePanel extends JPanel {
     private GridComponent[][] mineField;
     private int[][] chessboard;
     private int[][] currentState;//记录格子们的当前打开状态
-    private ArrayList<ArrayList<Integer>>  saveOfMine;//存档中的雷场
+    private ArrayList<ArrayList<Integer>> saveOfMine;//存档中的雷场
     //用于记录雷区的状态，0代表未点开（covered)，-1代表点开是雷(bombed)，
     // 1代表是雷并正确插旗(flag)，2代表点开了，但是安全数字(clicked),-2代表错误插旗(wrong)
     private final Random random = new Random();
@@ -32,7 +32,7 @@ public class GamePanel extends JPanel {
      * @param mineCount mine count
      */
     //注意：xCount代表行数，yCount代表列数
-    //直接生成游戏界面
+    //直接生成游戏
     public GamePanel(int xCount, int yCount, int mineCount) {
         this.xCount = xCount;
         this.yCount = yCount;
@@ -49,11 +49,11 @@ public class GamePanel extends JPanel {
         repaint();
     }
 
-    //根据存档生成游戏界面
-    public GamePanel(ArrayList<ArrayList<Integer>> mineDemo){
-        this.saveOfMine=mineDemo;
-        this.xCount=saveOfMine.size();
-        this.yCount=saveOfMine.get(0).size();
+    //根据存档雷场生成游戏
+    public GamePanel(ArrayList<ArrayList<Integer>> mineDemo) {
+        this.saveOfMine = mineDemo;
+        this.xCount = saveOfMine.size();
+        this.yCount = saveOfMine.get(0).size();
 
         this.setVisible(true);
         this.setFocusable(true);
@@ -62,6 +62,25 @@ public class GamePanel extends JPanel {
         this.setSize(GridComponent.gridSize * yCount, GridComponent.gridSize * xCount);
 
         initialGame2();
+        generateState();//对所记录的按钮们的状态进行了初始化，默认是0即未点开
+        repaint();
+    }
+
+    //根据存档状态继续游戏
+    public GamePanel() {
+
+        this.saveOfMine=InitialWindow.window.getCopyOfMine();
+        this.xCount = InitialWindow.window.getCopyOfMine().size();
+        this.yCount = InitialWindow.window.getCopyOfMine().get(0).size();
+
+        this.setVisible(true);
+        this.setFocusable(true);
+        this.setLayout(null);
+        this.setBackground(Color.WHITE);
+        this.setSize(GridComponent.gridSize * yCount, GridComponent.gridSize * xCount);
+
+        initialGame2();
+        loadCurrentState();//加载存档中的游戏打开状态
         repaint();
     }
 
@@ -83,14 +102,15 @@ public class GamePanel extends JPanel {
         //对所记录的按钮们的状态进行了初始化，默认是0即未点开
         generateState();
     }
+
     //根据存档生成雷场和按钮们，这里只读取之前的雷场，不读取玩家游戏状态
     public void initialGame2() {
         mineField = new GridComponent[xCount][yCount];
         //根据存档初始化雷场
-        chessboard=new int[xCount][yCount];
-        for (int i=0;i<xCount;i++){
-            for (int j=0;j<yCount;j++){
-                chessboard[i][j]=saveOfMine.get(i).get(j);
+        chessboard = new int[xCount][yCount];
+        for (int i = 0; i < xCount; i++) {
+            for (int j = 0; j < yCount; j++) {
+                chessboard[i][j] = saveOfMine.get(i).get(j);
             }
         }
         //对按钮们进行了初始化
@@ -103,9 +123,8 @@ public class GamePanel extends JPanel {
                 this.add(mineField[i][j]);
             }
         }
-        //对所记录的按钮们的状态进行了初始化，默认是0即未点开
-        generateState();
     }
+
 
     //todo:不同棋盘大小对应不同数量的雷，对不合法的输入怎么办
     public int findBoardSize() {
@@ -264,7 +283,6 @@ public class GamePanel extends JPanel {
         }
     }
 
-
     /**
      * 获取一个指定坐标的格子。
      * 注意请不要给一个棋盘之外的坐标哦~
@@ -299,8 +317,6 @@ public class GamePanel extends JPanel {
         return yCount;
     }
 
-
-
     public int[][] getCurrentState() {
         return currentState;
     }
@@ -314,20 +330,51 @@ public class GamePanel extends JPanel {
                         currentState[i][j] = 1;
                         break;
                     }
-                    case Wrong:{
-                        currentState[i][j]=-2;
+                    case Wrong: {
+                        currentState[i][j] = -2;
                         break;
                     }
-                    case Covered:{
-                        currentState[i][j]=0;
+                    case Covered: {
+                        currentState[i][j] = 0;
                         break;
                     }
-                    case Clicked:{
-                        currentState[i][j]=2;
+                    case Clicked: {
+                        currentState[i][j] = 2;
                         break;
                     }
-                    case Bombed:{
-                        currentState[i][j]=-1;
+                    case Bombed: {
+                        currentState[i][j] = -1;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+
+    //本方法用于将读取后格子们的打开状态符号重新赋予给格子们
+    public void loadCurrentState(){
+        for (int i=0;i<xCount;i++){
+            for (int j=0;j<yCount;j++){
+                switch (InitialWindow.window.getCopyOfState().get(i).get(j)){
+                    case 0:{
+                        mineField[i][j].setStatus(GridStatus.Covered);
+                        break;
+                    }
+                    case -1:{
+                        mineField[i][j].setStatus(GridStatus.Bombed);
+                        break;
+                    }
+                    case 1:{
+                        mineField[i][j].setStatus(GridStatus.Flag);
+                        break;
+                    }
+                    case 2:{
+                        mineField[i][j].setStatus(GridStatus.Clicked);
+                        break;
+                    }
+                    case -2:{
+                        mineField[i][j].setStatus(GridStatus.Wrong);
                         break;
                     }
                 }

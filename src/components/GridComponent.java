@@ -1,14 +1,10 @@
 package components;
 
 import entity.GridStatus;
-import entity.Player;
-import minesweeper.GamePanel;
 import minesweeper.MainFrame;
-
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.ImageObserver;
+
 
 //233
 public class GridComponent extends BasicComponent {
@@ -116,5 +112,9 @@ public class GridComponent extends BasicComponent {
 
     public GridStatus getStatus() {
         return status;
+    }
+
+    public void setStatus(GridStatus status) {
+        this.status = status;
     }
 }

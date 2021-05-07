@@ -3,6 +3,7 @@ package controller;
 import minesweeper.GamePanel;
 import entity.Player;
 import minesweeper.ScoreBoard;
+import openWindow.InitialWindow;
 
 
 import java.io.*;
@@ -24,11 +25,20 @@ public class GameController {
     private GamePanel gamePanel;
     private ScoreBoard scoreBoard;
 
+    //新游戏时初始化游戏的游戏控制器
     public GameController(Player p1,Player p2) {
         this.init(p1, p2);
         this.onTurn = p1;
     }
-    //todo:多人模式
+
+    //读取游戏存档状态时的游戏控制器
+    public GameController(){
+        this.p1=new Player(InitialWindow.window.getCopyOfName().get(0));
+        this.p2=new Player(InitialWindow.window.getCopyOfName().get(1));
+        this.onTurn=new Player(InitialWindow.window.getCopyOfName().get(2));
+    }
+
+    //todo:多人模式？
     public GameController(int playerNUm){
         this.playerNUm=playerNUm;
         this.playerList=new ArrayList<>(playerNUm);
@@ -107,17 +117,6 @@ public class GameController {
     }
 
 
-    /* public void readFileData(String fileName) {
-         //todo: read date from file
-
-     }
-
-     public void writeDataToFile(String fileName){
-         //todo: write data into file
-     }*/
-
-
-
 
     //存档,传入一个arraylist，其中元素为Integer 形式的二维数组，以代表棋盘的状态
     //todo:传入一个参数，以明确这是要存哪个档
@@ -176,6 +175,7 @@ public class GameController {
         for (int i = 0; i < scoreBoard.getNameList().length; i++) {
                 fileWriter.write(scoreBoard.getNameList()[i] + "\t");
         }
+        fileWriter.write(onTurn.getUserName()+"\t");
         fileWriter.close();
     }
 

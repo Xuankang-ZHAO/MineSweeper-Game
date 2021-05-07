@@ -1,6 +1,7 @@
 package openWindow;
 
 import ModeOfGame.NewGame;
+import ModeOfGame.ReadGame;
 import ModeOfGame.ReadMine;
 
 
@@ -24,7 +25,7 @@ public class InitialWindow extends JFrame implements ActionListener {
     private ArrayList<ArrayList<Integer>> copyOfMine;
     private ArrayList<ArrayList<Integer>> copyOfState;
     private ArrayList<ArrayList<Integer>> copyOfScore;
-    private ArrayList<ArrayList<String>> copyOfName;
+    private ArrayList<String> copyOfName;
 
     public InitialWindow() {
         window = this;
@@ -82,14 +83,14 @@ public class InitialWindow extends JFrame implements ActionListener {
             }
 
             try {
-                ArrayList<ArrayList<String>> copyOfName = new ArrayList<>(readUserNameToFile(fileName + "playerID"));
+                ArrayList<String> copyOfName = new ArrayList<>(readUserNameToFile(fileName + "playerID"));
                 this.copyOfName = copyOfName;
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
 
             dispose();
-            new ReadMine();
+            new ReadGame();
         });
 
 
@@ -180,8 +181,8 @@ public class InitialWindow extends JFrame implements ActionListener {
     }
 
 
-    public ArrayList<ArrayList<String>> readUserNameToFile(String name) throws IOException {
-        ArrayList<ArrayList<String>> readDemo = new ArrayList<>();
+    public ArrayList<String> readUserNameToFile(String name) throws IOException {
+        ArrayList<String> readDemo = new ArrayList<>();
         File file = new File("E:\\project 的存档", name);
         Reader reader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(reader);
@@ -189,9 +190,8 @@ public class InitialWindow extends JFrame implements ActionListener {
             String s;
             while ((s = bufferedReader.readLine()) != null) {
                 String[] strings = s.split("\t");
-                readDemo.add(new ArrayList());
-                for (int i = 0; i < strings.length; i++) {
-                    readDemo.get(readDemo.size() - 1).add(i, strings[i]);
+                for (int i=0;i<strings.length;i++){
+                    readDemo.add(i,strings[i]);
                 }
             }
         }
@@ -211,7 +211,7 @@ public class InitialWindow extends JFrame implements ActionListener {
         return copyOfScore;
     }
 
-    public ArrayList<ArrayList<String>> getCopyOfName() {
+    public ArrayList<String> getCopyOfName() {
         return copyOfName;
     }
 }

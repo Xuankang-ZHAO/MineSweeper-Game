@@ -10,7 +10,7 @@ public class ReadGame extends JFrame {
     private ArrayList<ArrayList<Integer>> dataOfMine;
     private ArrayList<ArrayList<Integer>> dataOfState;
     private ArrayList<ArrayList<Integer>> dataOfScore;
-    private ArrayList<ArrayList<String>> dataOfName;
+    private ArrayList<String> dataOfName;
 
     public ReadGame(){
         super("ModeOfGame.ReadGame");
@@ -19,7 +19,7 @@ public class ReadGame extends JFrame {
         this.dataOfState=InitialWindow.window.getCopyOfState();
         this.dataOfScore=InitialWindow.window.getCopyOfScore();
         this.dataOfName=InitialWindow.window.getCopyOfName();
-        MainFrame mainFrame=new MainFrame(dataOfMine);//暂时用读取雷场的版本代替
+        MainFrame mainFrame=new MainFrame();
         mainFrame.setVisible(true);
         pack();
         setVisible(true);
