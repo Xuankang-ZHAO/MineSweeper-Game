@@ -27,8 +27,8 @@ public class GridComponent extends BasicComponent {
     }
 
 
+//test
 
-    
     @Override
     public void onMouseLeftClicked() {
         System.out.printf("Gird (%d,%d) is left-clicked.\n", row, col);
