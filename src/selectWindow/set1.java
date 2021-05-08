@@ -98,9 +98,9 @@ public class set1 extends JFrame implements ActionListener,MouseListener {
         loginButton = new JButton("开启");
         loginButton.setFont(new Font("黑体",Font.BOLD,18));
         loginButton.setBounds(20, 310, 100, 35);
-        loginButton.setForeground(Color.BLACK);
         loginButton.setOpaque(false);
         loginButton.setContentAreaFilled(false);
+        loginButton.setForeground(Color.BLACK);
         this.add(loginButton);
         loginButton.addActionListener(e -> {
             this.xCount=Integer.parseInt(xCountText.getText());
