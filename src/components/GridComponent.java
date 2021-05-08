@@ -26,6 +26,8 @@ public class GridComponent extends BasicComponent {
         this.value = num;//记住该component下标记是雷或者探测得到的雷数的数字
     }
 
+
+
     
     @Override
     public void onMouseLeftClicked() {
