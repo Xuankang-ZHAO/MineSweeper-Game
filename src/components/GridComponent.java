@@ -98,7 +98,16 @@ public class GridComponent extends BasicComponent {
             g.setColor(Color.RED);
             g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
         }
+        /*if(this.status==GridStatus.Show){
+            g.setColor(Color.LIGHT_GRAY);
+            g.fillRect(0,0,getWidth()-1,getHeight()-1);
+            g.setColor(new Color(244,183,113));
+            g.drawString(Integer.toString(content),getWidth()/2 -5,getHeight()/2 +5);
+        }*/
     }
+
+
+
 
     public void setContent(int content) {
         this.content = content;

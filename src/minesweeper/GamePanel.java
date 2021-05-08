@@ -382,4 +382,13 @@ public class GamePanel extends JPanel {
             }
         }
     }
+
+
+    public void showMineDirectly(){
+        for (int i=0;i<xCount;i++){
+            for (int j=0;j<yCount;j++){
+
+            }
+        }
+    }
 }
