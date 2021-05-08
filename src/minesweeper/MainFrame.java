@@ -17,10 +17,6 @@ public class MainFrame extends JFrame {
     private int mineCount;
     private ArrayList<ArrayList<Integer>> saveOfMines;
 
-    private ArrayList<ArrayList<Integer>> dataOfMine;
-    private ArrayList<ArrayList<Integer>> dataOfState;
-    private ArrayList<ArrayList<Integer>> dataOfScore;
-    private ArrayList<ArrayList<String>> dataOfName;
 
 
     //新游戏
