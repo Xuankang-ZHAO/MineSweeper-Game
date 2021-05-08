@@ -66,6 +66,8 @@ public class InitialWindow extends JFrame implements ActionListener {
                 this.copyOfMine = copyOfMine;
             } catch (IOException ioException) {
                 ioException.printStackTrace();
+                JOptionPane.showMessageDialog(null,"找不到您要的存档，请更换存档名再试","提示",JOptionPane.PLAIN_MESSAGE);
+                new InitialWindow();
             }
 
             try {
@@ -110,6 +112,8 @@ public class InitialWindow extends JFrame implements ActionListener {
                 this.copyOfMine = copyOfMine;
             } catch (IOException ioException) {
                 ioException.printStackTrace();
+                JOptionPane.showMessageDialog(null,"找不到您要的存档，请更换存档名再试","提示",JOptionPane.PLAIN_MESSAGE);
+                new InitialWindow();
             }
 
             dispose();
