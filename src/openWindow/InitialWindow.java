@@ -195,6 +195,9 @@ public class InitialWindow extends JFrame implements ActionListener {
                 }
             }
         }
+
+
+
         bufferedReader.close();
         return readDemo;
     }
