@@ -126,40 +126,22 @@ public class GamePanel extends JPanel {
     }
 
 
-    //todo:不同棋盘大小对应不同数量的雷，对不合法的输入怎么办
-    public int findBoardSize() {
-        if (xCount == 9 && yCount == 9)
-            return 10;
-        if (xCount == 16 && yCount == 16)
-            return 40;
-        if (xCount == 16 && yCount == 30)
-            return 99;
-        else {
-            if (xCount <= 24 && yCount <= 30 && mineCount <= (xCount * yCount) / 2) {
-                return mineCount;
-            } else {
-                System.out.print("The size is invalid,please input again");
-                //这里的语句后续可能会更改
-                return 0;
-            }
-        }
-    }
+
 
     //产生雷场并将格子们正确地赋值，是雷还是周围的雷数
     public void generateChessBoard() {
         //todo: generate chessboard by your own algorithm
         chessboard = new int[xCount][yCount];//定义棋盘大小
-        int count = 0;
+        int count = 1;//从0改为1了，原来生成的雷数会差1
         //埋下指定数量的雷数，现在只写了-1
         for (int i = 0; i < xCount; i++) {
             for (int j = 0; j < yCount; j++) {
-                if (count <= findBoardSize()) {
+                if (count <=mineCount) {
                     chessboard[i][j] = -1;
                     count++;
                 }
             }
         }
-        //先将雷们打乱一次
         resetMine();
         //如果打乱后出现9雷，重新洗牌直至无9雷
         while (checkMine()) {
@@ -259,6 +241,25 @@ public class GamePanel extends JPanel {
 
     //洗雷，使得雷重新分布
     public void resetMine() {
+        //先洗一次牌再说
+        //对每一行重新洗牌 i在外层，j在内层
+        for (int i = xCount - 1; i >= 0; i--) {
+            for (int j = yCount - 1; j > 0; j--) {
+                int a = random.nextInt(j);//小心数组越界！！！
+                int rem = chessboard[i][a];
+                chessboard[i][a] = chessboard[i][j];//得记住之前的数啊，是交换！！！
+                chessboard[i][j] = rem;
+            }
+        }
+        //对每一列重新洗牌，i在内，j在外
+        for (int j = yCount - 1; j >= 0; j--) {
+            for (int i = xCount - 1; i > 0; i--) {
+                int b = random.nextInt(i);
+                int rem = chessboard[b][j];
+                chessboard[b][j] = chessboard[i][j];
+                chessboard[i][j] = rem;
+            }
+        }
         while (this.checkMine()) {//有9雷
             //以下用洗牌算法防止雷区过度密集
             //对每一行重新洗牌 i在外层，j在内层
