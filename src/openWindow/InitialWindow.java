@@ -2,6 +2,7 @@ package openWindow;
 
 import ModeOfGame.ReadGame;
 import ModeOfGame.ReadMine;
+import selectMode.ModeSelect;
 import selectWindow.set1;
 
 
@@ -136,7 +137,7 @@ public class InitialWindow extends JFrame implements ActionListener {
         JButton bt = (JButton) e.getSource();
         if (bt.equals(newButton)) {
             dispose();
-            new set1();
+            new ModeSelect();
         }
 
         if (e.getSource() == cancelButton) {
