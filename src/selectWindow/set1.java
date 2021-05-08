@@ -18,16 +18,19 @@ public class set1 extends JFrame implements ActionListener,MouseListener {
     private JTextField xCountText;
     private JTextField yCountText;
     private JTextField mineText;
+    private JTextField turnsText;
 
     private JButton loginButton;
     private JButton backButton;
     private JLabel xCountLabel;
     private JLabel yCountLabel;
     private JLabel mineLabel;
+    private JLabel turnsLabel;
 
     private int xCount;
     private int yCount;
     private int mineNum;
+    private int turnsNum;
 
     public set1() {
         set1=this;
@@ -44,7 +47,7 @@ public class set1 extends JFrame implements ActionListener,MouseListener {
 
         xCountText = new JTextField();
         xCountText.setBounds(120, 100, 150, 35);
-        xCountText.setFont(new Font("微软雅黑",Font.PLAIN,16));
+        xCountText.setFont(new Font("微软雅黑",Font.PLAIN,18));
         xCountText.setOpaque(false);
         xCountText.setBorder(null);
         xCountText.addMouseListener(this);
@@ -78,9 +81,23 @@ public class set1 extends JFrame implements ActionListener,MouseListener {
         this.add(mineText);
 
 
+        turnsLabel = new JLabel("每回合次数");
+        turnsLabel.setBounds(10, 250, 90, 35);
+        turnsLabel.setForeground(Color.BLACK);
+        turnsLabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        this.add(turnsLabel);
+
+        turnsText = new JTextField();
+        turnsText.setBounds(120, 250, 150, 35);
+        turnsText.setOpaque(false);
+        turnsText.setBorder(null);
+        turnsText.addMouseListener(this);
+        this.add(turnsText);
+
+
         loginButton = new JButton("开启");
-        loginButton.setFont(new Font("微软雅黑",Font.PLAIN,18));
-        loginButton.setBounds(20, 250, 100, 35);
+        loginButton.setFont(new Font("黑体",Font.BOLD,18));
+        loginButton.setBounds(20, 310, 100, 35);
         loginButton.setForeground(Color.BLACK);
         loginButton.setOpaque(false);
         loginButton.setContentAreaFilled(false);
@@ -89,13 +106,14 @@ public class set1 extends JFrame implements ActionListener,MouseListener {
             this.xCount=Integer.parseInt(xCountText.getText());
             this.yCount=Integer.parseInt(yCountText.getText());
             this.mineNum=Integer.parseInt(mineText.getText());
+            this.turnsNum=Integer.parseInt(turnsText.getText());
             dispose();
             new NewGame();
         });
 
         backButton = new JButton("返回");
-        backButton.setFont(new Font("微软雅黑",Font.PLAIN,18));
-        backButton.setBounds(150, 250, 100, 35);
+        backButton.setFont(new Font("黑体",Font.BOLD,18));
+        backButton.setBounds(150, 310, 100, 35);
         backButton.setOpaque(false);
         backButton.setContentAreaFilled(false);
         backButton.setForeground(Color.BLACK);
@@ -168,5 +186,12 @@ public class set1 extends JFrame implements ActionListener,MouseListener {
 
     public int getMineNum() {
         return mineNum;
+    }
+
+    //这是用来返回设定的每回合每个玩家可以点击的次数的
+    //调用该get方法时，请用   set1.set1.getTurnsNum()
+    // 强调： 这里的 set1 需要重复两次
+    public int getTurnsNum() {
+        return turnsNum;
     }
 }
