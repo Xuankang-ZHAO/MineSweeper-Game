@@ -4,8 +4,6 @@ import minesweeper.GamePanel;
 import entity.Player;
 import minesweeper.ScoreBoard;
 import openWindow.InitialWindow;
-
-
 import java.io.*;
 import java.util.ArrayList;
 

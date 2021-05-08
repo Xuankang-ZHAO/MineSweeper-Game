@@ -1,8 +1,8 @@
 package openWindow;
 
-import ModeOfGame.NewGame;
 import ModeOfGame.ReadGame;
 import ModeOfGame.ReadMine;
+import selectWindow.set1;
 
 
 import javax.swing.*;
@@ -136,7 +136,7 @@ public class InitialWindow extends JFrame implements ActionListener {
         JButton bt = (JButton) e.getSource();
         if (bt.equals(newButton)) {
             dispose();
-            new NewGame();
+            new set1();
         }
 
         if (e.getSource() == cancelButton) {

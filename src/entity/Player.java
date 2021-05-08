@@ -1,7 +1,5 @@
 package entity;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.util.Random;
 
 public class Player {
@@ -16,6 +14,7 @@ public class Player {
      *
      * @param userName 玩家的名字
      */
+    //读档时根据存储读档
     public Player(String userName) {
         this.userName = userName;
     }

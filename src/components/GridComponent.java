@@ -8,19 +8,16 @@ import java.awt.*;
 
 //233
 public class GridComponent extends BasicComponent {
-    public static int gridSize = 30;
+    public static int gridSize = 30;//设置格子的尺寸大小
 
     //todo:是否可以设置一个点击次数的变量，以防止第一步就踩雷呢？  addByZXK
     private int counter=0;//用于防止第一步踩到雷
-
-    private int row;
-    private int col;
+    private int row;//格子的横坐标
+    private int col;//格子的纵坐标
     private int value;//用于记住该component下标记是雷或者探测得到的雷数的数字
 
-    private GridStatus status = GridStatus.Covered;
+    private GridStatus status = GridStatus.Covered;//初始默认打开状态都是覆盖
     private int content = 0;
-    ImageIcon 钻石 = new ImageIcon("钻石.PNG");
-    Image diamond = 钻石.getImage();
 
     public GridComponent(int x, int y, int num) {
         this.setSize(gridSize, gridSize);//设置component组件的大小
