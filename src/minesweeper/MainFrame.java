@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
     private int yCount;
     private int mineCount;
     private ArrayList<ArrayList<Integer>> saveOfMines;
+    private int clickTimes=0;
 
 
 
@@ -115,7 +116,13 @@ public class MainFrame extends JFrame {
         clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn4);
         clickBtn4.addActionListener(e -> {
-            gamePanel.showMineDirectly();
+            if(clickTimes==0){
+                gamePanel.showMineDirectly();
+                clickTimes++;
+            }else {
+                gamePanel.backGame();
+                clickTimes--;
+            }
             repaint();
         });
 

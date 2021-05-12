@@ -69,7 +69,7 @@ public class GamePanel extends JPanel {
     //根据存档状态继续游戏
     public GamePanel() {
 
-        this.saveOfMine=InitialWindow.window.getCopyOfMine();
+        this.saveOfMine = InitialWindow.window.getCopyOfMine();
         this.xCount = InitialWindow.window.getCopyOfMine().size();
         this.yCount = InitialWindow.window.getCopyOfMine().get(0).size();
 
@@ -126,8 +126,6 @@ public class GamePanel extends JPanel {
     }
 
 
-
-
     //产生雷场并将格子们正确地赋值，是雷还是周围的雷数
     public void generateChessBoard() {
         //todo: generate chessboard by your own algorithm
@@ -136,7 +134,7 @@ public class GamePanel extends JPanel {
         //埋下指定数量的雷数，现在只写了-1
         for (int i = 0; i < xCount; i++) {
             for (int j = 0; j < yCount; j++) {
-                if (count <=mineCount) {
+                if (count <= mineCount) {
                     chessboard[i][j] = -1;
                     count++;
                 }
@@ -354,27 +352,27 @@ public class GamePanel extends JPanel {
 
 
     //本方法用于将读取后格子们的打开状态符号重新赋予给格子们
-    public void loadCurrentState(){
-        for (int i=0;i<xCount;i++){
-            for (int j=0;j<yCount;j++){
-                switch (InitialWindow.window.getCopyOfState().get(i).get(j)){
-                    case 0:{
+    public void loadCurrentState() {
+        for (int i = 0; i < xCount; i++) {
+            for (int j = 0; j < yCount; j++) {
+                switch (InitialWindow.window.getCopyOfState().get(i).get(j)) {
+                    case 0: {
                         mineField[i][j].setStatus(GridStatus.Covered);
                         break;
                     }
-                    case -1:{
+                    case -1: {
                         mineField[i][j].setStatus(GridStatus.Bombed);
                         break;
                     }
-                    case 1:{
+                    case 1: {
                         mineField[i][j].setStatus(GridStatus.Flag);
                         break;
                     }
-                    case 2:{
+                    case 2: {
                         mineField[i][j].setStatus(GridStatus.Clicked);
                         break;
                     }
-                    case -2:{
+                    case -2: {
                         mineField[i][j].setStatus(GridStatus.Wrong);
                         break;
                     }
@@ -384,11 +382,40 @@ public class GamePanel extends JPanel {
     }
 
 
-    public void showMineDirectly(){
-        for (int i=0;i<xCount;i++){
-            for (int j=0;j<yCount;j++){
-                if(chessboard[i][j]==-1){
+    public void showMineDirectly() {
+        for (int i = 0; i < xCount; i++) {
+            for (int j = 0; j < yCount; j++) {
+                if (chessboard[i][j] == -1) {
                     mineField[i][j].setStatus(GridStatus.Show);
+                }
+            }
+        }
+    }
+
+    public void backGame() {
+        for (int i = 0; i < xCount; i++) {
+            for (int j = 0; j < yCount; j++) {
+                switch (currentState[i][j]) {
+                    case 0: {
+                        mineField[i][j].setStatus(GridStatus.Covered);
+                        break;
+                    }
+                    case -1: {
+                        mineField[i][j].setStatus(GridStatus.Bombed);
+                        break;
+                    }
+                    case 1: {
+                        mineField[i][j].setStatus(GridStatus.Flag);
+                        break;
+                    }
+                    case 2: {
+                        mineField[i][j].setStatus(GridStatus.Clicked);
+                        break;
+                    }
+                    case -2: {
+                        mineField[i][j].setStatus(GridStatus.Wrong);
+                        break;
+                    }
                 }
             }
         }
