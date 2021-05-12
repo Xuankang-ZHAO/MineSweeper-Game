@@ -387,7 +387,9 @@ public class GamePanel extends JPanel {
     public void showMineDirectly(){
         for (int i=0;i<xCount;i++){
             for (int j=0;j<yCount;j++){
-
+                if(chessboard[i][j]==-1){
+                    mineField[i][j].setStatus(GridStatus.Show);
+                }
             }
         }
     }

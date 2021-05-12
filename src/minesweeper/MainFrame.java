@@ -7,7 +7,6 @@ import entity.Player;
 import openWindow.InitialWindow;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -115,6 +114,10 @@ public class MainFrame extends JFrame {
         clickBtn4.setSize(100, 20);
         clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn4);
+        clickBtn4.addActionListener(e -> {
+            gamePanel.showMineDirectly();
+            repaint();
+        });
 
 
         this.setVisible(true);
@@ -314,6 +317,8 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
+
+
 
 
 
