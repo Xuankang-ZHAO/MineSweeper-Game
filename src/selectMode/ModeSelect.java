@@ -1,6 +1,5 @@
 package selectMode;
 
-import ModeOfGame.NewGame;
 import ModeOfGame.NewGameOfThreeMode;
 import openWindow.InitialWindow;
 import selectWindow.Background1;
@@ -8,10 +7,7 @@ import selectWindow.set1;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 public class ModeSelect extends JFrame {
     public static selectMode.ModeSelect modeSelect;
