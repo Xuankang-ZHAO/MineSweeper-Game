@@ -3,6 +3,7 @@ package openWindow;
 import ModeOfGame.ReadGame;
 import ModeOfGame.ReadMine;
 import selectMode.ModeSelect;
+import selectWindow.set1;
 
 
 import javax.swing.*;
@@ -92,8 +93,6 @@ public class  InitialWindow extends JFrame implements ActionListener {
             }
 
             dispose();
-            //this.hide();
-            //this.setVisible(false);
             new ReadGame();
         });
 
@@ -119,8 +118,6 @@ public class  InitialWindow extends JFrame implements ActionListener {
             }
 
             dispose();
-            //this.hide();
-            //this.setVisible(false);
             new ReadMine();
         });
 
@@ -144,8 +141,6 @@ public class  InitialWindow extends JFrame implements ActionListener {
         JButton bt = (JButton) e.getSource();
         if (bt.equals(newButton)) {
             dispose();
-            //this.hide();
-            //this.setVisible(false);
             new ModeSelect();
         }
 
