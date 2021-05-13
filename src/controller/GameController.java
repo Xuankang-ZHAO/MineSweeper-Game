@@ -176,7 +176,4 @@ public class GameController {
         fileWriter.write(onTurn.getUserName()+"\t");
         fileWriter.close();
     }
-
-
-
 }

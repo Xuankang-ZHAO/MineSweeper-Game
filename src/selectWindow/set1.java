@@ -154,6 +154,9 @@ public class set1 extends JFrame implements ActionListener,MouseListener {
         }else if(e.getSource()==mineText)
         {
             mineText.setBorder(BorderFactory.createLineBorder(new Color(255,255,255)));
+        }else if(e.getSource()==turnsText)
+        {
+            turnsText.setBorder(BorderFactory.createLineBorder(new Color(255,255,255)));
         }
 
     }

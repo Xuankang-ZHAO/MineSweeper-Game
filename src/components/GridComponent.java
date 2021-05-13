@@ -1,6 +1,7 @@
 package components;
 
 import entity.GridStatus;
+import minesweeper.GamePanel;
 import minesweeper.MainFrame;
 
 import javax.swing.*;
@@ -29,6 +30,14 @@ public class GridComponent extends BasicComponent {
     private GridStatus status = GridStatus.Covered;//初始默认打开状态都是覆盖
     private int content = 0;
 
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
     public GridComponent(int x, int y, int num) {
         this.setSize(gridSize, gridSize);//设置component组件的大小
         this.row = x;//记住component所在的行
@@ -44,15 +53,23 @@ public class GridComponent extends BasicComponent {
         System.out.printf("Gird (%d,%d) is left-clicked.\n", row, col);
         if (this.status == GridStatus.Covered) {
             if (value == -1) {
-                this.status=GridStatus.Bombed;
+                this.status = GridStatus.Bombed;
                 MainFrame.controller.getOnTurn().addMistake();
                 MainFrame.controller.getOnTurn().costScore();
-            }else {
+            } else {
                 this.status = GridStatus.Clicked;
             }
-            repaint();
-            MainFrame.controller.nextTurn();
         }
+//        //避免首发触雷
+//        counter++;
+//        System.out.print(counter);
+//        while (counter == 1 && this.status == GridStatus.Bombed) {
+//            minesweeper.GamePanel rrr = new minesweeper.GamePanel();
+//            rrr.resetMine();
+//            repaint();
+//        }
+        repaint();
+        MainFrame.controller.nextTurn();
 
         //TODO: 在左键点击一个格子的时候，还需要做什么？
     }
@@ -65,7 +82,7 @@ public class GridComponent extends BasicComponent {
                 this.status = GridStatus.Flag;
                 MainFrame.controller.getOnTurn().addScore();
             } else {
-                this.status=GridStatus.Wrong;
+                this.status = GridStatus.Wrong;
                 MainFrame.controller.getOnTurn().addMistake();
                 MainFrame.controller.getOnTurn().costScore();
             }
@@ -100,7 +117,7 @@ public class GridComponent extends BasicComponent {
             /*g.setColor(Color.LIGHT_GRAY);
             g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
             g.setColor(Color.GREEN);
-            g.drawString("F", getWidth() / 2 - 5, getHeight() / 2 + 5);*/
+            g.drawString("F", getWidth() / 2 - 5, getHeight() / 2 + 5);
         }
         if (this.status == GridStatus.Bombed) {
             Image image1=p2Plus.getImage();
@@ -127,6 +144,7 @@ public class GridComponent extends BasicComponent {
 
         }
     }
+
 
 
 
