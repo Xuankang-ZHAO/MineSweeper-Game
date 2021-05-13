@@ -14,7 +14,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class InitialWindow extends JFrame implements ActionListener {
+public class  InitialWindow extends JFrame implements ActionListener {
     //在任何地方通过InitialWindow.window获得对象
     public static InitialWindow window;
 

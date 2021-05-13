@@ -181,15 +181,6 @@ public class GamePanel extends JPanel {
         }
     }
 
-    //初始化记录格子打开状态的数组为0，即未打开
-    public void generateState() {
-        currentState = new int[xCount][yCount];
-        for (int m = 0; m < xCount; m++) {
-            for (int n = 0; n < yCount; n++) {
-                currentState[m][n] = 0;
-            }
-        }
-    }
 
     //检查雷的分布，找9个雷的情况
     public boolean checkMine() {
@@ -225,16 +216,22 @@ public class GamePanel extends JPanel {
                     count++;
                 }
                 if (count == 9) {//有9雷是true；
-                    check = true;
-                    break;
+//                    check = true;
+//                    break;
+//                }
+//            }
+//            if (check) {
+//                break;
+//            }
+//        }
+//        return check;//没有9雷false；
+//        // 暂时还没有满足用户第一次点到雷的情况
+//    }
+                    return true;
                 }
             }
-            if (check) {
-                break;
-            }
         }
-        return check;//没有9雷false；
-        // 暂时还没有满足用户第一次点到雷的情况
+        return false;
     }
 
     //洗雷，使得雷重新分布
@@ -279,6 +276,16 @@ public class GamePanel extends JPanel {
                 }
             }
 
+        }
+    }
+
+    //初始化记录格子打开状态的数组为0，即未打开
+    public void generateState() {
+        currentState = new int[xCount][yCount];
+        for (int m = 0; m < xCount; m++) {
+            for (int n = 0; n < yCount; n++) {
+                currentState[m][n] = 0;
+            }
         }
     }
 
