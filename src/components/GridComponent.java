@@ -11,10 +11,10 @@ import java.awt.*;
 //233
 public class GridComponent extends BasicComponent {
     public static int gridSize = 30;//设置格子的尺寸大小
-    public static int count;//用于设定回合数
+    public static int count=0;//用于设定回合数
 
     //todo:是否可以设置一个点击次数的变量，以防止第一步就踩雷呢？  addByZXK
-    private int counter = 0;//用于防止第一步踩到雷
+    public static int counter;//用于防止第一步踩到雷
     private int row;//格子的横坐标
     private int col;//格子的纵坐标
     private int value;//用于记住该component下标记是雷或者探测得到的雷数的数字
@@ -49,7 +49,7 @@ public class GridComponent extends BasicComponent {
                 this.status = GridStatus.Clicked;
             }
         }
-//        //避免首发触雷
+//           避免首发触雷
 //        counter++;
 //        System.out.print(counter);
 //        while (counter == 1 && this.status == GridStatus.Bombed) {

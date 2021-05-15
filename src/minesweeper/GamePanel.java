@@ -315,6 +315,10 @@ public class GamePanel extends JPanel {
         return chessboard;
     }
 
+    public GridComponent[][] getMineField() {
+        return mineField;
+    }
+
     public int getxCount() {
         return xCount;
     }
@@ -325,6 +329,10 @@ public class GamePanel extends JPanel {
 
     public int[][] getCurrentState() {
         return currentState;
+    }
+
+    public int getMineCount() {
+        return mineCount;
     }
 
     //本方法用于对格子的状态进行时刻更新

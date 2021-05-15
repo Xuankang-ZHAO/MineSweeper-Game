@@ -1,6 +1,7 @@
 package controller;
 
 import components.GridComponent;
+import entity.GridStatus;
 import minesweeper.GamePanel;
 import entity.Player;
 import minesweeper.ScoreBoard;
@@ -8,6 +9,7 @@ import openWindow.InitialWindow;
 import selectMode.ModeSelect;
 import selectMode.set1;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -16,6 +18,8 @@ public class GameController {
 
     private Player p1;
     private Player p2;
+    private int coveredMine = 0;
+    private int bombedMine = 0;
 
     int playerNUm;
     ArrayList<Player> playerList;
@@ -67,19 +71,22 @@ public class GameController {
      * (目前这里没有每个玩家进行n回合的计数机制的，请自行修改完成哦~）
      */
     public void nextTurn() {
-        if (onTurn == p1 && GridComponent.count < ModeSelect.modeSelect.getTurnsNum()) {
+        if (onTurn == p1 && GridComponent.count < ModeSelect.modeSelect.getTurnsNum() - 1) {
             GridComponent.count++;
             onTurn = p1;
-        }
-        if (onTurn == p1 && GridComponent.count >= ModeSelect.modeSelect.getTurnsNum()) {
+        } else if (onTurn == p1 && GridComponent.count >= ModeSelect.modeSelect.getTurnsNum() - 1) {
+            if (GridComponent.count == ModeSelect.modeSelect.getTurnsNum() - 1) {
+                EndGame();
+            }//结束游戏or转换turn
             onTurn = p2;
             GridComponent.count = 0;
-        }
-        if (onTurn == p2 && GridComponent.count <= ModeSelect.modeSelect.getTurnsNum()) {
+        } else if (onTurn == p2 && GridComponent.count < ModeSelect.modeSelect.getTurnsNum() - 1) {
             GridComponent.count++;
             onTurn = p2;
-        }
-        if (onTurn == p2 && GridComponent.count > ModeSelect.modeSelect.getTurnsNum()) {
+        } else if (onTurn == p2 && GridComponent.count >= ModeSelect.modeSelect.getTurnsNum() - 1) {
+            if (GridComponent.count == ModeSelect.modeSelect.getTurnsNum() - 1) {
+                EndGame();
+            }//结束游戏or转换turn
             onTurn = p1;
             GridComponent.count = 0;
         }
@@ -88,7 +95,50 @@ public class GameController {
         gamePanel.updateCurrentState();//回合结束更新棋子们的打开状态
         scoreBoard.updatePlayerScores();//回合结束更新玩家的分数和失误次数表，用于存档
         //TODO: 在每个回合结束的时候，还需要做什么 (例如...检查游戏是否结束？)
+    }
 
+    public void EndGame() {
+        for (int i = 0; i < gamePanel.getxCount(); i++) {
+            for (int j = 0; j < getGamePanel().getyCount(); j++) {
+                //检查未揭晓的雷数
+                if (gamePanel.getChessboard()[i][j] == -1 && gamePanel.getMineField()[i][j].getStatus() == GridStatus.Covered) {
+                    coveredMine++;
+                }
+                //检查揭晓的雷数
+                if (gamePanel.getChessboard()[i][j] == -1 && gamePanel.getMineField()[i][j].getStatus() == GridStatus.Bombed) {
+                    bombedMine++;
+                }
+            }
+        }
+        int a = 0;
+        if (p1.getScore() > p2.getScore() && p1.getScore() - p2.getScore() > coveredMine) {
+            a = 1;
+            System.out.println("The winner is p1.");
+        } else if (p2.getScore() > p1.getScore() && p2.getScore() - p1.getScore() > coveredMine) {
+            a = 2;
+            System.out.println("The winner is p2.");
+        }
+        if (bombedMine == gamePanel.getMineCount() && p1.getScore() == p2.getScore()) {
+            if (p1.getMistake() < p2.getMistake()) {
+                a = 1;
+                System.out.println("The winner is p1.");
+            }
+            if (p2.getMistake() < p1.getMistake()) {
+                a = 2;
+                System.out.println("The winner is p2.");
+            }
+            if (p1.getMistake() == p2.getMistake()) {
+                a = 3;
+                System.out.println("The game ended in a tie.");
+            }
+        }
+        if (a == 1) {
+            JOptionPane.showMessageDialog(null, "The winner is p1.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+        } else if (a == 2) {
+            JOptionPane.showMessageDialog(null, "The winner is p2.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+        } else if (a == 3) {
+            JOptionPane.showMessageDialog(null, "The game ended in a tie.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+        }
     }
 
 
