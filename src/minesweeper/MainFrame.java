@@ -20,8 +20,7 @@ public class MainFrame extends JFrame {
     private int clickTimes=0;
     public static MainFrame mainFrame;
 
-
-
+    //2333
     //新游戏
     public MainFrame(int xCount, int yCount, int mineCount) {
         mainFrame=this;
