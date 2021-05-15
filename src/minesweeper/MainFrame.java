@@ -5,6 +5,7 @@ import components.GridComponent;
 import controller.GameController;
 import entity.Player;
 import openWindow.InitialWindow;
+import selectMode.ModeSelect;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -17,11 +18,13 @@ public class MainFrame extends JFrame {
     private int mineCount;
     private ArrayList<ArrayList<Integer>> saveOfMines;
     private int clickTimes=0;
+    public static MainFrame mainFrame;
 
 
 
     //新游戏
     public MainFrame(int xCount, int yCount, int mineCount) {
+        mainFrame=this;
         //todo: change the count of xCount, yCount and mineCount by passing parameters from constructor
         //下面写的是确定大小的雷区的参数
         this.xCount = xCount;
@@ -33,8 +36,8 @@ public class MainFrame extends JFrame {
         this.setSize(yCount * GridComponent.gridSize + 20, xCount * GridComponent.gridSize + 200);
         this.setLocationRelativeTo(null);
 
-        Player p1 = new Player();
-        Player p2 = new Player();
+        Player p1 = new Player(ModeSelect.modeSelect.getPlayerName1());
+        Player p2 = new Player(ModeSelect.modeSelect.getPlayerName2());
 
         controller = new GameController(p1, p2);
         GamePanel gamePanel = new GamePanel(xCount, yCount, mineCount);
@@ -323,5 +326,17 @@ public class MainFrame extends JFrame {
 
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public int getxCount() {
+        return xCount;
+    }
+
+    public int getyCount() {
+        return yCount;
+    }
+
+    public int getMineCount() {
+        return mineCount;
     }
 }

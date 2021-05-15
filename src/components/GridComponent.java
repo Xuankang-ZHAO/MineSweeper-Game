@@ -13,8 +13,13 @@ public class GridComponent extends BasicComponent {
     public static int gridSize = 30;//设置格子的尺寸大小
     public static int count=0;//用于设定回合数
 
+    private MainFrame mainFrame;
+    private int xCount;
+    private int yCount;
+    private int mineNUm;
+
     //todo:是否可以设置一个点击次数的变量，以防止第一步就踩雷呢？  addByZXK
-    public static int counter;//用于防止第一步踩到雷
+    public static int counter=0;//用于防止第一步踩到雷
     private int row;//格子的横坐标
     private int col;//格子的纵坐标
     private int value;//用于记住该component下标记是雷或者探测得到的雷数的数字
@@ -35,28 +40,30 @@ public class GridComponent extends BasicComponent {
         this.row = x;//记住component所在的行
         this.col = y;//记住component所在的列
         this.value = num;//记住该component下标记是雷或者探测得到的雷数的数字
+        this.mainFrame=MainFrame.mainFrame;
+        this.xCount=mainFrame.getxCount();
+        this.yCount=mainFrame.getyCount();
+        this.mineNUm=mainFrame.getMineCount();
     }
 
     @Override
     public void onMouseLeftClicked() {
         System.out.printf("Gird (%d,%d) is left-clicked.\n", row, col);
         if (this.status == GridStatus.Covered) {
-            if (value == -1) {
-                this.status = GridStatus.Bombed;
-                MainFrame.controller.getOnTurn().addMistake();
-                MainFrame.controller.getOnTurn().costScore();
-            } else {
-                this.status = GridStatus.Clicked;
+            if(counter==0&&value==-1){
+                mainFrame.dispose();
+                new MainFrame(xCount,yCount,mineNUm);
+            }else {
+                if (value == -1) {
+                    this.status = GridStatus.Bombed;
+                    MainFrame.controller.getOnTurn().addMistake();
+                    MainFrame.controller.getOnTurn().costScore();
+                } else {
+                    this.status = GridStatus.Clicked;
+                }
+                counter++;
             }
         }
-//           避免首发触雷
-//        counter++;
-//        System.out.print(counter);
-//        while (counter == 1 && this.status == GridStatus.Bombed) {
-//            minesweeper.GamePanel rrr = new minesweeper.GamePanel();
-//            rrr.resetMine();
-//            repaint();
-//        }
         MainFrame.controller.nextTurn();
         repaint();
 

@@ -31,6 +31,7 @@ public class Player {
 //        if (ModeSelect.modeSelect.getPlayerName2() == null) {
 //            this.userName = "User#" + (ran.nextInt(9000) + 1000);
 //        }
+        //todo:这段代码什么意思？我暂时舍弃了这个构造方法，选择带有姓名的构造方法
         if (ModeSelect.numberOfPlayer == 0) {
             this.userName = "User#" + ModeSelect.modeSelect.getPlayerName1();
             ModeSelect.numberOfPlayer++;
