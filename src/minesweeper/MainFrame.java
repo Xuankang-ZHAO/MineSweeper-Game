@@ -48,7 +48,7 @@ public class MainFrame extends JFrame {
         this.add(gamePanel);
         this.add(scoreBoard);
 
-//2333
+
         JButton clickBtn1 = new JButton("存档进度");
         clickBtn1.setSize(100, 20);
         clickBtn1.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight());
