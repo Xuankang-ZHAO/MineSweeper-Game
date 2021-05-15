@@ -5,10 +5,8 @@ import openWindow.InitialWindow;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
+import java.io.IOException;
 
 public class ModeSelect extends JFrame implements ActionListener, MouseListener {
     public static ModeSelect modeSelect;
@@ -48,6 +46,7 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
 
         nameText1 = new JTextField();
         nameText1.setBounds(220, 20, 150, 35);
+        nameText1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         nameText1.setOpaque(false);
         nameText1.setBorder(null);
         nameText1.addMouseListener(this);
@@ -61,6 +60,7 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
 
         nameText2 = new JTextField();
         nameText2.setBounds(220, 70, 150, 35);
+        nameText2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         nameText2.setOpaque(false);
         nameText2.setBorder(null);
         nameText2.addMouseListener(this);
@@ -74,10 +74,27 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
 
         turnsText = new JTextField();
         turnsText.setBounds(220, 120, 150, 35);
+        turnsText.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         turnsText.setOpaque(false);
         turnsText.setBorder(null);
         turnsText.addMouseListener(this);
         this.add(turnsText);
+//        turnsText.addKeyListener(new KeyAdapter() {
+//            public void keyTyped(KeyEvent e) {
+//                int a = e.getKeyChar();
+//                String b = turnsText.getText();
+//                if (a < 40 || a > 53|| b.length() >= 1) {
+//                    e.consume();
+//                    JOptionPane.showMessageDialog(null, "请", "单击次数设定不合理", JOptionPane.WARNING_MESSAGE);
+//                }
+//                int a = Integer.parseInt(turnsText.getText() + "0");
+//                if (a <1) {
+//                    e.consume();
+//                    JOptionPane.showMessageDialog(null, "请", "单击次数设定不合理", JOptionPane.WARNING_MESSAGE);
+//                }
+//            }
+//        });
+
 
         primary = new JButton("初级");
         primary.setFont(new Font("黑体", Font.BOLD, 18));
@@ -90,11 +107,16 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
             this.xCount = 9;
             this.yCount = 9;
             this.mineNum = 10;
-            this.turnsNum = Integer.parseInt(turnsText.getText());
-            this.playerName1 = nameText1.getText();
-            this.playerName2 = nameText2.getText();
-            dispose();
-            new NewGameOfThreeMode();
+            int a = Integer.parseInt(turnsText.getText() + "");
+            if (a < 1 || a > 5) {
+                JOptionPane.showMessageDialog(null, "请输入数字1-5", "单击次数设定不合理", JOptionPane.WARNING_MESSAGE);
+            } else {
+                this.turnsNum = Integer.parseInt(turnsText.getText());
+                this.playerName1 = nameText1.getText();
+                this.playerName2 = nameText2.getText();
+                dispose();
+                new NewGameOfThreeMode();
+            }
         });
 
 
@@ -109,11 +131,16 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
             this.xCount = 16;
             this.yCount = 16;
             this.mineNum = 40;
-            this.turnsNum = Integer.parseInt(turnsText.getText());
-            this.playerName1 = nameText1.getText();
-            this.playerName2 = nameText2.getText();
-            dispose();
-            new NewGameOfThreeMode();
+            int a = Integer.parseInt(turnsText.getText() + "");
+            if (a < 1 || a > 5) {
+                JOptionPane.showMessageDialog(null, "请输入数字1-5", "单击次数设定不合理", JOptionPane.WARNING_MESSAGE);
+            } else {
+                this.turnsNum = Integer.parseInt(turnsText.getText());
+                this.playerName1 = nameText1.getText();
+                this.playerName2 = nameText2.getText();
+                dispose();
+                new NewGameOfThreeMode();
+            }
         });
 
 
@@ -128,11 +155,16 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
             this.xCount = 16;
             this.yCount = 30;
             this.mineNum = 99;
-            this.turnsNum = Integer.parseInt(turnsText.getText());
-            this.playerName1 = nameText1.getText();
-            this.playerName2 = nameText2.getText();
-            dispose();
-            new NewGameOfThreeMode();
+            int a = Integer.parseInt(turnsText.getText() + "");
+            if (a < 1 || a > 5) {
+                JOptionPane.showMessageDialog(null, "请输入数字1-5", "单击次数设定不合理", JOptionPane.WARNING_MESSAGE);
+            } else {
+                this.turnsNum = Integer.parseInt(turnsText.getText());
+                this.playerName1 = nameText1.getText();
+                this.playerName2 = nameText2.getText();
+                dispose();
+                new NewGameOfThreeMode();
+            }
         });
 
 
@@ -144,11 +176,16 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
         user_defined.setForeground(Color.BLACK);
         this.add(user_defined);
         user_defined.addActionListener(e -> {
-            this.turnsNum = Integer.parseInt(turnsText.getText());
-            this.playerName1 = nameText1.getText();
-            this.playerName2 = nameText2.getText();
-            dispose();
-            new set1();
+            int a = Integer.parseInt(turnsText.getText() + "");
+            if (a < 1 || a > 5) {
+                JOptionPane.showMessageDialog(null, "请输入数字1-5", "单击次数设定不合理", JOptionPane.WARNING_MESSAGE);
+            } else {
+                this.turnsNum = Integer.parseInt(turnsText.getText());
+                this.playerName1 = nameText1.getText();
+                this.playerName2 = nameText2.getText();
+                dispose();
+                new set1();
+            }
         });
 
 
@@ -186,9 +223,13 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
         return mineNum;
     }
 
-    public String getPlayerName1() { return playerName1; }
+    public String getPlayerName1() {
+        return playerName1;
+    }
 
-    public String getPlayerName2() { return playerName2; }
+    public String getPlayerName2() {
+        return playerName2;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -215,12 +256,24 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
         if (e.getSource() == turnsText) {
             turnsText.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
         }
+        if (e.getSource() == nameText1) {
+            nameText1.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
+        }
+        if (e.getSource() == nameText2) {
+            nameText2.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         if (e.getSource() == turnsText) {
             turnsText.setBorder(null);
+        }
+        if (e.getSource() == nameText1) {
+            nameText1.setBorder(null);
+        }
+        if (e.getSource() == nameText2) {
+            nameText2.setBorder(null);
         }
     }
 }
