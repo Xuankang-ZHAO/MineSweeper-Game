@@ -18,8 +18,6 @@ public class GameController {
 
     private Player p1;
     private Player p2;
-    private int coveredMine = 0;
-    private int bombedMine = 0;
 
     int playerNUm;
     ArrayList<Player> playerList;
@@ -98,6 +96,8 @@ public class GameController {
     }
 
     public void EndGame() {
+        int coveredMine = 0;
+        int bombedMine = 0;
         for (int i = 0; i < gamePanel.getxCount(); i++) {
             for (int j = 0; j < getGamePanel().getyCount(); j++) {
                 //检查未揭晓的雷数
@@ -105,7 +105,8 @@ public class GameController {
                     coveredMine++;
                 }
                 //检查揭晓的雷数
-                if (gamePanel.getChessboard()[i][j] == -1 && gamePanel.getMineField()[i][j].getStatus() == GridStatus.Bombed) {
+                if (gamePanel.getChessboard()[i][j] == -1 && gamePanel.getMineField()[i][j].getStatus() == GridStatus.Bombed
+                        || gamePanel.getMineField()[i][j].getStatus() == GridStatus.Flag || gamePanel.getMineField()[i][j].getStatus() == GridStatus.Wrong) {
                     bombedMine++;
                 }
             }
