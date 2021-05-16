@@ -4,10 +4,12 @@ package minesweeper;
 import components.GridComponent;
 import controller.GameController;
 import entity.Player;
+import openWindow.InitialPanel;
 import openWindow.InitialWindow;
 import selectMode.ModeSelect;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -128,6 +130,13 @@ public class MainFrame extends JFrame {
             repaint();
         });
 
+        JLabel time=new JLabel("15s left");
+        time.setSize(200,60);
+        time.setLocation(230,gamePanel.getHeight()+scoreBoard.getHeight());
+        //time.setOpaque(true);
+        time.setBorder(BorderFactory.createLineBorder(Color.RED));
+        time.setFont(new Font("粗体", Font.PLAIN, 50));
+        add(time);
 
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
