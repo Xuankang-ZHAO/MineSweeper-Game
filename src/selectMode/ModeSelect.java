@@ -17,20 +17,21 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
     private JButton backButton;
     private JTextField nameText1;
     private JTextField nameText2;
+    private JTextField turnsText;
+    private JTextField timeText;
     private JLabel name1;
     private JLabel name2;
-
-    private JTextField turnsText;
     private JLabel turnsLabel;
+    private JLabel timeLabel;
+
 
     private int xCount;
     private int yCount;
     private int mineNum;
     private int turnsNum;
+    private int time;
     String playerName1;
     String playerName2;
-
-    public static int numberOfPlayer;
 
     public ModeSelect() {
         modeSelect = this;
@@ -39,13 +40,13 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
         this.setLocationRelativeTo(null);
 
         name1 = new JLabel("请输入用户1的姓名");
-        name1.setBounds(10, 20, 200, 35);
+        name1.setBounds(10, 20, 160, 35);
         name1.setForeground(Color.BLACK);
         name1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         this.add(name1);
 
         nameText1 = new JTextField();
-        nameText1.setBounds(220, 20, 150, 35);
+        nameText1.setBounds(180, 20, 100, 35);
         nameText1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         nameText1.setOpaque(false);
         nameText1.setBorder(null);
@@ -53,27 +54,27 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
         this.add(nameText1);
 
         name2 = new JLabel("请输入用户2的姓名");
-        name2.setBounds(10, 70, 200, 35);
+        name2.setBounds(290, 20, 160, 35);
         name2.setForeground(Color.BLACK);
         name2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         this.add(name2);
 
         nameText2 = new JTextField();
-        nameText2.setBounds(220, 70, 150, 35);
+        nameText2.setBounds(460, 20, 100, 35);
         nameText2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         nameText2.setOpaque(false);
         nameText2.setBorder(null);
         nameText2.addMouseListener(this);
         this.add(nameText2);
 
-        turnsLabel = new JLabel("请输入每回合次数");
-        turnsLabel.setBounds(10, 120, 200, 35);
+        turnsLabel = new JLabel("请输入每回合单击次数");
+        turnsLabel.setBounds(10, 70, 200, 35);
         turnsLabel.setForeground(Color.BLACK);
         turnsLabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         this.add(turnsLabel);
 
         turnsText = new JTextField();
-        turnsText.setBounds(220, 120, 150, 35);
+        turnsText.setBounds(230, 70, 120, 35);
         turnsText.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         turnsText.setOpaque(false);
         turnsText.setBorder(null);
@@ -94,6 +95,19 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
 //                }
 //            }
 //        });
+        timeLabel = new JLabel("请输入每次点击间隔时间");
+        timeLabel.setBounds(10, 120, 200, 35);
+        timeLabel.setForeground(Color.BLACK);
+        timeLabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        this.add(timeLabel);
+
+        timeText = new JTextField();
+        timeText.setBounds(230, 120, 120, 35);
+        timeText.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        timeText.setOpaque(false);
+        timeText.setBorder(null);
+        timeText.addMouseListener(this);
+        this.add(timeText);
 
 
         primary = new JButton("初级");
@@ -114,6 +128,7 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
                 this.turnsNum = Integer.parseInt(turnsText.getText());
                 this.playerName1 = nameText1.getText();
                 this.playerName2 = nameText2.getText();
+                this.time = Integer.parseInt(timeText.getText());
                 dispose();
                 new NewGameOfThreeMode();
             }
@@ -138,6 +153,7 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
                 this.turnsNum = Integer.parseInt(turnsText.getText());
                 this.playerName1 = nameText1.getText();
                 this.playerName2 = nameText2.getText();
+                this.time = Integer.parseInt(timeText.getText());
                 dispose();
                 new NewGameOfThreeMode();
             }
@@ -162,6 +178,7 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
                 this.turnsNum = Integer.parseInt(turnsText.getText());
                 this.playerName1 = nameText1.getText();
                 this.playerName2 = nameText2.getText();
+                this.time = Integer.parseInt(timeText.getText());
                 dispose();
                 new NewGameOfThreeMode();
             }
@@ -183,6 +200,7 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
                 this.turnsNum = Integer.parseInt(turnsText.getText());
                 this.playerName1 = nameText1.getText();
                 this.playerName2 = nameText2.getText();
+                this.time = Integer.parseInt(timeText.getText());
                 dispose();
                 new set1();
             }
@@ -200,13 +218,19 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
             dispose();
             new InitialWindow();
         });
-        this.add(new Background1());
+        if (TopicSelect.getSss() == 1) {
+            this.add(new Background1());
+        } else if (TopicSelect.getSss() == 2) {
+            this.add(new Background1());//在这可以换不同背景
+        } else if (TopicSelect.getSss() == 3) {
+            this.add(new Background1());
+        }
         this.setVisible(true);
     }
 
     //这是用来返回设定的每回合每个玩家可以点击的次数的
     //调用该get方法时，请用   set1.set1.getTurnsNum()
-    // 强调： 这里的 set1 需要重复两次
+    //强调这里的 set1 需要重复两次
     public int getTurnsNum() {
         return turnsNum;
     }
@@ -262,6 +286,9 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
         if (e.getSource() == nameText2) {
             nameText2.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
         }
+        if (e.getSource() == timeText) {
+            timeText.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
+        }
     }
 
     @Override
@@ -274,6 +301,9 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
         }
         if (e.getSource() == nameText2) {
             nameText2.setBorder(null);
+        }
+        if (e.getSource() == timeText) {
+            timeText.setBorder(null);
         }
     }
 }

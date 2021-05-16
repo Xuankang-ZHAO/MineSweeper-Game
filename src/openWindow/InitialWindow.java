@@ -3,6 +3,7 @@ package openWindow;
 import ModeOfGame.ReadGame;
 import ModeOfGame.ReadMine;
 import selectMode.ModeSelect;
+import selectMode.TopicSelect;
 
 
 import javax.swing.*;
@@ -140,7 +141,7 @@ public class InitialWindow extends JFrame implements ActionListener {
         JButton bt = (JButton) e.getSource();
         if (bt.equals(newButton)) {
             dispose();
-            new ModeSelect();
+            new TopicSelect();
         }
 
         if (e.getSource() == cancelButton) {
