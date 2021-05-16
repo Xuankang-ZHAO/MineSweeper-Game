@@ -144,10 +144,13 @@ public class GameController {
         }
         if (a == 1) {
             JOptionPane.showMessageDialog(null, "The winner is p1.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+            new InitialWindow();
         } else if (a == 2) {
             JOptionPane.showMessageDialog(null, "The winner is p2.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+            new InitialWindow();
         } else if (a == 3) {
             JOptionPane.showMessageDialog(null, "The game ended in a tie.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+            new InitialWindow();
         }
     }
 
