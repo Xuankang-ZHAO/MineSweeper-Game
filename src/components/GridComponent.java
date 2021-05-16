@@ -11,15 +11,15 @@ import java.awt.*;
 //233
 public class GridComponent extends BasicComponent {
     public static int gridSize = 30;//设置格子的尺寸大小
-    public static int count=0;//用于设定回合数
+    //public static int count=0;//用于设定回合数
 
-    private MainFrame mainFrame;
-    private int xCount;
-    private int yCount;
-    private int mineNUm;
+
+    private int xCount=MainFrame.mainFrame.getxCount();
+    private int yCount=MainFrame.mainFrame.getyCount();
+    private int mineNUm=MainFrame.mainFrame.getMineCount();
 
     //todo:是否可以设置一个点击次数的变量，以防止第一步就踩雷呢？  addByZXK
-    public static int counter=0;//用于防止第一步踩到雷
+    public static int counter;//用于防止第一步踩到雷
     private int row;//格子的横坐标
     private int col;//格子的纵坐标
     private int value;//用于记住该component下标记是雷或者探测得到的雷数的数字
@@ -27,23 +27,16 @@ public class GridComponent extends BasicComponent {
     private GridStatus status = GridStatus.Covered;//初始默认打开状态都是覆盖
     private int content = 0;
 
-    public int getCounter() {
-        return counter;
-    }
-
-    public void setCounter(int counter) {
-        this.counter = counter;
-    }
 
     public GridComponent(int x, int y, int num) {
         this.setSize(gridSize, gridSize);//设置component组件的大小
         this.row = x;//记住component所在的行
         this.col = y;//记住component所在的列
         this.value = num;//记住该component下标记是雷或者探测得到的雷数的数字
-        this.mainFrame=MainFrame.mainFrame;
-        this.xCount=mainFrame.getxCount();
+        //this.mainFrame=MainFrame.mainFrame;
+        /*this.xCount=MainFrame.mainFrame.getxCount();
         this.yCount=mainFrame.getyCount();
-        this.mineNUm=mainFrame.getMineCount();
+        this.mineNUm=mainFrame.getMineCount();*/
     }
 
     @Override
@@ -51,7 +44,7 @@ public class GridComponent extends BasicComponent {
         System.out.printf("Gird (%d,%d) is left-clicked.\n", row, col);
         if (this.status == GridStatus.Covered) {
             if(counter==0&&value==-1){
-                mainFrame.dispose();
+                MainFrame.mainFrame.dispose();
                 new MainFrame(xCount,yCount,mineNUm);
             }else {
                 if (value == -1) {
@@ -63,10 +56,9 @@ public class GridComponent extends BasicComponent {
                 }
                 counter++;
             }
+            MainFrame.controller.nextTurn();
+            repaint();
         }
-        MainFrame.controller.nextTurn();
-        repaint();
-
         //TODO: 在左键点击一个格子的时候，还需要做什么？
     }
 
@@ -147,5 +139,7 @@ public class GridComponent extends BasicComponent {
     public void setStatus(GridStatus status) {
         this.status = status;
     }
+
+
 
 }

@@ -81,6 +81,7 @@ public class GamePanel extends JPanel {
 
         initialGame2();
         loadCurrentState();//加载存档中的游戏打开状态
+        this.currentState=new int[xCount][yCount];
         repaint();
     }
 

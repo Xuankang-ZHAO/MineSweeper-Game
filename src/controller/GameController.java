@@ -28,10 +28,16 @@ public class GameController {
     private GamePanel gamePanel;
     private ScoreBoard scoreBoard;
 
+    private int turns;//玩家们约定几个回合一次交换
+    private int count;////当前玩家正处于turns的第几个回合
+
     //新游戏时初始化游戏的游戏控制器
     public GameController(Player p1, Player p2) {
         this.init(p1, p2);
         this.onTurn = p1;
+        this.turns=ModeSelect.modeSelect.getTurnsNum();
+        this.count=0;
+        GridComponent.counter=0;
     }
 
     //读取游戏存档状态时的游戏控制器
@@ -39,6 +45,9 @@ public class GameController {
         this.p1 = new Player(InitialWindow.window.getCopyOfName().get(0));
         this.p2 = new Player(InitialWindow.window.getCopyOfName().get(1));
         this.onTurn = new Player(InitialWindow.window.getCopyOfName().get(2));
+        this.count=Integer.parseInt(InitialWindow.window.getCopyOfName().get(3));
+        this.turns=Integer.parseInt(InitialWindow.window.getCopyOfName().get(4));
+        GridComponent.counter=Integer.parseInt(InitialWindow.window.getCopyOfName().get(5));
     }
 
     //todo:多人模式？
@@ -69,24 +78,24 @@ public class GameController {
      * (目前这里没有每个玩家进行n回合的计数机制的，请自行修改完成哦~）
      */
     public void nextTurn() {
-        if (onTurn == p1 && GridComponent.count < ModeSelect.modeSelect.getTurnsNum() - 1) {
-            GridComponent.count++;
+        if (onTurn == p1 && count < turns - 1) {
+            count++;
             onTurn = p1;
-        } else if (onTurn == p1 && GridComponent.count >= ModeSelect.modeSelect.getTurnsNum() - 1) {
-            if (GridComponent.count == ModeSelect.modeSelect.getTurnsNum() - 1) {
+        } else if (onTurn == p1 && count >= turns - 1) {
+            if (count == turns - 1) {
                 EndGame();
             }//结束游戏or转换turn
             onTurn = p2;
-            GridComponent.count = 0;
-        } else if (onTurn == p2 && GridComponent.count < ModeSelect.modeSelect.getTurnsNum() - 1) {
-            GridComponent.count++;
+            count = 0;
+        } else if (onTurn == p2 && count < turns - 1) {
+            count++;
             onTurn = p2;
-        } else if (onTurn == p2 && GridComponent.count >= ModeSelect.modeSelect.getTurnsNum() - 1) {
-            if (GridComponent.count == ModeSelect.modeSelect.getTurnsNum() - 1) {
+        } else if (onTurn == p2 && count >= turns - 1) {
+            if (count == turns - 1) {
                 EndGame();
             }//结束游戏or转换turn
             onTurn = p1;
-            GridComponent.count = 0;
+            count = 0;
         }
         System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
         scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
@@ -229,7 +238,7 @@ public class GameController {
         fileWriter.close();
     }
 
-    //该存档用于存玩家名称
+    //该存档用于存玩家名称以及当前玩家名称以及当前玩家所处的第几回合以及玩家们约定的几个回合交换以及避免首发触雷的counter
     public void writePlayerIDToFile(String s) throws IOException {
         File file = new File("E:\\project 的存档", s + "playerID");
         if (file.exists()) {
@@ -240,6 +249,28 @@ public class GameController {
             fileWriter.write(scoreBoard.getNameList()[i] + "\t");
         }
         fileWriter.write(onTurn.getUserName() + "\t");
+        String s1=Integer.toString(count);
+        fileWriter.write(s1+"\t");
+        String s2=Integer.toString(turns);
+        fileWriter.write(s2+"\t");
+        String s3=Integer.toString(GridComponent.counter);
+        fileWriter.write(s3+"\t");
         fileWriter.close();
+    }
+
+    public int getTurns() {
+        return turns;
+    }
+
+    public void setTurns(int turns) {
+        this.turns = turns;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }
