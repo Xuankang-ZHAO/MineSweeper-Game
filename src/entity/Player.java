@@ -25,19 +25,7 @@ public class Player {
      * 通过默认名字初始化一个玩家对象。
      */
     public Player() {
-//        if (ModeSelect.modeSelect.getPlayerName1() == null) {
-//            this.userName = "User#" + (ran.nextInt(9000) + 1000);
-//        }
-//        if (ModeSelect.modeSelect.getPlayerName2() == null) {
-//            this.userName = "User#" + (ran.nextInt(9000) + 1000);
-//        }
-        //todo:这段代码什么意思？我暂时舍弃了这个构造方法，选择带有姓名的构造方法
-        if (ModeSelect.numberOfPlayer == 0) {
-            this.userName = "User#" + ModeSelect.modeSelect.getPlayerName1();
-            ModeSelect.numberOfPlayer++;
-        } else if (ModeSelect.numberOfPlayer != 0) {
-            this.userName = "User#" + ModeSelect.modeSelect.getPlayerName2();
-        }
+        this.userName = "User#" + (ran.nextInt(9000) + 1000);
     }
 
     /**
