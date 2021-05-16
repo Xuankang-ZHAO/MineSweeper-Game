@@ -10,17 +10,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GamePanel extends JPanel {
-    private GridComponent[][] mineField;
-    private int[][] chessboard;
+    private static GridComponent[][] mineField;
+    private static int[][] chessboard;
     private int[][] currentState;//记录格子们的当前打开状态
     private ArrayList<ArrayList<Integer>> saveOfMine;//存档中的雷场
     //用于记录雷区的状态，0代表未点开（covered)，-1代表点开是雷(bombed)，
     // 1代表是雷并正确插旗(flag)，2代表点开了，但是安全数字(clicked),-2代表错误插旗(wrong)
     private final Random random = new Random();
-    private int xCount;
-    private int yCount;
-    private int mineCount;
+    private static int xCount;
+    private static int yCount;
+    private  int mineCount;
 
+    public static GamePanel gamePanel;
     private int LeiCode = -1;
 
 
@@ -34,6 +35,8 @@ public class GamePanel extends JPanel {
     //注意：xCount代表行数，yCount代表列数
     //直接生成游戏
     public GamePanel(int xCount, int yCount, int mineCount) {
+
+        gamePanel=this;
         this.xCount = xCount;
         this.yCount = yCount;
         this.mineCount = mineCount;
@@ -51,6 +54,7 @@ public class GamePanel extends JPanel {
 
     //根据存档雷场生成游戏
     public GamePanel(ArrayList<ArrayList<Integer>> mineDemo) {
+        gamePanel=this;
         this.saveOfMine = mineDemo;
         this.xCount = saveOfMine.size();
         this.yCount = saveOfMine.get(0).size();
@@ -68,7 +72,7 @@ public class GamePanel extends JPanel {
 
     //根据存档状态继续游戏
     public GamePanel() {
-
+        gamePanel=this;
         this.saveOfMine = InitialWindow.window.getCopyOfMine();
         this.xCount = InitialWindow.window.getCopyOfMine().size();
         this.yCount = InitialWindow.window.getCopyOfMine().get(0).size();
@@ -436,4 +440,65 @@ public class GamePanel extends JPanel {
             }
         }
     }
+
+    public void setMineField(GridComponent[][] mineField) {
+        this.mineField = mineField;
+    }
+
+    public void setChessboard(int[][] chessboard) {
+        this.chessboard = chessboard;
+    }
+
+    //递归开格子
+    public static void openCell(int i,int j){
+
+        if(!mineField[i][j].getStatus().equals(GridStatus.Covered)){
+            return;
+        }
+        if(chessboard[i][j]==0){
+            mineField[i][j].setStatus(GridStatus.Clicked);
+            if(i>1&&chessboard[i-1][j]==0){
+                openCell(i-1,j);
+            }else if(i>1&&chessboard[i-1][j]!=-1){
+                mineField[i-1][j].setStatus(GridStatus.Clicked);
+            }
+            if(j>1&&chessboard[i][j-1]==0){
+                openCell(i,j-1);
+            }else if(j>1&&chessboard[i][j-1]!=-1){
+                mineField[i][j-1].setStatus(GridStatus.Clicked);
+            }
+            if(j<yCount-1&&chessboard[i][j+1]==0){
+                openCell(i,j+1);
+            }else if(j<yCount-1&&chessboard[i][j+1]!=-1){
+                mineField[i][j+1].setStatus(GridStatus.Clicked);
+            }
+            if(i<xCount-1&&chessboard[i+1][j]==0){
+                openCell(i+1,j);
+            }else if(i<xCount-1&&chessboard[i+1][j]!=-1){
+                mineField[i+1][j].setStatus(GridStatus.Clicked);
+            }
+            if(i>1&&j>1&&chessboard[i-1][j-1]==0){
+                openCell(i-1,j-1);
+            }else if(i>1&&j>1&&chessboard[i-1][j-1]!=-1){
+                mineField[i-1][j-1].setStatus(GridStatus.Clicked);
+            }
+            if(i>1&&j<yCount-1&&chessboard[i-1][j+1]==0){
+                openCell(i-1,j+1);
+            }else if(i>1&&j<yCount-1&&chessboard[i-1][j+1]!=-1){
+                mineField[i-1][j+1].setStatus(GridStatus.Clicked);
+            }
+            if(j>1&&i<xCount-1&&chessboard[i+1][j-1]==0){
+                openCell(i+1,j-1);
+            }else if(j>1&&i<xCount-1&&chessboard[i+1][j-1]!=-1){
+                mineField[i+1][j-1].setStatus(GridStatus.Clicked);
+            }
+            if(j<yCount-1&&i<xCount-1&&chessboard[i+1][j+1]==0){
+                openCell(i+1,j+1);
+            }else if(j<yCount-1&&i<xCount-1&&chessboard[i+1][j+1]!=-1){
+                mineField[i+1][j+1].setStatus(GridStatus.Clicked);
+            }
+
+        }
+    }
+
 }

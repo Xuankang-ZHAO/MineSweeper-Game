@@ -33,10 +33,6 @@ public class GridComponent extends BasicComponent {
         this.row = x;//记住component所在的行
         this.col = y;//记住component所在的列
         this.value = num;//记住该component下标记是雷或者探测得到的雷数的数字
-        //this.mainFrame=MainFrame.mainFrame;
-        /*this.xCount=MainFrame.mainFrame.getxCount();
-        this.yCount=mainFrame.getyCount();
-        this.mineNUm=mainFrame.getMineCount();*/
     }
 
     @Override
@@ -48,16 +44,16 @@ public class GridComponent extends BasicComponent {
                 new MainFrame(xCount,yCount,mineNUm);
             }else {
                 if (value == -1) {
-                    this.status = GridStatus.Bombed;
+                    setStatus(GridStatus.Bombed);
                     MainFrame.controller.getOnTurn().addMistake();
                     MainFrame.controller.getOnTurn().costScore();
                 } else {
-                    this.status = GridStatus.Clicked;
+                    GamePanel.gamePanel.openCell(row,col);
+                    setStatus(GridStatus.Clicked);
                 }
                 counter++;
             }
             MainFrame.controller.nextTurn();
-            repaint();
         }
         //TODO: 在左键点击一个格子的时候，还需要做什么？
     }
@@ -67,15 +63,14 @@ public class GridComponent extends BasicComponent {
         System.out.printf("Gird (%d,%d) is right-clicked.\n", row, col);
         if (this.status == GridStatus.Covered) {
             if (value == -1) {
-                this.status = GridStatus.Flag;
+                setStatus(GridStatus.Flag);
                 MainFrame.controller.getOnTurn().addScore();
             } else {
-                this.status = GridStatus.Wrong;
+                setStatus(GridStatus.Wrong);
                 MainFrame.controller.getOnTurn().addMistake();
                 MainFrame.controller.getOnTurn().costScore();
             }
             MainFrame.controller.nextTurn();
-            repaint();
         }
 
         //TODO: 在右键点击一个格子的时候，还需要做什么？
@@ -136,9 +131,13 @@ public class GridComponent extends BasicComponent {
         return status;
     }
 
+    //每次改变一个格子都需要重新绘制这个格子
     public void setStatus(GridStatus status) {
         this.status = status;
+        repaint();
     }
+
+
 
 
 
