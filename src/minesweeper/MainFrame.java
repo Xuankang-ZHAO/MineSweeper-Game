@@ -19,13 +19,13 @@ public class MainFrame extends JFrame {
     private int yCount;
     private int mineCount;
     private ArrayList<ArrayList<Integer>> saveOfMines;
-    private int clickTimes=0;
+    private int clickTimes = 0;
     public static MainFrame mainFrame;
 
     //2333
     //新游戏
     public MainFrame(int xCount, int yCount, int mineCount) {
-        mainFrame=this;
+        mainFrame = this;
         //todo: change the count of xCount, yCount and mineCount by passing parameters from constructor
         //下面写的是确定大小的雷区的参数
         this.xCount = xCount;
@@ -124,19 +124,19 @@ public class MainFrame extends JFrame {
         clickBtn4.setLocation(110,  gamePanel.getHeight()+scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn4);
         clickBtn4.addActionListener(e -> {
-            if(clickTimes==0){
+            if (clickTimes == 0) {
                 gamePanel.showMineDirectly();
                 clickTimes++;
-            }else {
+            } else {
                 gamePanel.backGame();
                 clickTimes--;
             }
             repaint();
         });
 
-        JLabel time=new JLabel("15s left");
-        time.setSize(200,60);
-        time.setLocation(230,gamePanel.getHeight()+scoreBoard.getHeight());
+        JLabel time = new JLabel("15s left");
+        time.setSize(200, 60);
+        time.setLocation(230, gamePanel.getHeight() + scoreBoard.getHeight());
         //time.setOpaque(true);
         time.setBorder(BorderFactory.createLineBorder(Color.RED));
         time.setFont(new Font("粗体", Font.PLAIN, 50));
@@ -150,7 +150,7 @@ public class MainFrame extends JFrame {
 
     //读取存储的雷场开始游戏
     public MainFrame(ArrayList<ArrayList<Integer>> saveOfMines) {
-        mainFrame=this;
+        mainFrame = this;
         //todo: change the count of xCount, yCount and mineCount by passing parameters from constructor
         //下面写的是确定大小的雷区的参数
         this.saveOfMines = saveOfMines;
@@ -245,10 +245,10 @@ public class MainFrame extends JFrame {
         clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn4);
         clickBtn4.addActionListener(e -> {
-            if(clickTimes==0){
+            if (clickTimes == 0) {
                 gamePanel.showMineDirectly();
                 clickTimes++;
-            }else {
+            } else {
                 gamePanel.backGame();
                 clickTimes--;
             }
@@ -262,23 +262,23 @@ public class MainFrame extends JFrame {
 
     //读取游戏存档开始游戏
     public MainFrame() {
-        mainFrame=this;
+        mainFrame = this;
         this.setTitle("2021 CS102A Project Demo 2");
         this.setLayout(null);//清空布局管理器
-        this.setSize(InitialWindow.window.getCopyOfMine().get(0).size() * GridComponent.gridSize + 20, InitialWindow.window.getCopyOfMine().size()* GridComponent.gridSize + 200);
+        this.setSize(InitialWindow.window.getCopyOfMine().get(0).size() * GridComponent.gridSize + 20, InitialWindow.window.getCopyOfMine().size() * GridComponent.gridSize + 200);
         this.setLocationRelativeTo(null);
 
-        this.xCount=InitialWindow.window.getCopyOfMine().size();
-        this.yCount=InitialWindow.window.getCopyOfMine().get(0).size();
-        int tempCount=0;
-        for (int i=0;i<InitialWindow.window.getCopyOfMine().size();i++){
-            for (int j=0;j<InitialWindow.window.getCopyOfMine().get(0).size();j++){
-                if(InitialWindow.window.getCopyOfMine().get(i).get(j)==-1){
+        this.xCount = InitialWindow.window.getCopyOfMine().size();
+        this.yCount = InitialWindow.window.getCopyOfMine().get(0).size();
+        int tempCount = 0;
+        for (int i = 0; i < InitialWindow.window.getCopyOfMine().size(); i++) {
+            for (int j = 0; j < InitialWindow.window.getCopyOfMine().get(0).size(); j++) {
+                if (InitialWindow.window.getCopyOfMine().get(i).get(j) == -1) {
                     tempCount++;
                 }
             }
         }
-        this.mineCount=tempCount;
+        this.mineCount = tempCount;
 
 
         controller = new GameController();
@@ -361,10 +361,10 @@ public class MainFrame extends JFrame {
         clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn4);
         clickBtn4.addActionListener(e -> {
-            if(clickTimes==0){
+            if (clickTimes == 0) {
                 gamePanel.showMineDirectly();
                 clickTimes++;
-            }else {
+            } else {
                 gamePanel.backGame();
                 clickTimes--;
             }

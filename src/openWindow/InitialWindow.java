@@ -7,6 +7,7 @@ import selectMode.TopicSelect;
 
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,11 +23,13 @@ public class InitialWindow extends JFrame implements ActionListener {
     private JButton getSaveBtn1;
     private JButton getSaveBTn2;
     private JButton cancelButton;
+    private JButton musicButton;
     private JLabel TitleLabel;
     private ArrayList<ArrayList<Integer>> copyOfMine;
     private ArrayList<ArrayList<Integer>> copyOfState;
     private ArrayList<ArrayList<Integer>> copyOfScore;
     private ArrayList<String> copyOfName;
+    public Thread musicThread;
 
     public InitialWindow() {
         window = this;
@@ -130,10 +133,25 @@ public class InitialWindow extends JFrame implements ActionListener {
         cancelButton.setForeground(Color.BLACK);
         this.add(cancelButton);
         cancelButton.addActionListener(this);
+
+
+        musicButton = new JButton("音乐");
+        musicButton.setFont(new Font("黑体", Font.BOLD, 18));
+        musicButton.setBounds(600, 500, 100, 35);
+        musicButton.setOpaque(false);
+        musicButton.setContentAreaFilled(false);
+        musicButton.setForeground(Color.BLACK);
+        this.add(musicButton);
+        musicButton.addActionListener(e -> {
+            new Thread(() -> {
+                while (true) {
+                    new playMusic();
+                }
+            }).start();// Lambda表达式
+        });
+
         this.add(new InitialPanel());
         this.setVisible(true);
-
-
     }
 
     @Override
