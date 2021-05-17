@@ -1,5 +1,7 @@
 package selectMode;
 
+import openWindow.InitialWindow;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,7 @@ public class TopicSelect extends JFrame implements ActionListener, MouseListener
     private JButton Topic1;
     private JButton Topic2;
     private JButton Topic3;
+    private JButton backButton;
 
     public static int sss = 0;//没有实际含义，只是为了根据点击不同的按钮来决定不同的modeSelect界面背景。
 
@@ -59,6 +62,25 @@ public class TopicSelect extends JFrame implements ActionListener, MouseListener
             dispose();
             new ModeSelect();
         });
+
+        backButton = new JButton("返回");
+        backButton.setFont(new Font("黑体", Font.BOLD, 18));
+        backButton.setBounds(450, 350, 100, 35);
+        backButton.setOpaque(false);
+        backButton.setContentAreaFilled(false);
+        backButton.setForeground(Color.BLACK);
+        this.add(backButton);
+        backButton.addActionListener(e -> {
+            dispose();
+            new InitialWindow();
+        });
+        if (TopicSelect.getSss() == 1) {
+            this.add(new Background1());
+        } else if (TopicSelect.getSss() == 2) {
+            this.add(new Background1());//在这可以换不同背景
+        } else if (TopicSelect.getSss() == 3) {
+            this.add(new Background1());
+        }
         this.add(new Background1());
         this.setVisible(true);
 
