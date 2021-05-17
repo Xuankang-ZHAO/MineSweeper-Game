@@ -34,8 +34,6 @@ public class ScoreBoard extends JPanel {
 
         this.add(new JLabel("Score Board Of Players - "));
         this.setSize((yCount * GridComponent.gridSize) / 2, 80);
-
-
         this.setLocation(0, xCount * GridComponent.gridSize);
 
         this.p1 = p1;
@@ -58,8 +56,6 @@ public class ScoreBoard extends JPanel {
 
         this.add(new JLabel("Score Board Of Players - "));
         this.setSize((InitialWindow.window.getCopyOfMine().get(0).size() * GridComponent.gridSize) / 2, 80);
-
-
         this.setLocation(0, InitialWindow.window.getCopyOfMine().size() * GridComponent.gridSize);
 
         //要把玩家信息（名字，分数，失误数）全部加载
@@ -88,8 +84,8 @@ public class ScoreBoard extends JPanel {
      */
 
     public void update() {
-        score1.setText(String.format("%s : %d score  and %d mistake", p1.getUserName(), p1.getScore(), p1.getMistake()));
-        score2.setText(String.format("%s : %d score  and %d mistake", p2.getUserName(), p2.getScore(), p2.getMistake()));
+        score1.setText(String.format("%s : %d score and %d mistake", p1.getUserName(), p1.getScore(), p1.getMistake()));
+        score2.setText(String.format("%s : %d score and %d mistake", p2.getUserName(), p2.getScore(), p2.getMistake()));
     }
 
     public void initialPlayerScores() {

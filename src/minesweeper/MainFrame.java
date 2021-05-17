@@ -50,9 +50,12 @@ public class MainFrame extends JFrame {
         this.add(scoreBoard);
 
 
+
+
         JButton clickBtn1 = new JButton("存档进度");
         clickBtn1.setSize(100, 20);
         clickBtn1.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight());
+        //clickBtn1.setLocation(gamePanel.getWidth(),  gamePanel.getHeight()+scoreBoard.getHeight()+10);
         add(clickBtn1);
         clickBtn1.addActionListener(e -> {
             String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
@@ -89,6 +92,7 @@ public class MainFrame extends JFrame {
         JButton clickBtn2 = new JButton("存档雷场");
         clickBtn2.setSize(100, 20);
         clickBtn2.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
+        //clickBtn2.setLocation(gamePanel.getWidth(), gamePanel.getHeight()+scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn2);
         clickBtn2.addActionListener(e -> {
             String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
@@ -117,7 +121,7 @@ public class MainFrame extends JFrame {
 
         JButton clickBtn4 = new JButton("透视雷场");
         clickBtn4.setSize(100, 20);
-        clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
+        clickBtn4.setLocation(110,  gamePanel.getHeight()+scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn4);
         clickBtn4.addActionListener(e -> {
             if(clickTimes==0){
@@ -137,6 +141,8 @@ public class MainFrame extends JFrame {
         time.setBorder(BorderFactory.createLineBorder(Color.RED));
         time.setFont(new Font("粗体", Font.PLAIN, 50));
         add(time);
+
+
 
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

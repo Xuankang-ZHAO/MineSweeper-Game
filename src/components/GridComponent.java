@@ -5,6 +5,7 @@ import minesweeper.GamePanel;
 import minesweeper.MainFrame;
 import selectMode.ModeSelect;
 
+import javax.swing.*;
 import java.awt.*;
 
 
@@ -12,6 +13,17 @@ import java.awt.*;
 public class GridComponent extends BasicComponent {
     public static int gridSize = 30;//设置格子的尺寸大小
     //public static int count=0;//用于设定回合数
+
+     ImageIcon p2=new ImageIcon("src/pictures/苦力怕贴图.PNG");
+     ImageIcon p2PLus=change(p2,0.11);
+     ImageIcon p1=new ImageIcon("src/pictures/草方块.PNG");
+     ImageIcon p1Plus=change(p1,0.2);
+     ImageIcon p3=new ImageIcon("src/pictures/钻石.PNG");
+     ImageIcon p3Plus=change(p3,0.06);
+     ImageIcon p4=new ImageIcon("src/pictures/贴图史蒂夫.png");
+     ImageIcon p4Plus=change(p4,0.08);
+
+
 
 
     private int xCount=MainFrame.mainFrame.getxCount();
@@ -79,9 +91,8 @@ public class GridComponent extends BasicComponent {
     public void draw(Graphics g) {
 
         if (this.status == GridStatus.Covered) {
-            g.setColor(Color.CYAN);//覆盖的时候是蓝绿色
-            g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
-            //其实是fill rectangular
+            Image image1=p1Plus.getImage();
+            g.drawImage(image1,0,0,image1.getWidth(this),image1.getHeight(this),this);
         }
         if (this.status == GridStatus.Clicked) {
 
@@ -91,28 +102,22 @@ public class GridComponent extends BasicComponent {
             g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
         }
         if (this.status == GridStatus.Flag) {
-            g.setColor(Color.LIGHT_GRAY);
-            g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
-            g.setColor(Color.GREEN);
-            g.drawString("F", getWidth() / 2 - 5, getHeight() / 2 + 5);
+            Image image1=p3Plus.getImage();
+            g.drawImage(image1,0,0,image1.getWidth(this),image1.getHeight(this),this);
         }
         if (this.status == GridStatus.Bombed) {
-            g.setColor(Color.LIGHT_GRAY);
-            g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
-            g.setColor(Color.YELLOW);
-            g.drawString("B", getWidth() / 2 - 5, getHeight() / 2 + 5);
+            Image image1=p2PLus.getImage();
+            g.drawImage(image1,0,0,image1.getWidth(this),image1.getHeight(this),this);
+
         }
         if (this.status == GridStatus.Wrong) {
-            g.setColor(Color.LIGHT_GRAY);
-            g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
-            g.setColor(Color.RED);
-            g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
+            Image image1=p4Plus.getImage();
+            g.drawImage(image1,0,0,image1.getWidth(this),image1.getHeight(this),this);
+
         }
         if (this.status == GridStatus.Show) {
-            g.setColor(Color.LIGHT_GRAY);
-            g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
-            g.setColor(new Color(244, 183, 113));
-            g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
+            Image image1=p2PLus.getImage();
+            g.drawImage(image1,0,0,image1.getWidth(this),image1.getHeight(this),this);
         }
     }
 
@@ -137,6 +142,19 @@ public class GridComponent extends BasicComponent {
         repaint();
     }
 
+    /**
+     * 用于调整图片的大小，以进行适当的贴图
+     * @param picture
+     * @param rate
+     * @return
+     */
+    public ImageIcon change(ImageIcon picture, double rate){
+        int width=(int)(picture.getIconWidth()*rate);
+        int height=(int)( picture.getIconHeight()*rate);
+        Image pic=picture.getImage().getScaledInstance(width,height,Image.SCALE_DEFAULT);
+        ImageIcon pic2=new ImageIcon(pic);
+        return pic2;
+    }
 
 
 
