@@ -24,12 +24,18 @@ public class InitialWindow extends JFrame implements ActionListener {
     private JButton getSaveBTn2;
     private JButton cancelButton;
     private JButton musicButton;
+    private int musicCount = 1;
     private JLabel TitleLabel;
     private ArrayList<ArrayList<Integer>> copyOfMine;
     private ArrayList<ArrayList<Integer>> copyOfState;
     private ArrayList<ArrayList<Integer>> copyOfScore;
     private ArrayList<String> copyOfName;
-    public Thread musicThread;
+    Thread musicThread = new Thread(() -> {
+        while (true) {
+            new playMusic();
+        }
+    });
+
 
     public InitialWindow() {
         window = this;
@@ -143,11 +149,13 @@ public class InitialWindow extends JFrame implements ActionListener {
         musicButton.setForeground(Color.BLACK);
         this.add(musicButton);
         musicButton.addActionListener(e -> {
-            new Thread(() -> {
-                while (true) {
-                    new playMusic();
-                }
-            }).start();// Lambda表达式
+            if (musicCount == 1) {
+                musicThread.start();// Lambda表达式
+                musicCount++;
+            } else {
+                musicThread.stop();
+                musicCount = 1;
+            }
         });
 
         this.add(new InitialPanel());
