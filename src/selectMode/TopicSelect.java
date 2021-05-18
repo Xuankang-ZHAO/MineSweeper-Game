@@ -15,8 +15,7 @@ public class TopicSelect extends JFrame implements ActionListener, MouseListener
     private JButton Topic2;
     private JButton Topic3;
     private JButton backButton;
-
-    public static int sss = 0;//没有实际含义，只是为了根据点击不同的按钮来决定不同的modeSelect界面背景。
+    private int sss;//没有实际含义，只是为了根据点击不同的按钮来决定不同的modeSelect界面背景。
 
     public TopicSelect() {
         topicSelect = this;
@@ -74,11 +73,11 @@ public class TopicSelect extends JFrame implements ActionListener, MouseListener
             dispose();
             new InitialWindow();
         });
-        if (TopicSelect.getSss() == 1) {
+        if (this.sss == 1) {
             this.add(new Background1());
-        } else if (TopicSelect.getSss() == 2) {
+        } else if (this.sss == 2) {
             this.add(new Background1());//在这可以换不同背景
-        } else if (TopicSelect.getSss() == 3) {
+        } else if (this.sss == 3) {
             this.add(new Background1());
         }
         this.add(new Background1());
@@ -86,7 +85,7 @@ public class TopicSelect extends JFrame implements ActionListener, MouseListener
 
     }
 
-    public static int getSss() {
+    public int getSss() {
         return sss;
     }
 

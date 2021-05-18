@@ -9,16 +9,16 @@ public abstract class BasicComponent extends JComponent {
         initial();
     }
 
-    private void initial(){
+    private void initial() {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(e.getButton()==1){
+                if (e.getButton() == 1) {
                     onMouseLeftClicked();
                 }
-                if(e.getButton()==3){
-                   onMouseRightClicked();
+                if (e.getButton() == 3) {
+                    onMouseRightClicked();
                 }
             }
         });

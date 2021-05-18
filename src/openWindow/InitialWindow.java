@@ -152,9 +152,12 @@ public class InitialWindow extends JFrame implements ActionListener {
             if (musicCount == 1) {
                 musicThread.start();// Lambda表达式
                 musicCount++;
-            } else {
-                musicThread.stop();
-                musicCount = 1;
+            } else if (musicCount == 2) {
+                musicCount++;
+                musicThread.suspend();
+            } else if (musicCount == 3) {
+                musicThread.resume();
+                musicCount = 2;
             }
         });
 

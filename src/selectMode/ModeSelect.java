@@ -218,12 +218,12 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
             dispose();
             new InitialWindow();
         });
-        if (TopicSelect.getSss() == 1) {
+        if (TopicSelect.topicSelect.getSss() == 1) {
             this.add(new Background1());
-        } else if (TopicSelect.getSss() == 2) {
-            this.add(new Background1());//在这可以换不同背景
-        } else if (TopicSelect.getSss() == 3) {
-            this.add(new Background1());
+        } else if (TopicSelect.topicSelect.getSss() == 2) {
+            this.add(new Background2());//在这可以换不同背景
+        } else if (TopicSelect.topicSelect.getSss() == 3) {
+            this.add(new Background3());
         }
         this.setVisible(true);
     }

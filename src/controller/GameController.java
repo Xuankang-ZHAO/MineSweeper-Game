@@ -7,7 +7,6 @@ import entity.Player;
 import minesweeper.ScoreBoard;
 import openWindow.InitialWindow;
 import selectMode.ModeSelect;
-import selectMode.set1;
 
 import javax.swing.*;
 import java.io.*;
