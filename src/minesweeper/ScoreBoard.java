@@ -1,10 +1,12 @@
 package minesweeper;
 
 import components.GridComponent;
+import controller.GameController;
 import entity.Player;
 import openWindow.InitialWindow;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -18,10 +20,11 @@ public class ScoreBoard extends JPanel {
     Player p2;
 
     int[][] playerScores;//记录玩家的分数
-    String [] nameList;//记录玩家的名字
+    String[] nameList;//记录玩家的名字
 
     JLabel score1 = new JLabel();
     JLabel score2 = new JLabel();
+    JLabel currentPlayer = new JLabel();
 
     /**
      * 通过进行游戏的玩家来初始化计分板。这里只考虑了两个玩家的情况。
@@ -31,8 +34,12 @@ public class ScoreBoard extends JPanel {
      * @param p2 玩家2
      */
     public ScoreBoard(Player p1, Player p2, int xCount, int yCount) {
+        JLabel scoreBoard = new JLabel("Score Board");
+        scoreBoard.setBounds(10, yCount + 10, 300, 30);
+        scoreBoard.setForeground(Color.BLACK);
+        scoreBoard.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        this.add(scoreBoard);
 
-        this.add(new JLabel("Score Board Of Players - "));
         this.setSize((yCount * GridComponent.gridSize) / 2, 80);
         this.setLocation(0, xCount * GridComponent.gridSize);
 
@@ -44,6 +51,7 @@ public class ScoreBoard extends JPanel {
 
         this.add(score1);
         this.add(score2);
+        this.add(currentPlayer);
 
 
         this.setLayout(new BoxLayout(this, 1));//target指的是container
@@ -53,7 +61,10 @@ public class ScoreBoard extends JPanel {
 
 
     public ScoreBoard() {
-
+//        JLabel scoreBoard = new JLabel("Score Board");
+//        scoreBoard.setBounds(10, yCount + 10, 300, 30);
+//        scoreBoard.setForeground(Color.BLACK);
+//        scoreBoard.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         this.add(new JLabel("Score Board Of Players - "));
         this.setSize((InitialWindow.window.getCopyOfMine().get(0).size() * GridComponent.gridSize) / 2, 80);
         this.setLocation(0, InitialWindow.window.getCopyOfMine().size() * GridComponent.gridSize);
@@ -71,6 +82,7 @@ public class ScoreBoard extends JPanel {
 
         this.add(score1);
         this.add(score2);
+        this.add(currentPlayer);
 
 
         this.setLayout(new BoxLayout(this, 1));//target指的是container
@@ -85,7 +97,20 @@ public class ScoreBoard extends JPanel {
 
     public void update() {
         score1.setText(String.format("%s : %d score and %d mistake", p1.getUserName(), p1.getScore(), p1.getMistake()));
+        score1.setBounds(10, MainFrame.mainFrame.getyCount()+ 50, 500, 35);
+        score1.setForeground(Color.BLACK);
+        score1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+
         score2.setText(String.format("%s : %d score and %d mistake", p2.getUserName(), p2.getScore(), p2.getMistake()));
+        score2.setBounds(10, MainFrame.mainFrame.getyCount()+ 90, 500, 35);
+        score2.setForeground(Color.BLACK);
+        score2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+
+//        currentPlayer.setText(String.format("Current player:%s", MainFrame.getController().getOnTurn().getUserName()));
+//        currentPlayer.setSize(200, 35);
+//        currentPlayer.setLocation(MainFrame.mainFrame.getxCount() * GridComponent.gridSize + 10, 20);
+//        currentPlayer.setForeground(Color.BLACK);
+//        currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
     }
 
     public void initialPlayerScores() {
@@ -96,24 +121,23 @@ public class ScoreBoard extends JPanel {
         playerScores[1][1] = 0;
     }
 
-    public void readPlayerScores(){
-        this.playerScores=new int[2][2];
-        playerScores[0][0]= InitialWindow.window.getCopyOfScore().get(0).get(0);
-        playerScores[0][1]= InitialWindow.window.getCopyOfScore().get(0).get(1);
-        playerScores[1][0]= InitialWindow.window.getCopyOfScore().get(1).get(0);
-        playerScores[1][1]= InitialWindow.window.getCopyOfScore().get(1).get(1);
+    public void readPlayerScores() {
+        this.playerScores = new int[2][2];
+        playerScores[0][0] = InitialWindow.window.getCopyOfScore().get(0).get(0);
+        playerScores[0][1] = InitialWindow.window.getCopyOfScore().get(0).get(1);
+        playerScores[1][0] = InitialWindow.window.getCopyOfScore().get(1).get(0);
+        playerScores[1][1] = InitialWindow.window.getCopyOfScore().get(1).get(1);
 
     }
 
-    public void initialNameList(){
-        this.nameList=new String[2];
-        nameList[0]=p1.getUserName();
-        nameList[1]=p2.getUserName();
+    public void initialNameList() {
+        this.nameList = new String[2];
+        nameList[0] = p1.getUserName();
+        nameList[1] = p2.getUserName();
     }
 
 
-
-    public void updatePlayerScores(){
+    public void updatePlayerScores() {
         playerScores[0][0] = p1.getScore();
         playerScores[0][1] = p1.getMistake();
         playerScores[1][0] = p2.getScore();

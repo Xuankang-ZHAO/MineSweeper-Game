@@ -1,4 +1,4 @@
-package openWindow;
+package Music;
 
 import javax.sound.sampled.*;
 import java.io.File;

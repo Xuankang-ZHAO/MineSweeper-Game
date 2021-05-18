@@ -4,7 +4,6 @@ package minesweeper;
 import components.GridComponent;
 import controller.GameController;
 import entity.Player;
-import openWindow.InitialPanel;
 import openWindow.InitialWindow;
 import selectMode.ModeSelect;
 
@@ -34,7 +33,7 @@ public class MainFrame extends JFrame {
 
         this.setTitle("2021 CS102A Project Demo 2");
         this.setLayout(null);//清空布局管理器
-        this.setSize(yCount * GridComponent.gridSize + 20, xCount * GridComponent.gridSize + 200);
+        this.setSize(yCount * GridComponent.gridSize + 200, xCount * GridComponent.gridSize + 200);
         this.setLocationRelativeTo(null);
 
         Player p1 = new Player(ModeSelect.modeSelect.getPlayerName1());
@@ -48,8 +47,6 @@ public class MainFrame extends JFrame {
 
         this.add(gamePanel);
         this.add(scoreBoard);
-
-
 
 
         JButton clickBtn1 = new JButton("存档进度");
@@ -121,7 +118,7 @@ public class MainFrame extends JFrame {
 
         JButton clickBtn4 = new JButton("透视雷场");
         clickBtn4.setSize(100, 20);
-        clickBtn4.setLocation(110,  gamePanel.getHeight()+scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
+        clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn4);
         clickBtn4.addActionListener(e -> {
             if (clickTimes == 0) {
@@ -141,7 +138,6 @@ public class MainFrame extends JFrame {
         time.setBorder(BorderFactory.createLineBorder(Color.RED));
         time.setFont(new Font("粗体", Font.PLAIN, 50));
         add(time);
-
 
 
         this.setVisible(true);
@@ -386,5 +382,9 @@ public class MainFrame extends JFrame {
 
     public int getMineCount() {
         return mineCount;
+    }
+
+    public static GameController getController() {
+        return controller;
     }
 }

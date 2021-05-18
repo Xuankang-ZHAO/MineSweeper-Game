@@ -19,7 +19,7 @@ public class GamePanel extends JPanel {
     private final Random random = new Random();
     private static int xCount;
     private static int yCount;
-    private  int mineCount;
+    private int mineCount;
 
     public static GamePanel gamePanel;
     private int LeiCode = -1;
@@ -36,7 +36,7 @@ public class GamePanel extends JPanel {
     //直接生成游戏
     public GamePanel(int xCount, int yCount, int mineCount) {
 
-        gamePanel=this;
+        gamePanel = this;
         this.xCount = xCount;
         this.yCount = yCount;
         this.mineCount = mineCount;
@@ -54,7 +54,7 @@ public class GamePanel extends JPanel {
 
     //根据存档雷场生成游戏
     public GamePanel(ArrayList<ArrayList<Integer>> mineDemo) {
-        gamePanel=this;
+        gamePanel = this;
         this.saveOfMine = mineDemo;
         this.xCount = saveOfMine.size();
         this.yCount = saveOfMine.get(0).size();
@@ -72,7 +72,7 @@ public class GamePanel extends JPanel {
 
     //根据存档状态继续游戏
     public GamePanel() {
-        gamePanel=this;
+        gamePanel = this;
         this.saveOfMine = InitialWindow.window.getCopyOfMine();
         this.xCount = InitialWindow.window.getCopyOfMine().size();
         this.yCount = InitialWindow.window.getCopyOfMine().get(0).size();
@@ -85,7 +85,7 @@ public class GamePanel extends JPanel {
 
         initialGame2();
         loadCurrentState();//加载存档中的游戏打开状态
-        this.currentState=new int[xCount][yCount];
+        this.currentState = new int[xCount][yCount];
         repaint();
     }
 
@@ -450,55 +450,53 @@ public class GamePanel extends JPanel {
     }
 
     //递归开格子
-    public static void openCell(int i,int j){
+    public static void openCell(int i, int j) {
 
-        if(!mineField[i][j].getStatus().equals(GridStatus.Covered)){
+        if (!mineField[i][j].getStatus().equals(GridStatus.Covered)) {
             return;
         }
-        if(chessboard[i][j]==0){
+        if (chessboard[i][j] == 0) {
             mineField[i][j].setStatus(GridStatus.Clicked);
-            if(i>1&&chessboard[i-1][j]==0){
-                openCell(i-1,j);
-            }else if(i>1&&chessboard[i-1][j]!=-1){
-                mineField[i-1][j].setStatus(GridStatus.Clicked);
+            if (i > 1 && chessboard[i - 1][j] == 0) {
+                openCell(i - 1, j);
+            } else if (i > 1 && chessboard[i - 1][j] != -1) {
+                mineField[i - 1][j].setStatus(GridStatus.Clicked);
             }
-            if(j>1&&chessboard[i][j-1]==0){
-                openCell(i,j-1);
-            }else if(j>1&&chessboard[i][j-1]!=-1){
-                mineField[i][j-1].setStatus(GridStatus.Clicked);
+            if (j > 1 && chessboard[i][j - 1] == 0) {
+                openCell(i, j - 1);
+            } else if (j > 1 && chessboard[i][j - 1] != -1) {
+                mineField[i][j - 1].setStatus(GridStatus.Clicked);
             }
-            if(j<yCount-1&&chessboard[i][j+1]==0){
-                openCell(i,j+1);
-            }else if(j<yCount-1&&chessboard[i][j+1]!=-1){
-                mineField[i][j+1].setStatus(GridStatus.Clicked);
+            if (j < yCount - 1 && chessboard[i][j + 1] == 0) {
+                openCell(i, j + 1);
+            } else if (j < yCount - 1 && chessboard[i][j + 1] != -1) {
+                mineField[i][j + 1].setStatus(GridStatus.Clicked);
             }
-            if(i<xCount-1&&chessboard[i+1][j]==0){
-                openCell(i+1,j);
-            }else if(i<xCount-1&&chessboard[i+1][j]!=-1){
-                mineField[i+1][j].setStatus(GridStatus.Clicked);
+            if (i < xCount - 1 && chessboard[i + 1][j] == 0) {
+                openCell(i + 1, j);
+            } else if (i < xCount - 1 && chessboard[i + 1][j] != -1) {
+                mineField[i + 1][j].setStatus(GridStatus.Clicked);
             }
-            if(i>1&&j>1&&chessboard[i-1][j-1]==0){
-                openCell(i-1,j-1);
-            }else if(i>1&&j>1&&chessboard[i-1][j-1]!=-1){
-                mineField[i-1][j-1].setStatus(GridStatus.Clicked);
+            if (i > 1 && j > 1 && chessboard[i - 1][j - 1] == 0) {
+                openCell(i - 1, j - 1);
+            } else if (i > 1 && j > 1 && chessboard[i - 1][j - 1] != -1) {
+                mineField[i - 1][j - 1].setStatus(GridStatus.Clicked);
             }
-            if(i>1&&j<yCount-1&&chessboard[i-1][j+1]==0){
-                openCell(i-1,j+1);
-            }else if(i>1&&j<yCount-1&&chessboard[i-1][j+1]!=-1){
-                mineField[i-1][j+1].setStatus(GridStatus.Clicked);
+            if (i > 1 && j < yCount - 1 && chessboard[i - 1][j + 1] == 0) {
+                openCell(i - 1, j + 1);
+            } else if (i > 1 && j < yCount - 1 && chessboard[i - 1][j + 1] != -1) {
+                mineField[i - 1][j + 1].setStatus(GridStatus.Clicked);
             }
-            if(j>1&&i<xCount-1&&chessboard[i+1][j-1]==0){
-                openCell(i+1,j-1);
-            }else if(j>1&&i<xCount-1&&chessboard[i+1][j-1]!=-1){
-                mineField[i+1][j-1].setStatus(GridStatus.Clicked);
+            if (j > 1 && i < xCount - 1 && chessboard[i + 1][j - 1] == 0) {
+                openCell(i + 1, j - 1);
+            } else if (j > 1 && i < xCount - 1 && chessboard[i + 1][j - 1] != -1) {
+                mineField[i + 1][j - 1].setStatus(GridStatus.Clicked);
             }
-            if(j<yCount-1&&i<xCount-1&&chessboard[i+1][j+1]==0){
-                openCell(i+1,j+1);
-            }else if(j<yCount-1&&i<xCount-1&&chessboard[i+1][j+1]!=-1){
-                mineField[i+1][j+1].setStatus(GridStatus.Clicked);
+            if (j < yCount - 1 && i < xCount - 1 && chessboard[i + 1][j + 1] == 0) {
+                openCell(i + 1, j + 1);
+            } else if (j < yCount - 1 && i < xCount - 1 && chessboard[i + 1][j + 1] != -1) {
+                mineField[i + 1][j + 1].setStatus(GridStatus.Clicked);
             }
-
         }
     }
-
 }

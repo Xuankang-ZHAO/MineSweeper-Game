@@ -19,7 +19,7 @@ public class GameController {
     private Player p2;
 
     int playerNUm;
-    ArrayList<Player> playerList;
+    private ArrayList<Player> playerList;
 
     private Player onTurn;
 
@@ -31,6 +31,7 @@ public class GameController {
     private int count;////当前玩家正处于turns的第几个回合
 
     //新游戏时初始化游戏的游戏控制器
+    //双人模式下的constructor
     public GameController(Player p1, Player p2) {
         this.init(p1, p2);
         this.onTurn = p1;
@@ -58,7 +59,6 @@ public class GameController {
 
     /**
      * 初始化游戏。在开始游戏前，应先调用此方法，给予游戏必要的参数。
-     *
      * @param p1 玩家1
      * @param p2 玩家2
      */
@@ -100,7 +100,7 @@ public class GameController {
         scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
         gamePanel.updateCurrentState();//回合结束更新棋子们的打开状态
         scoreBoard.updatePlayerScores();//回合结束更新玩家的分数和失误次数表，用于存档
-        //TODO: 在每个回合结束的时候，还需要做什么 (例如...检查游戏是否结束？)
+
     }
 
     public void EndGame() {
