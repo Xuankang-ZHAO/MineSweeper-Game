@@ -24,7 +24,7 @@ public class NewGame {
         JFrame jf = new JFrame("测试进度条");
         jf.setMinimumSize(new Dimension(LOAD_WIDTH, LOAD_HEIGHT));
         // 创建标签,并在标签上放置一张图片
-        ImageIcon p = new ImageIcon("src/pictures/苦力怕爆炸.gif");
+        ImageIcon p = new ImageIcon("resouces/pictures/苦力怕爆炸.gif");
         ImageIcon pPLus = change(p, 0.9, 0.35);
         JLabel label = new JLabel(pPLus);
         label.setBounds(0, 0, 455, 280);

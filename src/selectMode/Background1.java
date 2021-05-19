@@ -11,7 +11,7 @@ public class Background1 extends JPanel {
 
     public Background1() {
         try {
-            image = ImageIO.read(new File("src/pictures/背景.PNG"));
+            image = ImageIO.read(new File("resouces/pictures/背景.PNG"));
         } catch (IOException e) {
             e.printStackTrace();
         }

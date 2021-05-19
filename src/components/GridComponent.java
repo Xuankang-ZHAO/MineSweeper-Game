@@ -29,29 +29,29 @@ public class GridComponent extends BasicComponent {
     private GridStatus status = GridStatus.Covered;//初始默认打开状态都是覆盖
     private int content = 0;
 
-    ImageIcon p1 = new ImageIcon("src/pictures/草方块.PNG");
+    ImageIcon p1 = new ImageIcon("resouces/pictures/草方块.PNG");
     ImageIcon p1Plus = change(p1, 0.2);
-    ImageIcon p2 = new ImageIcon("src/pictures/苦力怕贴图.PNG");
+    ImageIcon p2 = new ImageIcon("resouces/pictures/苦力怕贴图.PNG");
     ImageIcon p2Plus = change(p2, 0.11);
-    ImageIcon p3 = new ImageIcon("src/pictures/钻石.PNG");
+    ImageIcon p3 = new ImageIcon("resouces/pictures/钻石.PNG");
     ImageIcon p3Plus = change(p3, 0.06);
-    ImageIcon p4 = new ImageIcon("src/pictures/贴图史蒂夫.png");
+    ImageIcon p4 = new ImageIcon("resouces/pictures/贴图史蒂夫.png");
     ImageIcon p4Plus = change(p4, 0.08);
-    ImageIcon p5 = new ImageIcon("src/pictures/草方块.PNG");
+    ImageIcon p5 = new ImageIcon("resouces/pictures/草方块.PNG");
     ImageIcon p5Plus = change(p5, 0.2);
-    ImageIcon p6 = new ImageIcon("src/pictures/钻石.PNG");
+    ImageIcon p6 = new ImageIcon("resouces/pictures/钻石.PNG");
     ImageIcon p6Plus = change(p6, 0.11);
-    ImageIcon p7 = new ImageIcon("src/pictures/钻石.PNG");
+    ImageIcon p7 = new ImageIcon("resouces/pictures/钻石.PNG");
     ImageIcon p7Plus = change(p7, 0.06);
-    ImageIcon p8 = new ImageIcon("src/pictures/钻石.PNG");
+    ImageIcon p8 = new ImageIcon("resouces/pictures/钻石.PNG");
     ImageIcon p8Plus = change(p8, 0.08);
-    ImageIcon p9 = new ImageIcon("src/pictures/钻石.PNG");
+    ImageIcon p9 = new ImageIcon("resouces/pictures/钻石.PNG");
     ImageIcon p9Plus = change(p9, 0.2);
-    ImageIcon p10 = new ImageIcon("src/pictures/钻石.PNG");
+    ImageIcon p10 = new ImageIcon("resouces/pictures/钻石.PNG");
     ImageIcon p10Plus = change(p10, 0.11);
-    ImageIcon p11 = new ImageIcon("src/pictures/钻石.PNG");
+    ImageIcon p11 = new ImageIcon("resouces/pictures/钻石.PNG");
     ImageIcon p11Plus = change(p11, 0.06);
-    ImageIcon p12 = new ImageIcon("src/pictures/钻石.PNG");
+    ImageIcon p12 = new ImageIcon("resouces/pictures/钻石.PNG");
     ImageIcon p12Plus = change(p12, 0.08);
 
     public GridComponent(int x, int y, int num) {
