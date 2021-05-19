@@ -255,6 +255,10 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
         return playerName2;
     }
 
+    public int getTime() {
+        return time;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 

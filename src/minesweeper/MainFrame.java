@@ -9,6 +9,8 @@ import selectMode.ModeSelect;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ public class MainFrame extends JFrame {
     private ArrayList<ArrayList<Integer>> saveOfMines;
     private int clickTimes = 0;
     public static MainFrame mainFrame;
+    int seconds=ModeSelect.modeSelect.getTime();
 
     //2333
     //新游戏
@@ -131,13 +134,33 @@ public class MainFrame extends JFrame {
             repaint();
         });
 
-        JLabel time = new JLabel("15s left");
-        time.setSize(200, 60);
-        time.setLocation(230, gamePanel.getHeight() + scoreBoard.getHeight());
+        JLabel time = new JLabel(seconds+"s left");
+        time.setSize(100, 20);
+        time.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight());
         //time.setOpaque(true);
         time.setBorder(BorderFactory.createLineBorder(Color.RED));
-        time.setFont(new Font("粗体", Font.PLAIN, 50));
+        time.setFont(new Font("粗体", Font.PLAIN, 20));
         add(time);
+
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(seconds>0){
+                    seconds--;
+                }else {
+                    seconds=ModeSelect.modeSelect.getTime();
+                }
+                time.setText(seconds+"s left");
+            }
+        });
+        JButton clickBtn5 = new JButton("开始游戏");
+        clickBtn5.setSize(100, 20);
+        clickBtn5.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
+        add(clickBtn5);
+        clickBtn5.addActionListener(e -> {
+            timer.start();
+        });
+
 
 
         //this.setVisible(true);

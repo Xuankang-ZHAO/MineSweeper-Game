@@ -15,7 +15,7 @@ import java.awt.*;
 public class GridComponent extends BasicComponent {
     public static GridComponent gridComponent;
 
-    public static int gridSize = 30;//设置格子的尺寸大小
+    public static int gridSize = 35;//设置格子的尺寸大小
     //public static int count=0;//用于设定回合数
     private int xCount = MainFrame.mainFrame.getxCount();
     private int yCount = MainFrame.mainFrame.getyCount();
@@ -67,7 +67,8 @@ public class GridComponent extends BasicComponent {
         if (this.status == GridStatus.Covered) {
             if (counter == 0 && value == -1) {
                 MainFrame.mainFrame.dispose();
-                new MainFrame(xCount, yCount, mineNUm);
+                MainFrame m=new MainFrame(xCount, yCount, mineNUm);
+                m.setVisible(true);
             } else {
                 if (value == -1) {
                     setStatus(GridStatus.Bombed);
