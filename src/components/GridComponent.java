@@ -1,9 +1,12 @@
 package components;
 
+import Music.BombedMusic;
+import Music.ClickedMusic;
+import Music.FlagMusic;
+import Music.WrongMusic;
 import entity.GridStatus;
 import minesweeper.GamePanel;
 import minesweeper.MainFrame;
-import selectMode.ModeSelect;
 import selectMode.TopicSelect;
 
 import javax.swing.*;
@@ -36,20 +39,19 @@ public class GridComponent extends BasicComponent {
     ImageIcon p4Plus = change(p4, 0.08);
     ImageIcon p5 = new ImageIcon("src/pictures/草方块.PNG");
     ImageIcon p5Plus = change(p5, 0.2);
-    ImageIcon p6 = new ImageIcon("src/pictures/苦力怕贴图.PNG");
+    ImageIcon p6 = new ImageIcon("src/pictures/钻石.PNG");
     ImageIcon p6Plus = change(p6, 0.11);
-    //ImageIcon p7 = new ImageIcon("src/pictures/向日葵.png");//包里没这个图片,为了看效果先换了
-    ImageIcon p7 = new ImageIcon("src/pictures/草方块.PNG");
+    ImageIcon p7 = new ImageIcon("src/pictures/钻石.PNG");
     ImageIcon p7Plus = change(p7, 0.06);
-    ImageIcon p8 = new ImageIcon("src/pictures/贴图史蒂夫.png");
+    ImageIcon p8 = new ImageIcon("src/pictures/钻石.PNG");
     ImageIcon p8Plus = change(p8, 0.08);
-    ImageIcon p9 = new ImageIcon("src/pictures/草方块.PNG");
+    ImageIcon p9 = new ImageIcon("src/pictures/钻石.PNG");
     ImageIcon p9Plus = change(p9, 0.2);
-    ImageIcon p10 = new ImageIcon("src/pictures/苦力怕贴图.PNG");
+    ImageIcon p10 = new ImageIcon("src/pictures/钻石.PNG");
     ImageIcon p10Plus = change(p10, 0.11);
-    ImageIcon p11 = new ImageIcon("src/pictures/草方块.PNG");
+    ImageIcon p11 = new ImageIcon("src/pictures/钻石.PNG");
     ImageIcon p11Plus = change(p11, 0.06);
-    ImageIcon p12 = new ImageIcon("src/pictures/贴图史蒂夫.png");
+    ImageIcon p12 = new ImageIcon("src/pictures/钻石.PNG");
     ImageIcon p12Plus = change(p12, 0.08);
 
     public GridComponent(int x, int y, int num) {
@@ -69,10 +71,11 @@ public class GridComponent extends BasicComponent {
             } else {
                 if (value == -1) {
                     setStatus(GridStatus.Bombed);
+                    new BombedMusic();
                     MainFrame.controller.getOnTurn().addMistake();
                     MainFrame.controller.getOnTurn().costScore();
-                    //todo:爆炸音效
                 } else {
+                    new ClickedMusic();
                     GamePanel.gamePanel.openCell(row, col);
                     setStatus(GridStatus.Clicked);
                 }
@@ -89,9 +92,11 @@ public class GridComponent extends BasicComponent {
         if (this.status == GridStatus.Covered) {
             if (value == -1) {
                 setStatus(GridStatus.Flag);
+                new FlagMusic();
                 MainFrame.controller.getOnTurn().addScore();
             } else {
                 setStatus(GridStatus.Wrong);
+                new WrongMusic();
                 MainFrame.controller.getOnTurn().addMistake();
                 MainFrame.controller.getOnTurn().costScore();
             }
