@@ -11,6 +11,8 @@ import selectMode.set1;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class NewGame {
     public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -79,7 +81,7 @@ public class NewGame {
             }
         });
         timer.start();
-        MainFrame mainFrame = new MainFrame(set1.set1.getxCount(), set1.set1.getyCount(), set1.set1.getMineNum());
+        AtomicReference<MainFrame> mainFrame = new AtomicReference<>();
         //监听进度条的任务变化
         model.addChangeListener(new ChangeListener() {
             @Override
@@ -88,10 +90,13 @@ public class NewGame {
                 if (value == simulaterActivity.getAmount()) {
                     timer.stop();
                     jf.dispose();
-                    mainFrame.setVisible(true);
+                    mainFrame.get().setVisible(true);
                 }
             }
         });
+        new Thread(()->{
+            mainFrame.set(new MainFrame(set1.set1.getxCount(), set1.set1.getyCount(), set1.set1.getMineNum()));
+        }).start();
 
     }
 
