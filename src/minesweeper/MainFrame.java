@@ -140,7 +140,8 @@ public class MainFrame extends JFrame {
         add(time);
 
 
-        this.setVisible(true);
+        //this.setVisible(true);
+        this.setVisible(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
