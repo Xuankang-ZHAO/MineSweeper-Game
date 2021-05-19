@@ -12,7 +12,7 @@ public class WrongMusic extends Frame {
     public WrongMusic() {
         try {
             URL cb;
-            File f = new File("E:\\我的世界音乐及音效资源\\点击后的音效\\点击错误扣血.wav");
+            File f = new File("F:\\SweepMine-Tiga\\src\\MusicUsed\\点击错误扣血.wav");
             cb = f.toURL();
             AudioClip aau;
             aau = Applet.newAudioClip(cb);
