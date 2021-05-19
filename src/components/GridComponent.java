@@ -38,7 +38,8 @@ public class GridComponent extends BasicComponent {
     ImageIcon p5Plus = change(p5, 0.2);
     ImageIcon p6 = new ImageIcon("src/pictures/苦力怕贴图.PNG");
     ImageIcon p6Plus = change(p6, 0.11);
-    ImageIcon p7 = new ImageIcon("src/pictures/向日葵.png");
+    //ImageIcon p7 = new ImageIcon("src/pictures/向日葵.png");//包里没这个图片,为了看效果先换了
+    ImageIcon p7 = new ImageIcon("src/pictures/草方块.PNG");
     ImageIcon p7Plus = change(p7, 0.06);
     ImageIcon p8 = new ImageIcon("src/pictures/贴图史蒂夫.png");
     ImageIcon p8Plus = change(p8, 0.08);
@@ -46,7 +47,7 @@ public class GridComponent extends BasicComponent {
     ImageIcon p9Plus = change(p9, 0.2);
     ImageIcon p10 = new ImageIcon("src/pictures/苦力怕贴图.PNG");
     ImageIcon p10Plus = change(p10, 0.11);
-    ImageIcon p11 = new ImageIcon("src/pictures/向日葵.png");
+    ImageIcon p11 = new ImageIcon("src/pictures/草方块.PNG");
     ImageIcon p11Plus = change(p11, 0.06);
     ImageIcon p12 = new ImageIcon("src/pictures/贴图史蒂夫.png");
     ImageIcon p12Plus = change(p12, 0.08);
@@ -70,6 +71,7 @@ public class GridComponent extends BasicComponent {
                     setStatus(GridStatus.Bombed);
                     MainFrame.controller.getOnTurn().addMistake();
                     MainFrame.controller.getOnTurn().costScore();
+                    //todo:爆炸音效
                 } else {
                     GamePanel.gamePanel.openCell(row, col);
                     setStatus(GridStatus.Clicked);
