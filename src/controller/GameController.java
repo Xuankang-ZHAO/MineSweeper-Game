@@ -75,10 +75,9 @@ public class GameController {
     /**
      * 进行下一个回合时应调用本方法。
      * 在这里执行每个回合结束时需要进行的操作。
-     * <p>
-     * (目前这里没有每个玩家进行n回合的计数机制的，请自行修改完成哦~）
      */
     public void nextTurn() {
+        MainFrame.mainFrame.playerUpdate();
         if (MainFrame.mainFrame.getSeconds() > 0) {
             if (onTurn == p1 && count < turns - 1) {
                 count++;
@@ -186,24 +185,6 @@ public class GameController {
      *
      * @return 正在进行当前回合的玩家
      */
-
-
-    public Player getP1() {
-        return p1;
-    }
-
-    public Player getP2() {
-        return p2;
-    }
-
-    public GamePanel getGamePanel() {
-        return gamePanel;
-    }
-
-    public ScoreBoard getScoreBoard() {
-        return scoreBoard;
-    }
-
     public void setGamePanel(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
@@ -211,6 +192,15 @@ public class GameController {
     public void setScoreBoard(ScoreBoard scoreBoard) {
         this.scoreBoard = scoreBoard;
     }
+
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
 
 
     //存档,传入一个arraylist，其中元素为Integer 形式的二维数组，以代表棋盘的状态
@@ -281,21 +271,5 @@ public class GameController {
         String s3 = Integer.toString(GridComponent.counter);
         fileWriter.write(s3 + "\t");
         fileWriter.close();
-    }
-
-    public int getTurns() {
-        return turns;
-    }
-
-    public void setTurns(int turns) {
-        this.turns = turns;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 }

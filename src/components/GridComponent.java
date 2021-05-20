@@ -88,7 +88,7 @@ public class GridComponent extends BasicComponent {
         if (TopicSelect.topicSelect.getSss() == 1) {
             if (this.status == GridStatus.Clicked) {
                 g.setColor(Color.WHITE);
-                g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
+                g.fill3DRect(0, 0, getWidth() - 1, getHeight() - 1,true);
                 g.setColor(Color.BLACK);
                 g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
             }
@@ -117,7 +117,7 @@ public class GridComponent extends BasicComponent {
         } else if (TopicSelect.topicSelect.getSss() == 2) {
             if (this.status == GridStatus.Clicked) {
                 g.setColor(Color.WHITE);
-                g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
+                g.fill3DRect(0, 0, getWidth() - 1, getHeight() - 1,true);
                 g.setColor(Color.BLACK);
                 g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
             }
@@ -147,7 +147,7 @@ public class GridComponent extends BasicComponent {
         } else if (TopicSelect.topicSelect.getSss() == 3) {
             if (this.status == GridStatus.Clicked) {
                 g.setColor(Color.WHITE);
-                g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
+                g.fill3DRect(0, 0, getWidth() - 1, getHeight() - 1,true);
                 g.setColor(Color.BLACK);
                 g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
             }

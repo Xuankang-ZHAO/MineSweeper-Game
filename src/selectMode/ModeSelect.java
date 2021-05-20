@@ -95,7 +95,7 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
 //                }
 //            }
 //        });
-        timeLabel = new JLabel("请输入每次点击间隔时间");
+        timeLabel = new JLabel("请输入每回合时间");
         timeLabel.setBounds(10, 120, 200, 35);
         timeLabel.setForeground(Color.BLACK);
         timeLabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));

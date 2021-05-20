@@ -1,6 +1,5 @@
 package minesweeper;
 
-
 import components.GridComponent;
 import controller.GameController;
 import entity.Player;
@@ -24,6 +23,9 @@ public class MainFrame extends JFrame {
     public static MainFrame mainFrame;
     public static int inputSeconds = ModeSelect.modeSelect.getTime();
     int seconds = inputSeconds;
+    JLabel currentPlayer = new JLabel();
+    JLabel clickTime = new JLabel();
+
 
     //新游戏
     public MainFrame(int xCount, int yCount, int mineCount) {
@@ -51,124 +53,9 @@ public class MainFrame extends JFrame {
         this.add(gamePanel);
         this.add(scoreBoard);
 
-
-        JButton clickBtn1 = new JButton("存档进度");
-        clickBtn1.setSize(100, 20);
-        clickBtn1.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight());
-        //clickBtn1.setLocation(gamePanel.getWidth(),  gamePanel.getHeight()+scoreBoard.getHeight()+10);
-        add(clickBtn1);
-        clickBtn1.addActionListener(e -> {
-            String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
-            System.out.println("fileName :" + fileName);
-
-//           controller.readFileData(fileName);\
-            //存档
-            //存雷场
-            try {
-                controller.writeInitialDataToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            //存棋子打开状态
-            try {
-                controller.writeCurrentDataToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            //存玩家们的当前分数和失误次数
-            try {
-                controller.writePlayerDataToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            //存玩家们的id(姓名）
-            try {
-                controller.writePlayerIDToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
-
-        JButton clickBtn2 = new JButton("存档雷场");
-        clickBtn2.setSize(100, 20);
-        clickBtn2.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
-        //clickBtn2.setLocation(gamePanel.getWidth(), gamePanel.getHeight()+scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
-        add(clickBtn2);
-        clickBtn2.addActionListener(e -> {
-            String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
-            System.out.println("fileName :" + fileName);
-
-//           controller.readFileData(fileName);\
-            //存档
-            //存雷场
-            try {
-                controller.writeInitialDataToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
-
-        JButton clickBtn3 = new JButton("开始界面");
-        clickBtn3.setSize(100, 20);
-        clickBtn3.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight());
-        add(clickBtn3);
-        clickBtn3.addActionListener(e -> {
-            dispose();
-            new InitialWindow();
-        });
-
-
-        JButton clickBtn4 = new JButton("透视雷场");
-        clickBtn4.setSize(100, 20);
-        clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
-        add(clickBtn4);
-        clickBtn4.addActionListener(e -> {
-            if (clickTimes == 0) {
-                gamePanel.showMineDirectly();
-                clickTimes++;
-            } else {
-                gamePanel.backGame();
-                clickTimes--;
-            }
-            repaint();
-        });
-
-
-        JLabel time = new JLabel(seconds + "s left");
-        time.setSize(100, 20);
-        time.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight());
-        //time.setOpaque(true);
-        time.setBorder(BorderFactory.createLineBorder(Color.RED));
-        time.setFont(new Font("粗体", Font.PLAIN, 20));
-        add(time);
-
-        JLabel currentPlayer = new JLabel();
-        currentPlayer.setText(String.format("Current player:%s", controller.getOnTurn().getUserName()));
-        currentPlayer.setSize(200, 35);
-        currentPlayer.setLocation(gamePanel.getWidth() + 10, 20);
-        currentPlayer.setForeground(Color.BLACK);
-        currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        button();
         add(currentPlayer);
-
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (seconds > 0) {
-                    seconds--;
-                }
-                time.setText(seconds + "s left");
-            }
-        });
-        JButton clickBtn5 = new JButton("开始计时");
-        clickBtn5.setSize(100, 20);
-        clickBtn5.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
-        add(clickBtn5);
-        clickBtn5.addActionListener(e -> {
-            timer.start();
-        });
-
+        add(clickTime);
 
         //this.setVisible(true);
         this.setVisible(false);
@@ -201,120 +88,9 @@ public class MainFrame extends JFrame {
         this.add(gamePanel);
         this.add(scoreBoard);
 
-
-        JButton clickBtn1 = new JButton("存档进度");
-        clickBtn1.setSize(100, 20);
-        clickBtn1.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight());
-        add(clickBtn1);
-        clickBtn1.addActionListener(e -> {
-            String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
-            System.out.println("fileName :" + fileName);
-
-//           controller.readFileData(fileName);\
-            //存档
-            //存雷场
-            try {
-                controller.writeInitialDataToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            //存棋子打开状态
-            try {
-                controller.writeCurrentDataToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            //存玩家们的当前分数和失误次数
-            try {
-                controller.writePlayerDataToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            //存玩家们的id(姓名）
-            try {
-                controller.writePlayerIDToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
-        JButton clickBtn2 = new JButton("存档雷场");
-        clickBtn2.setSize(100, 20);
-        clickBtn2.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
-        add(clickBtn2);
-        clickBtn2.addActionListener(e -> {
-            String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
-            System.out.println("fileName :" + fileName);
-
-//           controller.readFileData(fileName);\
-            //存档
-            //存雷场
-            try {
-                controller.writeInitialDataToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
-
-        JButton clickBtn3 = new JButton("开始界面");
-        clickBtn3.setSize(100, 20);
-        clickBtn3.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight());
-        add(clickBtn3);
-        clickBtn3.addActionListener(e -> {
-            dispose();
-            new InitialWindow();
-        });
-
-
-        JButton clickBtn4 = new JButton("透视雷场");
-        clickBtn4.setSize(100, 20);
-        clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
-        add(clickBtn4);
-        clickBtn4.addActionListener(e -> {
-            if (clickTimes == 0) {
-                gamePanel.showMineDirectly();
-                clickTimes++;
-            } else {
-                gamePanel.backGame();
-                clickTimes--;
-            }
-            repaint();
-        });
-
-        JLabel time = new JLabel(seconds + "s left");
-        time.setSize(100, 20);
-        time.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight());
-        //time.setOpaque(true);
-        time.setBorder(BorderFactory.createLineBorder(Color.RED));
-        time.setFont(new Font("粗体", Font.PLAIN, 20));
-        add(time);
-
-        JLabel currentPlayer = new JLabel();
-        currentPlayer.setText(String.format("Current player:%s", controller.getOnTurn().getUserName()));
-        currentPlayer.setSize(200, 35);
-        currentPlayer.setLocation(gamePanel.getWidth() + 10, 20);
-        currentPlayer.setForeground(Color.BLACK);
-        currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        button();
         add(currentPlayer);
-
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (seconds > 0) {
-                    seconds--;
-                }
-                time.setText(seconds + "s left");
-            }
-        });
-        JButton clickBtn5 = new JButton("开始计时");
-        clickBtn5.setSize(100, 20);
-        clickBtn5.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
-        add(clickBtn5);
-        clickBtn5.addActionListener(e -> {
-            timer.start();
-        });
-
+        add(clickTime);
 
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -350,16 +126,40 @@ public class MainFrame extends JFrame {
         this.add(gamePanel);
         this.add(scoreBoard);
 
+        button();
+        add(currentPlayer);
+        add(clickTime);
 
+
+        this.setVisible(true);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public void playerUpdate() {
+        currentPlayer.setText(String.format("Current player:%s", controller.getOnTurn().getUserName()));
+        currentPlayer.setSize(200, 35);
+        currentPlayer.setLocation(GamePanel.gamePanel.getWidth() + 10, 20);
+        currentPlayer.setForeground(Color.BLACK);
+        currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+
+        clickTime.setText(String.format("已单击次数:%s", controller.getCount() + 1));
+        clickTime.setSize(200, 35);
+        clickTime.setLocation(GamePanel.gamePanel.getWidth() + 10, 200);
+        clickTime.setForeground(Color.BLACK);
+        clickTime.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+    }
+
+    public void button() {
         JButton clickBtn1 = new JButton("存档进度");
         clickBtn1.setSize(100, 20);
-        clickBtn1.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight());
+        clickBtn1.setLocation(5, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
+        //clickBtn1.setLocation(gamePanel.getWidth(),  gamePanel.getHeight()+scoreBoard.getHeight()+10);
         add(clickBtn1);
         clickBtn1.addActionListener(e -> {
             String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
             System.out.println("fileName :" + fileName);
 
-//           controller.readFileData(fileName);\
+            //controller.readFileData(fileName);\
             //存档
             //存雷场
             try {
@@ -387,15 +187,17 @@ public class MainFrame extends JFrame {
             }
         });
 
+
         JButton clickBtn2 = new JButton("存档雷场");
         clickBtn2.setSize(100, 20);
-        clickBtn2.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
+        clickBtn2.setLocation(5, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
+        //clickBtn2.setLocation(gamePanel.getWidth(), gamePanel.getHeight()+scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn2);
         clickBtn2.addActionListener(e -> {
             String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
             System.out.println("fileName :" + fileName);
 
-//           controller.readFileData(fileName);\
+            //controller.readFileData(fileName);
             //存档
             //存雷场
             try {
@@ -408,7 +210,7 @@ public class MainFrame extends JFrame {
 
         JButton clickBtn3 = new JButton("开始界面");
         clickBtn3.setSize(100, 20);
-        clickBtn3.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight());
+        clickBtn3.setLocation(110, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
         add(clickBtn3);
         clickBtn3.addActionListener(e -> {
             dispose();
@@ -418,34 +220,27 @@ public class MainFrame extends JFrame {
 
         JButton clickBtn4 = new JButton("透视雷场");
         clickBtn4.setSize(100, 20);
-        clickBtn4.setLocation(110, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
+        clickBtn4.setLocation(110, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn4);
         clickBtn4.addActionListener(e -> {
             if (clickTimes == 0) {
-                gamePanel.showMineDirectly();
+                GamePanel.gamePanel.showMineDirectly();
                 clickTimes++;
             } else {
-                gamePanel.backGame();
+                GamePanel.gamePanel.backGame();
                 clickTimes--;
             }
             repaint();
         });
 
+
         JLabel time = new JLabel(seconds + "s left");
         time.setSize(100, 20);
-        time.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight());
+        time.setLocation(225, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
         //time.setOpaque(true);
         time.setBorder(BorderFactory.createLineBorder(Color.RED));
         time.setFont(new Font("粗体", Font.PLAIN, 20));
         add(time);
-
-        JLabel currentPlayer = new JLabel();
-        currentPlayer.setText(String.format("Current player:%s", controller.getOnTurn().getUserName()));
-        currentPlayer.setSize(200, 35);
-        currentPlayer.setLocation(gamePanel.getWidth() + 10, 20);
-        currentPlayer.setForeground(Color.BLACK);
-        currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        add(currentPlayer);
 
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
@@ -456,17 +251,15 @@ public class MainFrame extends JFrame {
                 time.setText(seconds + "s left");
             }
         });
+
+
         JButton clickBtn5 = new JButton("开始计时");
         clickBtn5.setSize(100, 20);
-        clickBtn5.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
+        clickBtn5.setLocation(225, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn5);
         clickBtn5.addActionListener(e -> {
             timer.start();
         });
-
-
-        this.setVisible(true);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public int getxCount() {
@@ -479,10 +272,6 @@ public class MainFrame extends JFrame {
 
     public int getMineCount() {
         return mineCount;
-    }
-
-    public static GameController getController() {
-        return controller;
     }
 
     public int getSeconds() {
