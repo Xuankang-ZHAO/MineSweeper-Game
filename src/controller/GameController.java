@@ -36,9 +36,9 @@ public class GameController {
     public GameController(Player p1, Player p2) {
         this.init(p1, p2);
         this.onTurn = p1;
-        this.turns=ModeSelect.modeSelect.getTurnsNum();
-        this.count=0;
-        GridComponent.counter=0;
+        this.turns = ModeSelect.modeSelect.getTurnsNum();
+        this.count = 0;
+        GridComponent.counter = 0;
     }
 
     //读取游戏存档状态时的游戏控制器
@@ -46,9 +46,9 @@ public class GameController {
         this.p1 = new Player(InitialWindow.window.getCopyOfName().get(0));
         this.p2 = new Player(InitialWindow.window.getCopyOfName().get(1));
         this.onTurn = new Player(InitialWindow.window.getCopyOfName().get(2));
-        this.count=Integer.parseInt(InitialWindow.window.getCopyOfName().get(3));
-        this.turns=Integer.parseInt(InitialWindow.window.getCopyOfName().get(4));
-        GridComponent.counter=Integer.parseInt(InitialWindow.window.getCopyOfName().get(5));
+        this.count = Integer.parseInt(InitialWindow.window.getCopyOfName().get(3));
+        this.turns = Integer.parseInt(InitialWindow.window.getCopyOfName().get(4));
+        GridComponent.counter = Integer.parseInt(InitialWindow.window.getCopyOfName().get(5));
     }
 
     //todo:多人模式？
@@ -60,6 +60,7 @@ public class GameController {
 
     /**
      * 初始化游戏。在开始游戏前，应先调用此方法，给予游戏必要的参数。
+     *
      * @param p1 玩家1
      * @param p2 玩家2
      */
@@ -78,7 +79,7 @@ public class GameController {
      * (目前这里没有每个玩家进行n回合的计数机制的，请自行修改完成哦~）
      */
     public void nextTurn() {
-        if(MainFrame.mainFrame.getSeconds()>0){
+        if (MainFrame.mainFrame.getSeconds() > 0) {
             if (onTurn == p1 && count < turns - 1) {
                 count++;
                 onTurn = p1;
@@ -103,17 +104,17 @@ public class GameController {
             System.out.println("正常转换");
         }
 
-        if(MainFrame.mainFrame.getSeconds()==0){
+        if (MainFrame.mainFrame.getSeconds() == 0) {
             System.out.println("sdf");
-            if(onTurn==p1){
-                onTurn=p2;
+            if (onTurn == p1) {
+                onTurn = p2;
                 System.out.println("change");
-                count=0;
+                count = 0;
             }
-            if(onTurn==p2){
-                onTurn=p1;
+            if (onTurn == p2) {
+                onTurn = p1;
                 System.out.println("change2");
-                count=0;
+                count = 0;
             }
             MainFrame.mainFrame.setSeconds(MainFrame.inputSeconds);
             System.out.println("强制转换");
@@ -129,7 +130,7 @@ public class GameController {
         int coveredMine = 0;
         int bombedMine = 0;
         for (int i = 0; i < gamePanel.getxCount(); i++) {
-            for (int j = 0; j < getGamePanel().getyCount(); j++) {
+            for (int j = 0; j < gamePanel.getyCount(); j++) {
                 //检查未揭晓的雷数
                 if (gamePanel.getChessboard()[i][j] == -1 && gamePanel.getMineField()[i][j].getStatus() == GridStatus.Covered) {
                     coveredMine++;
@@ -273,12 +274,12 @@ public class GameController {
             fileWriter.write(scoreBoard.getNameList()[i] + "\t");
         }
         fileWriter.write(onTurn.getUserName() + "\t");
-        String s1=Integer.toString(count);
-        fileWriter.write(s1+"\t");
-        String s2=Integer.toString(turns);
-        fileWriter.write(s2+"\t");
-        String s3=Integer.toString(GridComponent.counter);
-        fileWriter.write(s3+"\t");
+        String s1 = Integer.toString(count);
+        fileWriter.write(s1 + "\t");
+        String s2 = Integer.toString(turns);
+        fileWriter.write(s2 + "\t");
+        String s3 = Integer.toString(GridComponent.counter);
+        fileWriter.write(s3 + "\t");
         fileWriter.close();
     }
 

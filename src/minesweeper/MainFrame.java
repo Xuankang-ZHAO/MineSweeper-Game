@@ -22,10 +22,9 @@ public class MainFrame extends JFrame {
     private ArrayList<ArrayList<Integer>> saveOfMines;
     private int clickTimes = 0;
     public static MainFrame mainFrame;
-    public static int inputSeconds=ModeSelect.modeSelect.getTime();
-    int seconds=inputSeconds;
+    public static int inputSeconds = ModeSelect.modeSelect.getTime();
+    int seconds = inputSeconds;
 
-    //2333
     //新游戏
     public MainFrame(int xCount, int yCount, int mineCount) {
         mainFrame = this;
@@ -35,7 +34,7 @@ public class MainFrame extends JFrame {
         this.yCount = yCount;
         this.mineCount = mineCount;
 
-        this.setTitle("2021 CS102A Project Demo 2");
+        this.setTitle("我的世界联名扫雷");
         this.setLayout(null);//清空布局管理器
         this.setSize(yCount * GridComponent.gridSize + 200, xCount * GridComponent.gridSize + 200);
         this.setLocationRelativeTo(null);
@@ -90,6 +89,7 @@ public class MainFrame extends JFrame {
             }
         });
 
+
         JButton clickBtn2 = new JButton("存档雷场");
         clickBtn2.setSize(100, 20);
         clickBtn2.setLocation(5, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
@@ -135,7 +135,8 @@ public class MainFrame extends JFrame {
             repaint();
         });
 
-        JLabel time = new JLabel(seconds+"s left");
+
+        JLabel time = new JLabel(seconds + "s left");
         time.setSize(100, 20);
         time.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight());
         //time.setOpaque(true);
@@ -143,13 +144,21 @@ public class MainFrame extends JFrame {
         time.setFont(new Font("粗体", Font.PLAIN, 20));
         add(time);
 
+        JLabel currentPlayer = new JLabel();
+        currentPlayer.setText(String.format("Current player:%s", controller.getOnTurn().getUserName()));
+        currentPlayer.setSize(200, 35);
+        currentPlayer.setLocation(gamePanel.getWidth()+10, 20);
+        currentPlayer.setForeground(Color.BLACK);
+        currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        add(currentPlayer);
+
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(seconds>0){
+                if (seconds > 0) {
                     seconds--;
                 }
-                time.setText(seconds+"s left");
+                time.setText(seconds + "s left");
             }
         });
         JButton clickBtn5 = new JButton("开始游戏");
@@ -159,7 +168,6 @@ public class MainFrame extends JFrame {
         clickBtn5.addActionListener(e -> {
             timer.start();
         });
-
 
 
         //this.setVisible(true);
@@ -176,9 +184,9 @@ public class MainFrame extends JFrame {
         this.xCount = saveOfMines.size();
         this.yCount = saveOfMines.get(0).size();
 
-        this.setTitle("2021 CS102A Project Demo 2");
+        this.setTitle("我的世界联名扫雷");
         this.setLayout(null);//清空布局管理器
-        this.setSize(yCount * GridComponent.gridSize + 20, xCount * GridComponent.gridSize + 200);
+        this.setSize(yCount * GridComponent.gridSize + 200, xCount * GridComponent.gridSize + 200);
         this.setLocationRelativeTo(null);
 
         Player p1 = new Player();
@@ -282,9 +290,9 @@ public class MainFrame extends JFrame {
     //读取游戏存档开始游戏
     public MainFrame() {
         mainFrame = this;
-        this.setTitle("2021 CS102A Project Demo 2");
+        this.setTitle("我的世界联名扫雷");
         this.setLayout(null);//清空布局管理器
-        this.setSize(InitialWindow.window.getCopyOfMine().get(0).size() * GridComponent.gridSize + 20, InitialWindow.window.getCopyOfMine().size() * GridComponent.gridSize + 200);
+        this.setSize(InitialWindow.window.getCopyOfMine().get(0).size() * GridComponent.gridSize + 200, InitialWindow.window.getCopyOfMine().size() * GridComponent.gridSize + 200);
         this.setLocationRelativeTo(null);
 
         this.xCount = InitialWindow.window.getCopyOfMine().size();

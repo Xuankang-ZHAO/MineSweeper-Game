@@ -24,7 +24,6 @@ public class ScoreBoard extends JPanel {
 
     JLabel score1 = new JLabel();
     JLabel score2 = new JLabel();
-    JLabel currentPlayer = new JLabel();
 
     /**
      * 通过进行游戏的玩家来初始化计分板。这里只考虑了两个玩家的情况。
@@ -35,12 +34,11 @@ public class ScoreBoard extends JPanel {
      */
     public ScoreBoard(Player p1, Player p2, int xCount, int yCount) {
         JLabel scoreBoard = new JLabel("Score Board");
-        scoreBoard.setBounds(10, yCount + 10, 300, 30);
         scoreBoard.setForeground(Color.BLACK);
         scoreBoard.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         this.add(scoreBoard);
 
-        this.setSize((yCount * GridComponent.gridSize) / 2, 80);
+        this.setSize((yCount * GridComponent.gridSize) , 80);
         this.setLocation(0, xCount * GridComponent.gridSize);
 
         this.p1 = p1;
@@ -51,7 +49,6 @@ public class ScoreBoard extends JPanel {
 
         this.add(score1);
         this.add(score2);
-        this.add(currentPlayer);
 
 
         this.setLayout(new BoxLayout(this, 1));//target指的是container
@@ -61,12 +58,11 @@ public class ScoreBoard extends JPanel {
 
 
     public ScoreBoard() {
-//        JLabel scoreBoard = new JLabel("Score Board");
-//        scoreBoard.setBounds(10, yCount + 10, 300, 30);
-//        scoreBoard.setForeground(Color.BLACK);
-//        scoreBoard.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-        this.add(new JLabel("Score Board Of Players - "));
-        this.setSize((InitialWindow.window.getCopyOfMine().get(0).size() * GridComponent.gridSize) / 2, 80);
+        JLabel scoreBoard = new JLabel("Score Board");
+        scoreBoard.setForeground(Color.BLACK);
+        scoreBoard.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        this.add(scoreBoard);
+        this.setSize((InitialWindow.window.getCopyOfMine().get(0).size() * GridComponent.gridSize), 80);
         this.setLocation(0, InitialWindow.window.getCopyOfMine().size() * GridComponent.gridSize);
 
         //要把玩家信息（名字，分数，失误数）全部加载
@@ -82,7 +78,6 @@ public class ScoreBoard extends JPanel {
 
         this.add(score1);
         this.add(score2);
-        this.add(currentPlayer);
 
 
         this.setLayout(new BoxLayout(this, 1));//target指的是container
@@ -97,20 +92,13 @@ public class ScoreBoard extends JPanel {
 
     public void update() {
         score1.setText(String.format("%s : %d score and %d mistake", p1.getUserName(), p1.getScore(), p1.getMistake()));
-        score1.setBounds(10, MainFrame.mainFrame.getyCount()+ 50, 500, 35);
         score1.setForeground(Color.BLACK);
         score1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 
         score2.setText(String.format("%s : %d score and %d mistake", p2.getUserName(), p2.getScore(), p2.getMistake()));
-        score2.setBounds(10, MainFrame.mainFrame.getyCount()+ 90, 500, 35);
         score2.setForeground(Color.BLACK);
         score2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 
-//        currentPlayer.setText(String.format("Current player:%s", MainFrame.getController().getOnTurn().getUserName()));
-//        currentPlayer.setSize(200, 35);
-//        currentPlayer.setLocation(MainFrame.mainFrame.getxCount() * GridComponent.gridSize + 10, 20);
-//        currentPlayer.setForeground(Color.BLACK);
-//        currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
     }
 
     public void initialPlayerScores() {
