@@ -12,7 +12,7 @@ public class ClickedMusic extends Frame {
     public ClickedMusic() {
         try {
             URL cb;
-            File f = new File("F:\\SweepMine-Tiga\\src\\MusicUsed\\点击按钮后的声音.wav");
+            File f = new File("src/MusicUsed/点击按钮后的声音.wav");
             cb = f.toURL();
             AudioClip aau;
             aau = Applet.newAudioClip(cb);

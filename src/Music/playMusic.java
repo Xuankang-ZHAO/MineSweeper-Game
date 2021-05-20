@@ -8,7 +8,7 @@ public class playMusic {
 
     public playMusic() {// 背景音乐播放
         try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("F:\\SweepMine-Tiga\\src\\MusicUsed\\Minecraft.wav"));
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("src/MusicUsed/Minecraft.wav"));
             AudioFormat aif = ais.getFormat();
             final SourceDataLine sdl;
             DataLine.Info info = new DataLine.Info(SourceDataLine.class, aif);

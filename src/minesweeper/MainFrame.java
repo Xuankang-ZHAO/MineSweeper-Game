@@ -22,7 +22,8 @@ public class MainFrame extends JFrame {
     private ArrayList<ArrayList<Integer>> saveOfMines;
     private int clickTimes = 0;
     public static MainFrame mainFrame;
-    int seconds=ModeSelect.modeSelect.getTime();
+    public static int inputSeconds=ModeSelect.modeSelect.getTime();
+    int seconds=inputSeconds;
 
     //2333
     //新游戏
@@ -147,8 +148,6 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(seconds>0){
                     seconds--;
-                }else {
-                    seconds=ModeSelect.modeSelect.getTime();
                 }
                 time.setText(seconds+"s left");
             }
@@ -410,5 +409,17 @@ public class MainFrame extends JFrame {
 
     public static GameController getController() {
         return controller;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
+    }
+
+    public static int getInputSeconds() {
+        return inputSeconds;
     }
 }

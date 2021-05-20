@@ -18,7 +18,7 @@ public class BombedMusic extends Frame {
     public BombedMusic() {
         try {
             URL cb;
-            File f = new File("F:\\SweepMine-Tiga\\src\\MusicUsed\\点到雷.wav");
+            File f = new File("src/MusicUsed/点到雷.wav");
             cb = f.toURL();
             AudioClip aau;
             aau = Applet.newAudioClip(cb);

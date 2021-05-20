@@ -4,6 +4,7 @@ import components.GridComponent;
 import entity.GridStatus;
 import minesweeper.GamePanel;
 import entity.Player;
+import minesweeper.MainFrame;
 import minesweeper.ScoreBoard;
 import openWindow.InitialWindow;
 import selectMode.ModeSelect;
@@ -77,24 +78,45 @@ public class GameController {
      * (目前这里没有每个玩家进行n回合的计数机制的，请自行修改完成哦~）
      */
     public void nextTurn() {
-        if (onTurn == p1 && count < turns - 1) {
-            count++;
-            onTurn = p1;
-        } else if (onTurn == p1 && count >= turns - 1) {
-            if (count == turns - 1) {
-                EndGame();
-            }//结束游戏or转换turn
-            onTurn = p2;
-            count = 0;
-        } else if (onTurn == p2 && count < turns - 1) {
-            count++;
-            onTurn = p2;
-        } else if (onTurn == p2 && count >= turns - 1) {
-            if (count == turns - 1) {
-                EndGame();
-            }//结束游戏or转换turn
-            onTurn = p1;
-            count = 0;
+        if(MainFrame.mainFrame.getSeconds()>0){
+            if (onTurn == p1 && count < turns - 1) {
+                count++;
+                onTurn = p1;
+            } else if (onTurn == p1 && count >= turns - 1) {
+                if (count == turns - 1) {
+                    EndGame();
+                }//结束游戏or转换turn
+                onTurn = p2;
+                count = 0;
+            } else if (onTurn == p2 && count < turns - 1) {
+                count++;
+                onTurn = p2;
+            } else if (onTurn == p2 && count >= turns - 1) {
+                if (count == turns - 1) {
+                    EndGame();
+                }//结束游戏or转换turn
+                onTurn = p1;
+                count = 0;
+            }
+            //todo:这个流程控制器和根据倒计时的时间强制转换还有点问题
+            MainFrame.mainFrame.setSeconds(MainFrame.getInputSeconds());
+            System.out.println("正常转换");
+        }
+
+        if(MainFrame.mainFrame.getSeconds()==0){
+            System.out.println("sdf");
+            if(onTurn==p1){
+                onTurn=p2;
+                System.out.println("change");
+                count=0;
+            }
+            if(onTurn==p2){
+                onTurn=p1;
+                System.out.println("change2");
+                count=0;
+            }
+            MainFrame.mainFrame.setSeconds(MainFrame.inputSeconds);
+            System.out.println("强制转换");
         }
         System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
         scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
