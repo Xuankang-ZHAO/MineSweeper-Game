@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ImageResource {
+
     public static ImageIcon p1 = new ImageIcon("resouces/pictures/草方块.PNG");
     public static ImageIcon p1Plus = change(p1, 0.2);
     public static ImageIcon p2 = new ImageIcon("resouces/pictures/苦力怕贴图.PNG");
