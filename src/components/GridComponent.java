@@ -7,6 +7,7 @@ import Music.WrongMusic;
 import entity.GridStatus;
 import minesweeper.GamePanel;
 import minesweeper.MainFrame;
+import resources.ImageResource;
 import selectMode.TopicSelect;
 
 import javax.swing.*;
@@ -29,30 +30,6 @@ public class GridComponent extends BasicComponent {
     private GridStatus status = GridStatus.Covered;//初始默认打开状态都是覆盖
     private int content = 0;
 
-    ImageIcon p1 = new ImageIcon("resouces/pictures/草方块.PNG");
-    ImageIcon p1Plus = change(p1, 0.2);
-    ImageIcon p2 = new ImageIcon("resouces/pictures/苦力怕贴图.PNG");
-    ImageIcon p2Plus = change(p2, 0.11);
-    ImageIcon p3 = new ImageIcon("resouces/pictures/钻石.PNG");
-    ImageIcon p3Plus = change(p3, 0.06);
-    ImageIcon p4 = new ImageIcon("resouces/pictures/贴图史蒂夫.png");
-    ImageIcon p4Plus = change(p4, 0.08);
-    ImageIcon p5 = new ImageIcon("resouces/pictures/草方块.PNG");
-    ImageIcon p5Plus = change(p5, 0.2);
-    ImageIcon p6 = new ImageIcon("resouces/pictures/钻石.PNG");
-    ImageIcon p6Plus = change(p6, 0.11);
-    ImageIcon p7 = new ImageIcon("resouces/pictures/钻石.PNG");
-    ImageIcon p7Plus = change(p7, 0.06);
-    ImageIcon p8 = new ImageIcon("resouces/pictures/钻石.PNG");
-    ImageIcon p8Plus = change(p8, 0.08);
-    ImageIcon p9 = new ImageIcon("resouces/pictures/钻石.PNG");
-    ImageIcon p9Plus = change(p9, 0.2);
-    ImageIcon p10 = new ImageIcon("resouces/pictures/钻石.PNG");
-    ImageIcon p10Plus = change(p10, 0.11);
-    ImageIcon p11 = new ImageIcon("resouces/pictures/钻石.PNG");
-    ImageIcon p11Plus = change(p11, 0.06);
-    ImageIcon p12 = new ImageIcon("resouces/pictures/钻石.PNG");
-    ImageIcon p12Plus = change(p12, 0.08);
 
     public GridComponent(int x, int y, int num) {
         this.setSize(gridSize, gridSize);//设置component组件的大小
@@ -116,25 +93,25 @@ public class GridComponent extends BasicComponent {
                 g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
             }
             if (this.status == GridStatus.Covered) {
-                Image image1 = p1Plus.getImage();
+                Image image1 = ImageResource.p1Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
             }
             if (this.status == GridStatus.Bombed) {
-                Image image1 = p2Plus.getImage();
+                Image image1 = ImageResource.p2Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
 
             }
             if (this.status == GridStatus.Flag) {
-                Image image1 = p3Plus.getImage();
+                Image image1 = ImageResource.p3Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
             }
             if (this.status == GridStatus.Wrong) {
-                Image image1 = p4Plus.getImage();
+                Image image1 = ImageResource.p4Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
 
             }
             if (this.status == GridStatus.Show) {
-                Image image1 = p2Plus.getImage();
+                Image image1 = ImageResource.p2Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
             }
         } else if (TopicSelect.topicSelect.getSss() == 2) {
@@ -145,26 +122,26 @@ public class GridComponent extends BasicComponent {
                 g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
             }
             if (this.status == GridStatus.Covered) {
-                Image image1 = p5Plus.getImage();
+                Image image1 = ImageResource.p5Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
             }
             if (this.status == GridStatus.Bombed) {
-                Image image1 = p6Plus.getImage();
+                Image image1 = ImageResource.p6Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
 
             }
             if (this.status == GridStatus.Flag) {
-                Image image1 = p7Plus.getImage();
+                Image image1 = ImageResource.p7Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
             }
 
             if (this.status == GridStatus.Wrong) {
-                Image image1 = p8Plus.getImage();
+                Image image1 = ImageResource.p8Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
 
             }
             if (this.status == GridStatus.Show) {
-                Image image1 = p6Plus.getImage();
+                Image image1 = ImageResource.p6Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
             }
         } else if (TopicSelect.topicSelect.getSss() == 3) {
@@ -175,25 +152,25 @@ public class GridComponent extends BasicComponent {
                 g.drawString(Integer.toString(content), getWidth() / 2 - 5, getHeight() / 2 + 5);
             }
             if (this.status == GridStatus.Covered) {
-                Image image1 = p9Plus.getImage();
+                Image image1 = ImageResource.p9Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
             }
             if (this.status == GridStatus.Bombed) {
-                Image image1 = p10Plus.getImage();
+                Image image1 = ImageResource.p10Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
 
             }
             if (this.status == GridStatus.Flag) {
-                Image image1 = p11Plus.getImage();
+                Image image1 = ImageResource.p11Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
             }
             if (this.status == GridStatus.Wrong) {
-                Image image1 = p12Plus.getImage();
+                Image image1 = ImageResource.p12Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
 
             }
             if (this.status == GridStatus.Show) {
-                Image image1 = p10Plus.getImage();
+                Image image1 = ImageResource.p10Plus.getImage();
                 g.drawImage(image1, 0, 0, image1.getWidth(this), image1.getHeight(this), this);
             }
         }
@@ -220,18 +197,4 @@ public class GridComponent extends BasicComponent {
         repaint();
     }
 
-    /**
-     * 用于调整图片的大小，以进行适当的贴图
-     *
-     * @param picture
-     * @param rate
-     * @return
-     */
-    public static ImageIcon change(ImageIcon picture, double rate) {
-        int width = (int) (picture.getIconWidth() * rate);
-        int height = (int) (picture.getIconHeight() * rate);
-        Image pic = picture.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
-        ImageIcon pic2 = new ImageIcon(pic);
-        return pic2;
-    }
 }

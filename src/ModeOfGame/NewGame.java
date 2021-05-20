@@ -132,7 +132,7 @@ public class NewGame {
             //子线程的任务  模拟耗时操作
             while (current < amount) {
                 try {
-                    Thread.currentThread().sleep(100);
+                    Thread.currentThread().sleep(250);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
