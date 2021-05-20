@@ -147,7 +147,7 @@ public class MainFrame extends JFrame {
         JLabel currentPlayer = new JLabel();
         currentPlayer.setText(String.format("Current player:%s", controller.getOnTurn().getUserName()));
         currentPlayer.setSize(200, 35);
-        currentPlayer.setLocation(gamePanel.getWidth()+10, 20);
+        currentPlayer.setLocation(gamePanel.getWidth() + 10, 20);
         currentPlayer.setForeground(Color.BLACK);
         currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         add(currentPlayer);
@@ -161,7 +161,7 @@ public class MainFrame extends JFrame {
                 time.setText(seconds + "s left");
             }
         });
-        JButton clickBtn5 = new JButton("开始游戏");
+        JButton clickBtn5 = new JButton("开始计时");
         clickBtn5.setSize(100, 20);
         clickBtn5.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
         add(clickBtn5);
@@ -282,6 +282,39 @@ public class MainFrame extends JFrame {
             repaint();
         });
 
+        JLabel time = new JLabel(seconds + "s left");
+        time.setSize(100, 20);
+        time.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight());
+        //time.setOpaque(true);
+        time.setBorder(BorderFactory.createLineBorder(Color.RED));
+        time.setFont(new Font("粗体", Font.PLAIN, 20));
+        add(time);
+
+        JLabel currentPlayer = new JLabel();
+        currentPlayer.setText(String.format("Current player:%s", controller.getOnTurn().getUserName()));
+        currentPlayer.setSize(200, 35);
+        currentPlayer.setLocation(gamePanel.getWidth() + 10, 20);
+        currentPlayer.setForeground(Color.BLACK);
+        currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        add(currentPlayer);
+
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (seconds > 0) {
+                    seconds--;
+                }
+                time.setText(seconds + "s left");
+            }
+        });
+        JButton clickBtn5 = new JButton("开始计时");
+        clickBtn5.setSize(100, 20);
+        clickBtn5.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
+        add(clickBtn5);
+        clickBtn5.addActionListener(e -> {
+            timer.start();
+        });
+
 
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -396,6 +429,39 @@ public class MainFrame extends JFrame {
                 clickTimes--;
             }
             repaint();
+        });
+
+        JLabel time = new JLabel(seconds + "s left");
+        time.setSize(100, 20);
+        time.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight());
+        //time.setOpaque(true);
+        time.setBorder(BorderFactory.createLineBorder(Color.RED));
+        time.setFont(new Font("粗体", Font.PLAIN, 20));
+        add(time);
+
+        JLabel currentPlayer = new JLabel();
+        currentPlayer.setText(String.format("Current player:%s", controller.getOnTurn().getUserName()));
+        currentPlayer.setSize(200, 35);
+        currentPlayer.setLocation(gamePanel.getWidth() + 10, 20);
+        currentPlayer.setForeground(Color.BLACK);
+        currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        add(currentPlayer);
+
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (seconds > 0) {
+                    seconds--;
+                }
+                time.setText(seconds + "s left");
+            }
+        });
+        JButton clickBtn5 = new JButton("开始计时");
+        clickBtn5.setSize(100, 20);
+        clickBtn5.setLocation(225, gamePanel.getHeight() + scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
+        add(clickBtn5);
+        clickBtn5.addActionListener(e -> {
+            timer.start();
         });
 
 
