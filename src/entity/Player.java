@@ -25,7 +25,7 @@ public class Player {
      * 通过默认名字初始化一个玩家对象。
      */
     public Player() {
-        this.userName = "User#" + (ran.nextInt(9000) + 1000);
+        this.userName = "*" + (ran.nextInt(90) + 10);
     }
 
     /**

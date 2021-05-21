@@ -35,7 +35,7 @@ public class ScoreBoard extends JPanel {
     public ScoreBoard(Player p1, Player p2, int xCount, int yCount) {
         JLabel scoreBoard = new JLabel("Score Board");
         scoreBoard.setForeground(Color.BLACK);
-        scoreBoard.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        scoreBoard.setFont(new Font("times new roman", Font.PLAIN, 24));
         this.add(scoreBoard);
 
         this.setSize((7* GridComponent.gridSize) , 80);
@@ -60,7 +60,7 @@ public class ScoreBoard extends JPanel {
     public ScoreBoard() {
         JLabel scoreBoard = new JLabel("Score Board");
         scoreBoard.setForeground(Color.BLACK);
-        scoreBoard.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        scoreBoard.setFont(new Font("times new roman", Font.PLAIN, 24));
         this.add(scoreBoard);
         this.setSize((7* GridComponent.gridSize), 80);
         this.setLocation(0, InitialWindow.window.getCopyOfMine().size() * GridComponent.gridSize);
@@ -93,11 +93,11 @@ public class ScoreBoard extends JPanel {
     public void update() {
         score1.setText(String.format("%s : %d score and %d mistake", p1.getUserName(), p1.getScore(), p1.getMistake()));
         score1.setForeground(Color.BLACK);
-        score1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        score1.setFont(new Font("times new roman", Font.PLAIN, 22));
 
         score2.setText(String.format("%s : %d score and %d mistake", p2.getUserName(), p2.getScore(), p2.getMistake()));
         score2.setForeground(Color.BLACK);
-        score2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        score2.setFont(new Font("times new roman", Font.PLAIN, 22));
 
     }
 

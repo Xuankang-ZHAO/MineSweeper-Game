@@ -158,6 +158,19 @@ public class MainFrame extends JFrame {
         button();
         panel.add(currentPlayer);
         panel.add(clickTime);
+        if (controller.getRecord() == 1) {
+            Image playerPhoto1 = ImageResource.playerPhoto1Plus.getImage();
+            ImageIcon afterChange = changeImage(150, 230, playerPhoto1, true);
+            photo.setIcon(afterChange);
+            photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
+            panel.add(photo);
+        } else if (controller.getRecord() == 2) {
+            Image playerPhoto2 = ImageResource.playerPhoto2Plus.getImage();
+            ImageIcon afterChange = changeImage(150, 230, playerPhoto2, true);
+            photo.setIcon(afterChange);
+            photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
+            panel.add(photo);
+        }
         panel.setOpaque(false);
 
 
@@ -172,7 +185,7 @@ public class MainFrame extends JFrame {
         currentPlayer.setSize(150, 35);
         currentPlayer.setLocation(GamePanel.gamePanel.getWidth() + 10, 20);
         currentPlayer.setForeground(Color.BLACK);
-        currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        currentPlayer.setFont(new Font("times new roman", Font.PLAIN, 20));
         panel.add(currentPlayer);
 
         clickTime.setText(String.format("已单击次数:%s", controller.getCount() + 1));
@@ -183,6 +196,7 @@ public class MainFrame extends JFrame {
         clickTime.setForeground(Color.BLACK);
         clickTime.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         panel.add(clickTime);
+
         if (TopicSelect.topicSelect.getSss() == 1) {
             if (controller.getRecord() == 1) {
                 Image playerPhoto1 = ImageResource.playerPhoto1Plus.getImage();
