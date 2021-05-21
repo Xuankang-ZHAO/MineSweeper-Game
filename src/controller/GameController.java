@@ -94,6 +94,7 @@ public class GameController {
                 if (count == turns - 1) {
                     EndGame();
                 }//结束游戏or转换turn
+                MainFrame.mainFrame.setSeconds(MainFrame.getInputSeconds());
                 onTurn = p2;
                 count = 0;
             } else if (onTurn == p2 && count < turns - 1) {
@@ -103,28 +104,24 @@ public class GameController {
                 if (count == turns - 1) {
                     EndGame();
                 }//结束游戏or转换turn
+                MainFrame.mainFrame.setSeconds(MainFrame.getInputSeconds());
                 onTurn = p1;
                 count = 0;
             }
             //todo:这个流程控制器和根据倒计时的时间强制转换还有点问题
-            MainFrame.mainFrame.setSeconds(MainFrame.getInputSeconds());
             System.out.println("正常转换");
         }
 
         if (MainFrame.mainFrame.getSeconds() == 0) {
-            System.out.println("sdf");
             if (onTurn == p1) {
                 onTurn = p2;
-                System.out.println("change");
-                count = 0;
-            }
-            if (onTurn == p2) {
+                System.out.println("now it is"+p2.getUserName()+"turn"+"时间到了强制转换");
+            }else {
                 onTurn = p1;
-                System.out.println("change2");
-                count = 0;
+                System.out.println("now it is"+p1.getUserName()+"turn"+"时间到了强制转换");
             }
+            count = 0;
             MainFrame.mainFrame.setSeconds(MainFrame.inputSeconds);
-            System.out.println("强制转换");
         }
         System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
         scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
