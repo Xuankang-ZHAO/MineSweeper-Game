@@ -30,6 +30,7 @@ public class GameController {
 
     private int turns;//玩家们约定几个回合一次交换
     private int count;////当前玩家正处于turns的第几个回合
+    private int record;//记录当前玩家
 
     //新游戏时初始化游戏的游戏控制器
     //双人模式下的constructor
@@ -77,7 +78,14 @@ public class GameController {
      * 在这里执行每个回合结束时需要进行的操作。
      */
     public void nextTurn() {
+        //这段啥都不影响，就是为了换头像用的!
+        if (onTurn == p1) {
+            record = 1;
+        } else if (onTurn == p2) {
+            record = 2;
+        }
         MainFrame.mainFrame.playerUpdate();
+        //之上
         if (MainFrame.mainFrame.getSeconds() > 0) {
             if (onTurn == p1 && count < turns - 1) {
                 count++;
@@ -180,6 +188,10 @@ public class GameController {
         return onTurn;
     }
 
+    public int getRecord() {
+        return record;
+    }
+
     /**
      * 获取正在进行当前回合的玩家。
      *
@@ -200,7 +212,6 @@ public class GameController {
     public int getCount() {
         return count;
     }
-
 
 
     //存档,传入一个arraylist，其中元素为Integer 形式的二维数组，以代表棋盘的状态

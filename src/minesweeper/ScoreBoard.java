@@ -38,7 +38,7 @@ public class ScoreBoard extends JPanel {
         scoreBoard.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         this.add(scoreBoard);
 
-        this.setSize((yCount * GridComponent.gridSize) , 80);
+        this.setSize((7* GridComponent.gridSize) , 80);
         this.setLocation(0, xCount * GridComponent.gridSize);
 
         this.p1 = p1;
@@ -62,7 +62,7 @@ public class ScoreBoard extends JPanel {
         scoreBoard.setForeground(Color.BLACK);
         scoreBoard.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         this.add(scoreBoard);
-        this.setSize((InitialWindow.window.getCopyOfMine().get(0).size() * GridComponent.gridSize), 80);
+        this.setSize((7* GridComponent.gridSize), 80);
         this.setLocation(0, InitialWindow.window.getCopyOfMine().size() * GridComponent.gridSize);
 
         //要把玩家信息（名字，分数，失误数）全部加载

@@ -4,7 +4,8 @@ import components.GridComponent;
 import controller.GameController;
 import entity.Player;
 import openWindow.InitialWindow;
-import selectMode.ModeSelect;
+import resources.ImageResource;
+import selectMode.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,8 +24,11 @@ public class MainFrame extends JFrame {
     public static MainFrame mainFrame;
     public static int inputSeconds = ModeSelect.modeSelect.getTime();
     int seconds = inputSeconds;
+    JLabel photo = new JLabel();
     JLabel currentPlayer = new JLabel();
     JLabel clickTime = new JLabel();
+    JPanel panel = (JPanel) this.getContentPane();
+    ImageIcon back;
 
 
     //新游戏
@@ -50,12 +54,25 @@ public class MainFrame extends JFrame {
         ScoreBoard scoreBoard = new ScoreBoard(p1, p2, xCount, yCount);
         controller.setScoreBoard(scoreBoard);
 
-        this.add(gamePanel);
-        this.add(scoreBoard);
+        if (TopicSelect.topicSelect.getSss() == 1) {
+            back = new ImageIcon("resouces/pictures/背景1.jpg");
+        } else if (TopicSelect.topicSelect.getSss() == 2) {
+            back = new ImageIcon("resouces/pictures/背景2.jpg");
+        } else if (TopicSelect.topicSelect.getSss() == 3) {
+            back = new ImageIcon("resouces/pictures/背景3.jpg");
+        }
 
+        JLabel label = new JLabel(back);
+        this.getLayeredPane().setLayout(null);
+        label.setBounds(0, 0, mainFrame.getWidth(), mainFrame.getHeight());
+        this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
+
+        panel.add(gamePanel);
+        panel.add(scoreBoard);
         button();
-        add(currentPlayer);
-        add(clickTime);
+        panel.add(currentPlayer);
+        panel.add(clickTime);
+        panel.setOpaque(false);
 
         //this.setVisible(true);
         this.setVisible(false);
@@ -85,12 +102,18 @@ public class MainFrame extends JFrame {
         ScoreBoard scoreBoard = new ScoreBoard(p1, p2, xCount, yCount);
         controller.setScoreBoard(scoreBoard);
 
-        this.add(gamePanel);
-        this.add(scoreBoard);
+        back = new ImageIcon("resouces/pictures/背景1.jpg");
+        JLabel label = new JLabel(back);
+        this.getLayeredPane().setLayout(null);
+        label.setBounds(0, 0, mainFrame.getWidth(), mainFrame.getHeight());
+        this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
 
+
+        panel.add(gamePanel);
+        panel.add(scoreBoard);
         button();
-        add(currentPlayer);
-        add(clickTime);
+        playerUpdate();
+        panel.setOpaque(false);
 
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -123,12 +146,19 @@ public class MainFrame extends JFrame {
         ScoreBoard scoreBoard = new ScoreBoard();
         controller.setScoreBoard(scoreBoard);
 
-        this.add(gamePanel);
-        this.add(scoreBoard);
+        back = new ImageIcon("resouces/pictures/背景1.jpg");
+        JLabel label = new JLabel(back);
+        this.getLayeredPane().setLayout(null);
+        label.setBounds(0, 0, mainFrame.getWidth(), mainFrame.getHeight());
+        this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
 
+
+        panel.add(gamePanel);
+        panel.add(scoreBoard);
         button();
-        add(currentPlayer);
-        add(clickTime);
+        panel.add(currentPlayer);
+        panel.add(clickTime);
+        panel.setOpaque(false);
 
 
         this.setVisible(true);
@@ -137,24 +167,100 @@ public class MainFrame extends JFrame {
 
     public void playerUpdate() {
         currentPlayer.setText(String.format("Current player:%s", controller.getOnTurn().getUserName()));
-        currentPlayer.setSize(200, 35);
+        currentPlayer.setBackground(Color.white);
+        currentPlayer.setOpaque(true);
+        currentPlayer.setSize(150, 35);
         currentPlayer.setLocation(GamePanel.gamePanel.getWidth() + 10, 20);
         currentPlayer.setForeground(Color.BLACK);
         currentPlayer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        panel.add(currentPlayer);
 
         clickTime.setText(String.format("已单击次数:%s", controller.getCount() + 1));
-        clickTime.setSize(200, 35);
-        clickTime.setLocation(GamePanel.gamePanel.getWidth() + 10, 200);
+        clickTime.setBackground(Color.white);
+        clickTime.setOpaque(true);
+        clickTime.setSize(150, 35);
+        clickTime.setLocation(GamePanel.gamePanel.getWidth() + 10, 270);
         clickTime.setForeground(Color.BLACK);
         clickTime.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        panel.add(clickTime);
+        if (TopicSelect.topicSelect.getSss() == 1) {
+            if (controller.getRecord() == 1) {
+                Image playerPhoto1 = ImageResource.playerPhoto1Plus.getImage();
+                ImageIcon afterChange = changeImage(150, 230, playerPhoto1, true);
+                photo.setIcon(afterChange);
+                photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
+                panel.add(photo);
+            } else if (controller.getRecord() == 2) {
+                Image playerPhoto2 = ImageResource.playerPhoto2Plus.getImage();
+                ImageIcon afterChange = changeImage(150, 230, playerPhoto2, true);
+                photo.setIcon(afterChange);
+                photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
+                panel.add(photo);
+            }
+        } else if (TopicSelect.topicSelect.getSss() == 2) {
+            if (controller.getRecord() == 1) {
+                Image playerPhoto3 = ImageResource.playerPhoto3Plus.getImage();
+                ImageIcon afterChange = changeImage(150, 230, playerPhoto3, true);
+                photo.setIcon(afterChange);
+                photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
+                panel.add(photo);
+            } else if (controller.getRecord() == 2) {
+                Image playerPhoto4 = ImageResource.playerPhoto4Plus.getImage();
+                ImageIcon afterChange = changeImage(150, 230, playerPhoto4, true);
+                photo.setIcon(afterChange);
+                photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
+                panel.add(photo);
+            }
+        } else if (TopicSelect.topicSelect.getSss() == 3) {
+            if (controller.getRecord() == 1) {
+                Image playerPhoto5 = ImageResource.playerPhoto5Plus.getImage();
+                ImageIcon afterChange = changeImage(150, 230, playerPhoto5, true);
+                photo.setIcon(afterChange);
+                photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
+                panel.add(photo);
+            } else if (controller.getRecord() == 2) {
+                Image playerPhoto6 = ImageResource.playerPhoto6Plus.getImage();
+                ImageIcon afterChange = changeImage(150, 230, playerPhoto6, true);
+                photo.setIcon(afterChange);
+                photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
+                panel.add(photo);
+            }
+        }
     }
+
+    private static ImageIcon changeImage(int cWidth, int cHeight, Image image, boolean isRatio) {
+        //将图片等比缩放到容器矩形内
+        ImageIcon imageIcon = new ImageIcon(image);
+        //默认值 强制拉伸
+        int showWidth = cWidth;
+        int showHeight = cHeight;
+
+        //等比缩放
+        if (isRatio) {
+            //获得 原宽和原高
+            int oriWidth = imageIcon.getIconWidth();
+            int oriHeight = imageIcon.getIconHeight();
+
+            if (1.0 * oriWidth / oriHeight >= 1.0 * cWidth / cHeight) {
+                //图片比较宽
+                showHeight = showWidth * oriHeight / oriWidth;
+            } else {
+                //图片比较长
+                showWidth = showHeight * oriWidth / oriHeight;
+            }
+        }
+        Image scaledInstance = imageIcon.getImage().getScaledInstance(showWidth, showHeight, Image.SCALE_DEFAULT);
+        ImageIcon pic = new ImageIcon(scaledInstance);
+        return pic;
+    }
+
 
     public void button() {
         JButton clickBtn1 = new JButton("存档进度");
         clickBtn1.setSize(100, 20);
         clickBtn1.setLocation(5, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
         //clickBtn1.setLocation(gamePanel.getWidth(),  gamePanel.getHeight()+scoreBoard.getHeight()+10);
-        add(clickBtn1);
+        panel.add(clickBtn1);
         clickBtn1.addActionListener(e -> {
             String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
             System.out.println("fileName :" + fileName);
@@ -192,7 +298,7 @@ public class MainFrame extends JFrame {
         clickBtn2.setSize(100, 20);
         clickBtn2.setLocation(5, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
         //clickBtn2.setLocation(gamePanel.getWidth(), gamePanel.getHeight()+scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
-        add(clickBtn2);
+        panel.add(clickBtn2);
         clickBtn2.addActionListener(e -> {
             String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
             System.out.println("fileName :" + fileName);
@@ -211,7 +317,7 @@ public class MainFrame extends JFrame {
         JButton clickBtn3 = new JButton("开始界面");
         clickBtn3.setSize(100, 20);
         clickBtn3.setLocation(110, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
-        add(clickBtn3);
+        panel.add(clickBtn3);
         clickBtn3.addActionListener(e -> {
             dispose();
             new InitialWindow();
@@ -221,7 +327,7 @@ public class MainFrame extends JFrame {
         JButton clickBtn4 = new JButton("透视雷场");
         clickBtn4.setSize(100, 20);
         clickBtn4.setLocation(110, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
-        add(clickBtn4);
+        panel.add(clickBtn4);
         clickBtn4.addActionListener(e -> {
             if (clickTimes == 0) {
                 GamePanel.gamePanel.showMineDirectly();
@@ -234,13 +340,15 @@ public class MainFrame extends JFrame {
         });
 
 
-        JLabel time = new JLabel(seconds + "s left");
+        JLabel time = new JLabel("   " + seconds + "s left");
+        time.setBackground(Color.white);
+        time.setOpaque(true);
         time.setSize(100, 20);
         time.setLocation(225, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
         //time.setOpaque(true);
-        time.setBorder(BorderFactory.createLineBorder(Color.RED));
+//        time.setBorder(BorderFactory.createLineBorder(Color.RED));
         time.setFont(new Font("粗体", Font.PLAIN, 20));
-        add(time);
+        panel.add(time);
 
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
@@ -256,9 +364,24 @@ public class MainFrame extends JFrame {
         JButton clickBtn5 = new JButton("开始计时");
         clickBtn5.setSize(100, 20);
         clickBtn5.setLocation(225, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
-        add(clickBtn5);
+        panel.add(clickBtn5);
         clickBtn5.addActionListener(e -> {
             timer.start();
+        });
+
+        JButton story = new JButton("游戏情节");
+        story.setSize(100, 20);
+        story.setLocation(340, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
+        panel.add(story);
+        story.addActionListener(e -> {
+            if (TopicSelect.topicSelect.getSss() == 1) {
+                new Story1();
+            } else if (TopicSelect.topicSelect.getSss() == 2) {
+                new Story2();
+            } else if (TopicSelect.topicSelect.getSss() == 3) {
+                new Story3();
+            }
+
         });
     }
 

@@ -29,6 +29,18 @@ public class ImageResource {
     public static ImageIcon p11Plus = change(p11, 0.06);
     public static ImageIcon p12 = new ImageIcon("resouces/pictures/贴图史蒂夫.png");
     public static ImageIcon p12Plus = change(p12, 0.08);
+    public static ImageIcon playerPhoto1 = new ImageIcon("resouces/pictures/头像1.jpg");
+    public static ImageIcon playerPhoto1Plus = change(playerPhoto1, 0.08);
+    public static ImageIcon playerPhoto2 = new ImageIcon("resouces/pictures/头像2.jpg");
+    public static ImageIcon playerPhoto2Plus = change(playerPhoto2, 0.08);
+    public static ImageIcon playerPhoto3 = new ImageIcon("resouces/pictures/头像3.jpg");
+    public static ImageIcon playerPhoto3Plus = change(playerPhoto3, 0.08);
+    public static ImageIcon playerPhoto4 = new ImageIcon("resouces/pictures/头像4.jpg");
+    public static ImageIcon playerPhoto4Plus = change(playerPhoto4, 0.08);
+    public static ImageIcon playerPhoto5 = new ImageIcon("resouces/pictures/头像5.jpg");
+    public static ImageIcon playerPhoto5Plus = change(playerPhoto5, 0.08);
+    public static ImageIcon playerPhoto6 = new ImageIcon("resouces/pictures/头像6.jpg");
+    public static ImageIcon playerPhoto6Plus = change(playerPhoto6, 0.08);
 
     /**
      * 用于调整图片的大小，以进行适当的贴图
