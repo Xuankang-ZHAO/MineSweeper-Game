@@ -23,7 +23,7 @@ public class MainFrame extends JFrame {
     private int clickTimes = 0;
     public static MainFrame mainFrame;
     private   int inputSeconds ;
-    int seconds = inputSeconds;
+    int seconds ;
     JLabel photo = new JLabel();
     JLabel currentPlayer = new JLabel();
     JLabel clickTime = new JLabel();
@@ -40,6 +40,7 @@ public class MainFrame extends JFrame {
         this.yCount = yCount;
         this.mineCount = mineCount;
         this.inputSeconds= ModeSelect.modeSelect.getTime();
+        this.seconds=inputSeconds;
 
         this.setTitle("我的世界联名扫雷");
         this.setLayout(null);//清空布局管理器
@@ -141,8 +142,9 @@ public class MainFrame extends JFrame {
         }
         this.mineCount = tempCount;
 
-        this.seconds=Integer.parseInt(InitialWindow.window.getCopyOfTime().get(0));
         this.inputSeconds=Integer.parseInt(InitialWindow.window.getCopyOfTime().get(1));
+        this.seconds=Integer.parseInt(InitialWindow.window.getCopyOfTime().get(0));
+
         new TopicSelect();
         TopicSelect.topicSelect.setSss(2);
 
@@ -366,7 +368,7 @@ public class MainFrame extends JFrame {
         });
 
 
-        JLabel time = new JLabel("   " + seconds + "s left");
+        JLabel time = new JLabel(seconds + "s left");
         time.setBackground(Color.white);
         time.setOpaque(true);
         time.setSize(100, 20);
