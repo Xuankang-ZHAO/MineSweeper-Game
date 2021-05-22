@@ -15,14 +15,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
-    public static GameController controller;
+    public  static GameController controller;
     private int xCount;
     private int yCount;
     private int mineCount;
     private ArrayList<ArrayList<Integer>> saveOfMines;
     private int clickTimes = 0;
     public static MainFrame mainFrame;
-    public static int inputSeconds = ModeSelect.modeSelect.getTime();
+    private   int inputSeconds ;
     int seconds = inputSeconds;
     JLabel photo = new JLabel();
     JLabel currentPlayer = new JLabel();
@@ -39,6 +39,7 @@ public class MainFrame extends JFrame {
         this.xCount = xCount;
         this.yCount = yCount;
         this.mineCount = mineCount;
+        this.inputSeconds= ModeSelect.modeSelect.getTime();
 
         this.setTitle("我的世界联名扫雷");
         this.setLayout(null);//清空布局管理器
@@ -138,6 +139,11 @@ public class MainFrame extends JFrame {
             }
         }
         this.mineCount = tempCount;
+
+        this.seconds=Integer.parseInt(InitialWindow.window.getCopyOfTime().get(0));
+        this.inputSeconds=Integer.parseInt(InitialWindow.window.getCopyOfTime().get(1));
+        new TopicSelect();
+        TopicSelect.topicSelect.setSss(2);
 
 
         controller = new GameController();
@@ -305,6 +311,11 @@ public class MainFrame extends JFrame {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+            try {
+                controller.writeTimeDataToFile(fileName);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         });
 
 
@@ -419,7 +430,11 @@ public class MainFrame extends JFrame {
         this.seconds = seconds;
     }
 
-    public static int getInputSeconds() {
+    public  int getInputSeconds() {
         return inputSeconds;
+    }
+
+    public static GameController getController() {
+        return controller;
     }
 }

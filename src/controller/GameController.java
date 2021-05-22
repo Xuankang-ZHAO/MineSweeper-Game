@@ -94,7 +94,7 @@ public class GameController {
                 if (count == turns - 1) {
                     EndGame();
                 }//结束游戏or转换turn
-                MainFrame.mainFrame.setSeconds(MainFrame.getInputSeconds());
+                MainFrame.mainFrame.setSeconds(MainFrame.mainFrame.getInputSeconds());
                 onTurn = p2;
                 count = 0;
             } else if (onTurn == p2 && count < turns - 1) {
@@ -104,7 +104,7 @@ public class GameController {
                 if (count == turns - 1) {
                     EndGame();
                 }//结束游戏or转换turn
-                MainFrame.mainFrame.setSeconds(MainFrame.getInputSeconds());
+                MainFrame.mainFrame.setSeconds(MainFrame.mainFrame.getInputSeconds());
                 onTurn = p1;
                 count = 0;
             }
@@ -121,7 +121,7 @@ public class GameController {
                 System.out.println("now it is"+p1.getUserName()+"turn"+"时间到了强制转换");
             }
             count = 0;
-            MainFrame.mainFrame.setSeconds(MainFrame.inputSeconds);
+            MainFrame.mainFrame.setSeconds(MainFrame.mainFrame.getInputSeconds());
         }
         System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
         scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
@@ -210,6 +210,9 @@ public class GameController {
         return count;
     }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     //存档,传入一个arraylist，其中元素为Integer 形式的二维数组，以代表棋盘的状态
     //todo:传入一个参数，以明确这是要存哪个档
@@ -261,7 +264,11 @@ public class GameController {
         fileWriter.close();
     }
 
-    //该存档用于存玩家名称以及当前玩家名称以及当前玩家所处的第几回合以及玩家们约定的几个回合交换以及避免首发触雷的counter
+    /**
+     * 该存档用于存玩家名称以及当前玩家名称以及当前玩家所处的第几回合以及玩家们约定的几个回合交换以及避免首发触雷的counter
+     * @param s
+     * @throws IOException
+     */
     public void writePlayerIDToFile(String s) throws IOException {
         File file = new File("E:\\project 的存档", s + "playerID");
         if (file.exists()) {
@@ -278,6 +285,22 @@ public class GameController {
         fileWriter.write(s2 + "\t");
         String s3 = Integer.toString(GridComponent.counter);
         fileWriter.write(s3 + "\t");
+        fileWriter.close();
+    }
+
+    /**
+     * 该方法用于存计时器数据，第一个存的是当前的时间，第二个存的是约定的时间
+     * @param s
+     * @throws IOException
+     */
+    public void writeTimeDataToFile(String s) throws IOException {
+        File file = new File("E:\\project 的存档", s + "time");
+        if (file.exists()) {
+            file.createNewFile();
+        }
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(MainFrame.mainFrame.getSeconds() + "\t");
+        fileWriter.write(MainFrame.mainFrame.getInputSeconds()+"\t");
         fileWriter.close();
     }
 }

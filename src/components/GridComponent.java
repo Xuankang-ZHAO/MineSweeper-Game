@@ -4,6 +4,7 @@ import Music.BombedMusic;
 import Music.ClickedMusic;
 import Music.FlagMusic;
 import Music.WrongMusic;
+import controller.GameController;
 import entity.GridStatus;
 import minesweeper.GamePanel;
 import minesweeper.MainFrame;
@@ -45,7 +46,10 @@ public class GridComponent extends BasicComponent {
             if (counter == 0 && value == -1) {
                 MainFrame.mainFrame.dispose();
                 MainFrame m=new MainFrame(xCount, yCount, mineNUm);
+                //todo:这里应该已经把count清零了呀？？
+                System.out.println(m.getController().getCount());
                 m.setVisible(true);
+                m.getController().setCount(0);
             } else {
                 if (value == -1) {
                     setStatus(GridStatus.Bombed);

@@ -29,6 +29,7 @@ public class InitialWindow extends JFrame implements ActionListener {
     private ArrayList<ArrayList<Integer>> copyOfState;
     private ArrayList<ArrayList<Integer>> copyOfScore;
     private ArrayList<String> copyOfName;
+    private ArrayList<String> copyOfTime;
     Thread musicThread = new Thread(() -> {
         while (true) {
             new playMusic();
@@ -96,6 +97,13 @@ public class InitialWindow extends JFrame implements ActionListener {
             try {
                 ArrayList<String> copyOfName = new ArrayList<>(readUserNameToFile(fileName + "playerID"));
                 this.copyOfName = copyOfName;
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+            try {
+                ArrayList<String> copyTime = new ArrayList(readUserNameToFile(fileName + "time"));
+                this.copyOfTime = copyTime;
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -227,11 +235,10 @@ public class InitialWindow extends JFrame implements ActionListener {
                 }
             }
         }
-
-
         bufferedReader.close();
         return readDemo;
     }
+
 
     public ArrayList<ArrayList<Integer>> getCopyOfMine() {
         return copyOfMine;
@@ -247,5 +254,9 @@ public class InitialWindow extends JFrame implements ActionListener {
 
     public ArrayList<String> getCopyOfName() {
         return copyOfName;
+    }
+
+    public ArrayList<String> getCopyOfTime() {
+        return copyOfTime;
     }
 }
