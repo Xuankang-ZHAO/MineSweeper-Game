@@ -395,6 +395,18 @@ public class MainFrame extends JFrame {
         panel.add(clickBtn5);
         clickBtn5.addActionListener(e -> {
             timer.start();
+            playerUpdate();
+        });
+
+        JButton clickBtn6=new JButton("重玩");
+        clickBtn6.setSize(100,20);
+        clickBtn6.setLocation(340,GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
+        panel.add(clickBtn6);
+        clickBtn6.addActionListener(e -> {
+            GamePanel.gamePanel.reGame();
+            ScoreBoard.scoreBoard.reScore();
+            getController().reControl();
+            playerUpdate();
         });
 
         JButton story = new JButton("游戏情节");

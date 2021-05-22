@@ -25,6 +25,8 @@ public class ScoreBoard extends JPanel {
     JLabel score1 = new JLabel();
     JLabel score2 = new JLabel();
 
+    public static ScoreBoard scoreBoard;
+
     /**
      * 通过进行游戏的玩家来初始化计分板。这里只考虑了两个玩家的情况。
      * 如果想要2-4人游戏甚至更多，请自行修改(建议把所有玩家存在ArrayList)~
@@ -33,6 +35,7 @@ public class ScoreBoard extends JPanel {
      * @param p2 玩家2
      */
     public ScoreBoard(Player p1, Player p2, int xCount, int yCount) {
+        scoreBoard=this;
         JLabel scoreBoard = new JLabel("Score Board");
         scoreBoard.setForeground(Color.BLACK);
         scoreBoard.setFont(new Font("times new roman", Font.PLAIN, 24));
@@ -61,6 +64,7 @@ public class ScoreBoard extends JPanel {
      * 这是读档时用的分数板
      */
     public ScoreBoard() {
+        scoreBoard=this;
         JLabel scoreBoard = new JLabel("Score Board");
         scoreBoard.setForeground(Color.BLACK);
         scoreBoard.setFont(new Font("times new roman", Font.PLAIN, 24));
@@ -139,5 +143,17 @@ public class ScoreBoard extends JPanel {
 
     public String[] getNameList() {
         return nameList;
+    }
+
+    /**
+     * 清空分数板
+     */
+    public void reScore(){
+        p1.setScore(0);
+        p1.setMistake(0);
+        p2.setScore(0);
+        p2.setMistake(0);
+        updatePlayerScores();
+        update();
     }
 }

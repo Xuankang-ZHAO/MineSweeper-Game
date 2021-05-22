@@ -340,7 +340,9 @@ public class GamePanel extends JPanel {
         return mineCount;
     }
 
-    //本方法用于对格子的状态进行时刻更新
+    /**
+     * 本方法用于对格子的状态进行时刻更新
+     */
     public void updateCurrentState() {
         for (int i = 0; i < xCount; i++) {
             for (int j = 0; j < yCount; j++) {
@@ -498,5 +500,15 @@ public class GamePanel extends JPanel {
                 mineField[i + 1][j + 1].setStatus(GridStatus.Clicked);
             }
         }
+    }
+
+
+    public void reGame(){
+        for (int i=0;i<mineField.length;i++){
+            for (int j=0;j<mineField[0].length;j++){
+                mineField[i][j].setStatus(GridStatus.Covered);
+            }
+        }
+        updateCurrentState();
     }
 }

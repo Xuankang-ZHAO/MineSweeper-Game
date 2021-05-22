@@ -32,6 +32,7 @@ public class GameController {
     private int count;////当前玩家正处于turns的第几个回合
     private int record;//记录当前玩家
 
+
     //新游戏时初始化游戏的游戏控制器
     //双人模式下的constructor
     public GameController(Player p1, Player p2) {
@@ -323,5 +324,10 @@ public class GameController {
 
     public Player getP2() {
         return p2;
+    }
+
+    public void reControl(){
+        this.onTurn=p1;
+        this.count=-1;
     }
 }
