@@ -8,8 +8,8 @@ public class Player {
     private static Random ran = new Random();
 
     private String userName;
-    private int score = 0;
-    private int mistake = 0;
+    private int score;
+    private int mistake;
 
     /**
      * 通过特定名字初始化一个玩家对象。
@@ -17,8 +17,10 @@ public class Player {
      * @param userName 玩家的名字
      */
     //读档时根据存储读档
-    public Player(String userName) {
+    public Player(String userName,int score,int mistake) {
         this.userName = userName;
+        this.score=score;
+        this.mistake=mistake;
     }
 
     /**
@@ -33,21 +35,22 @@ public class Player {
      */
     public void addScore() {
 
-        score++;
+        this.score++;
     }
 
     /**
      * 为玩家扣一分。
      */
     public void costScore() {
-        score--;
+
+        this.score--;
     }
 
     /**
      * 为玩家增加一次失误数。
      */
     public void addMistake() {
-        mistake++;
+        this.mistake++;
     }
 
 

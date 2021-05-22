@@ -44,9 +44,18 @@ public class GameController {
 
     //读取游戏存档状态时的游戏控制器
     public GameController() {
-        this.p1 = new Player(InitialWindow.window.getCopyOfName().get(0));
-        this.p2 = new Player(InitialWindow.window.getCopyOfName().get(1));
-        this.onTurn = new Player(InitialWindow.window.getCopyOfName().get(2));
+        int p1Score=InitialWindow.window.getCopyOfScore().get(0).get(0);
+        int p1Mis=InitialWindow.window.getCopyOfScore().get(0).get(1);
+        int p2Score=InitialWindow.window.getCopyOfScore().get(1).get(0);
+        int p2Mis=InitialWindow.window.getCopyOfScore().get(1).get(1);
+        this.p1 = new Player(InitialWindow.window.getCopyOfName().get(0),p1Score,p1Mis);
+        this.p2 = new Player(InitialWindow.window.getCopyOfName().get(1),p2Score,p2Mis);
+        if(InitialWindow.window.getCopyOfName().get(2).equals(p1.getUserName())){
+            this.onTurn = p1;
+        }
+        if(InitialWindow.window.getCopyOfName().get(2).equals(p2.getUserName())){
+            this.onTurn=p2;
+        }
         this.count = Integer.parseInt(InitialWindow.window.getCopyOfName().get(3));
         this.turns = Integer.parseInt(InitialWindow.window.getCopyOfName().get(4));
         GridComponent.counter = Integer.parseInt(InitialWindow.window.getCopyOfName().get(5));
@@ -124,6 +133,10 @@ public class GameController {
             MainFrame.mainFrame.setSeconds(MainFrame.mainFrame.getInputSeconds());
         }
         System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
+        System.out.println(p1.getScore());
+        System.out.println(p1.getMistake());
+        System.out.println(p2.getScore());
+        System.out.println(p2.getMistake());
         scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
         gamePanel.updateCurrentState();//回合结束更新棋子们的打开状态
         scoreBoard.updatePlayerScores();//回合结束更新玩家的分数和失误次数表，用于存档
@@ -302,5 +315,13 @@ public class GameController {
         fileWriter.write(MainFrame.mainFrame.getSeconds() + "\t");
         fileWriter.write(MainFrame.mainFrame.getInputSeconds()+"\t");
         fileWriter.close();
+    }
+
+    public Player getP1() {
+        return p1;
+    }
+
+    public Player getP2() {
+        return p2;
     }
 }

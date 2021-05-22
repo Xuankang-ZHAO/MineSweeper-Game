@@ -46,8 +46,8 @@ public class MainFrame extends JFrame {
         this.setSize(yCount * GridComponent.gridSize + 200, xCount * GridComponent.gridSize + 200);
         this.setLocationRelativeTo(null);
 
-        Player p1 = new Player(ModeSelect.modeSelect.getPlayerName1());
-        Player p2 = new Player(ModeSelect.modeSelect.getPlayerName2());
+        Player p1 = new Player(ModeSelect.modeSelect.getPlayerName1(),0,0);
+        Player p2 = new Player(ModeSelect.modeSelect.getPlayerName2(),0,0);
 
         controller = new GameController(p1, p2);
         GamePanel gamePanel = new GamePanel(xCount, yCount, mineCount);
@@ -128,6 +128,7 @@ public class MainFrame extends JFrame {
         this.setSize(InitialWindow.window.getCopyOfMine().get(0).size() * GridComponent.gridSize + 200, InitialWindow.window.getCopyOfMine().size() * GridComponent.gridSize + 200);
         this.setLocationRelativeTo(null);
 
+        //得到雷数
         this.xCount = InitialWindow.window.getCopyOfMine().size();
         this.yCount = InitialWindow.window.getCopyOfMine().get(0).size();
         int tempCount = 0;
@@ -437,4 +438,6 @@ public class MainFrame extends JFrame {
     public static GameController getController() {
         return controller;
     }
+
+
 }

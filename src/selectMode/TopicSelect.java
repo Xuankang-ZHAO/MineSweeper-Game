@@ -32,7 +32,7 @@ public class TopicSelect extends JFrame {
         this.add(Topic1);
         Topic1.addActionListener(e -> {
             sss = 1;//下同，给sss赋值区分不同主题
-            dispose();
+            this.hide();
             new ModeSelect();
         });
 
@@ -45,7 +45,7 @@ public class TopicSelect extends JFrame {
         this.add(Topic2);
         Topic2.addActionListener(e -> {
             sss = 2;
-            dispose();
+            this.hide();
             new ModeSelect();
         });
 
@@ -58,7 +58,7 @@ public class TopicSelect extends JFrame {
         this.add(Topic3);
         Topic3.addActionListener(e -> {
             sss = 3;
-            dispose();
+            this.hide();
             new ModeSelect();
         });
 
@@ -70,7 +70,7 @@ public class TopicSelect extends JFrame {
         backButton.setForeground(Color.BLACK);
         this.add(backButton);
         backButton.addActionListener(e -> {
-            dispose();
+            this.dispose();
             new InitialWindow();
         });
         if (this.sss == 1) {

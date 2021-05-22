@@ -79,9 +79,11 @@ public class GridComponent extends BasicComponent {
             } else {
                 setStatus(GridStatus.Wrong);
                 new WrongMusic();
+                System.out.println("打印1");
                 MainFrame.controller.getOnTurn().addMistake();
                 MainFrame.controller.getOnTurn().costScore();
             }
+
             MainFrame.controller.nextTurn();
         }
 

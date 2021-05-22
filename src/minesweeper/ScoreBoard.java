@@ -57,6 +57,9 @@ public class ScoreBoard extends JPanel {
     }
 
 
+    /**
+     * 这是读档时用的分数板
+     */
     public ScoreBoard() {
         JLabel scoreBoard = new JLabel("Score Board");
         scoreBoard.setForeground(Color.BLACK);
@@ -66,12 +69,10 @@ public class ScoreBoard extends JPanel {
         this.setLocation(0, InitialWindow.window.getCopyOfMine().size() * GridComponent.gridSize);
 
         //要把玩家信息（名字，分数，失误数）全部加载
-        this.p1 = new Player(InitialWindow.window.getCopyOfName().get(0));
-        p1.setScore(InitialWindow.window.getCopyOfScore().get(0).get(0));
-        p1.setMistake(InitialWindow.window.getCopyOfScore().get(0).get(1));
-        this.p2 = new Player(InitialWindow.window.getCopyOfName().get(1));
-        p2.setScore(InitialWindow.window.getCopyOfScore().get(1).get(0));
-        p2.setMistake(InitialWindow.window.getCopyOfScore().get(1).get(1));
+
+        this.p1 = MainFrame.controller.getP1();
+        this.p2 = MainFrame.controller.getP2();
+
 
         readPlayerScores();
         initialNameList();
