@@ -45,17 +45,17 @@ public class GameController {
 
     //读取游戏存档状态时的游戏控制器
     public GameController() {
-        int p1Score=InitialWindow.window.getCopyOfScore().get(0).get(0);
-        int p1Mis=InitialWindow.window.getCopyOfScore().get(0).get(1);
-        int p2Score=InitialWindow.window.getCopyOfScore().get(1).get(0);
-        int p2Mis=InitialWindow.window.getCopyOfScore().get(1).get(1);
-        this.p1 = new Player(InitialWindow.window.getCopyOfName().get(0),p1Score,p1Mis);
-        this.p2 = new Player(InitialWindow.window.getCopyOfName().get(1),p2Score,p2Mis);
-        if(InitialWindow.window.getCopyOfName().get(2).equals(p1.getUserName())){
+        int p1Score = InitialWindow.window.getCopyOfScore().get(0).get(0);
+        int p1Mis = InitialWindow.window.getCopyOfScore().get(0).get(1);
+        int p2Score = InitialWindow.window.getCopyOfScore().get(1).get(0);
+        int p2Mis = InitialWindow.window.getCopyOfScore().get(1).get(1);
+        this.p1 = new Player(InitialWindow.window.getCopyOfName().get(0), p1Score, p1Mis);
+        this.p2 = new Player(InitialWindow.window.getCopyOfName().get(1), p2Score, p2Mis);
+        if (InitialWindow.window.getCopyOfName().get(2).equals(p1.getUserName())) {
             this.onTurn = p1;
         }
-        if(InitialWindow.window.getCopyOfName().get(2).equals(p2.getUserName())){
-            this.onTurn=p2;
+        if (InitialWindow.window.getCopyOfName().get(2).equals(p2.getUserName())) {
+            this.onTurn = p2;
         }
         this.count = Integer.parseInt(InitialWindow.window.getCopyOfName().get(3));
         this.turns = Integer.parseInt(InitialWindow.window.getCopyOfName().get(4));
@@ -88,15 +88,15 @@ public class GameController {
      * 在这里执行每个回合结束时需要进行的操作。
      */
     public void nextTurn() {
-        //这段啥都不影响，就是为了换头像用的!
-        if (onTurn == p1) {
-            record = 1;
-        } else if (onTurn == p2) {
-            record = 2;
-        }
-        MainFrame.mainFrame.playerUpdate();
-        //之上
         if (MainFrame.mainFrame.getSeconds() > 0) {
+            //这段啥都不影响，就是为了换头像用的!
+            if (onTurn == p1) {
+                record = 1;
+            } else if (onTurn == p2) {
+                record = 2;
+            }
+            MainFrame.mainFrame.playerUpdate();
+            //之上
             if (onTurn == p1 && count < turns - 1) {
                 count++;
                 onTurn = p1;
@@ -118,32 +118,36 @@ public class GameController {
                 onTurn = p1;
                 count = 0;
             }
-            //todo:这个流程控制器和根据倒计时的时间强制转换还有点问题
+            System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
             System.out.println("正常转换");
         }
-
-        if (MainFrame.mainFrame.getSeconds() == 0) {
+        else if (MainFrame.mainFrame.getSeconds() == 0) {
             if (onTurn == p1) {
                 EndGame();
                 onTurn = p2;
-                System.out.println("now it is"+p2.getUserName()+"turn"+"时间到了强制转换");
-            }else {
+                record = 2;
+                count=0;
+                MainFrame.mainFrame.playerUpdate();
+                System.out.println("now it is" + p2.getUserName() + "turn" + "时间到了强制转换");
+            } else {
                 EndGame();
                 onTurn = p1;
-                System.out.println("now it is"+p1.getUserName()+"turn"+"时间到了强制转换");
+                record = 1;
+                count=0;
+                MainFrame.mainFrame.playerUpdate();
+                System.out.println("now it is" + p1.getUserName() + "turn" + "时间到了强制转换");
             }
-            count = 0;
+
             MainFrame.mainFrame.setSeconds(MainFrame.mainFrame.getInputSeconds());
         }
-        System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
-        System.out.println(p1.getScore());
-        System.out.println(p1.getMistake());
-        System.out.println(p2.getScore());
-        System.out.println(p2.getMistake());
+//        System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
+//        System.out.println(p1.getScore());
+//        System.out.println(p1.getMistake());
+//        System.out.println(p2.getScore());
+//        System.out.println(p2.getMistake());
         scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
         gamePanel.updateCurrentState();//回合结束更新棋子们的打开状态
         scoreBoard.updatePlayerScores();//回合结束更新玩家的分数和失误次数表，用于存档
-
     }
 
     public void EndGame() {
@@ -186,12 +190,15 @@ public class GameController {
         }
         if (a == 1) {
             JOptionPane.showMessageDialog(null, "The winner is p1.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+            MainFrame.mainFrame.dispose();
             new InitialWindow();
         } else if (a == 2) {
             JOptionPane.showMessageDialog(null, "The winner is p2.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+            MainFrame.mainFrame.dispose();
             new InitialWindow();
         } else if (a == 3) {
             JOptionPane.showMessageDialog(null, "The game ended in a tie.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+            MainFrame.mainFrame.dispose();
             new InitialWindow();
         }
     }
@@ -282,6 +289,7 @@ public class GameController {
 
     /**
      * 该存档用于存玩家名称以及当前玩家名称以及当前玩家所处的第几回合以及玩家们约定的几个回合交换以及避免首发触雷的counter
+     *
      * @param s
      * @throws IOException
      */
@@ -306,6 +314,7 @@ public class GameController {
 
     /**
      * 该方法用于存计时器数据，第一个存的是当前的时间，第二个存的是约定的时间
+     *
      * @param s
      * @throws IOException
      */
@@ -316,7 +325,7 @@ public class GameController {
         }
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write(MainFrame.mainFrame.getSeconds() + "\t");
-        fileWriter.write(MainFrame.mainFrame.getInputSeconds()+"\t");
+        fileWriter.write(MainFrame.mainFrame.getInputSeconds() + "\t");
         fileWriter.close();
     }
 
@@ -328,8 +337,8 @@ public class GameController {
         return p2;
     }
 
-    public void reControl(){
-        this.onTurn=p1;
-        this.count=-1;
+    public void reControl() {
+        this.onTurn = p1;
+        this.count = -1;
     }
 }
