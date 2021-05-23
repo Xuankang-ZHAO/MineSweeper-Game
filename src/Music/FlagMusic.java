@@ -12,7 +12,7 @@ public class FlagMusic extends Frame {
     public FlagMusic() {
         try {
             URL cb;
-            File f = new File("src/MusicUsed/得分.wav");
+            File f = new File("resouces/MusicUsed/得分.wav");
             cb = f.toURL();
             AudioClip aau;
             aau = Applet.newAudioClip(cb);

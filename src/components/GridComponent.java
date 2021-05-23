@@ -4,14 +4,12 @@ import Music.BombedMusic;
 import Music.ClickedMusic;
 import Music.FlagMusic;
 import Music.WrongMusic;
-import controller.GameController;
 import entity.GridStatus;
 import minesweeper.GamePanel;
 import minesweeper.MainFrame;
 import resources.ImageResource;
 import selectMode.TopicSelect;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class GridComponent extends BasicComponent {

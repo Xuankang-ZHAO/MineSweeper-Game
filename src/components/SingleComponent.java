@@ -5,7 +5,6 @@ import Music.ClickedMusic;
 import Music.FlagMusic;
 import Music.WrongMusic;
 import entity.GridStatus;
-import minesweeper.MainFrame;
 import minesweeper.SingleGame;
 import minesweeper.SinglePanel;
 import resources.ImageResource;
