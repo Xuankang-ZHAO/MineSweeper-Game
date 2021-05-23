@@ -23,7 +23,7 @@ public class TopicSelect extends JFrame {
         this.setUndecorated(true);
         this.setLocationRelativeTo(null);
 
-        Topic1 = new JButton("主题1");
+        Topic1 = new JButton("草原");
         Topic1.setFont(new Font("黑体", Font.BOLD, 18));
         Topic1.setBounds(250, 120, 90, 35);
         Topic1.setOpaque(false);
@@ -36,7 +36,7 @@ public class TopicSelect extends JFrame {
             new ModeSelect();
         });
 
-        Topic2 = new JButton("主题2");
+        Topic2 = new JButton("冰原");
         Topic2.setFont(new Font("黑体", Font.BOLD, 18));
         Topic2.setBounds(250, 170, 90, 35);
         Topic2.setOpaque(false);
@@ -49,7 +49,7 @@ public class TopicSelect extends JFrame {
             new ModeSelect();
         });
 
-        Topic3 = new JButton("主题3");
+        Topic3 = new JButton("沙漠");
         Topic3.setFont(new Font("黑体", Font.BOLD, 18));
         Topic3.setBounds(250, 220, 90, 35);
         Topic3.setOpaque(false);
