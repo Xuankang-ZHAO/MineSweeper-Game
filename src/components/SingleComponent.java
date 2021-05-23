@@ -56,6 +56,7 @@ public class SingleComponent extends BasicComponent{
                     SingleGame.singleGame.update();
                     new ClickedMusic();
                 }
+                counter++;
             }
         }
     }
@@ -79,6 +80,7 @@ public class SingleComponent extends BasicComponent{
                 JOptionPane.showMessageDialog(null, "标记错误，请重新开始游戏", "提示", JOptionPane.PLAIN_MESSAGE);
                 new WrongMusic();
             }
+            counter++;
         }
 
     }

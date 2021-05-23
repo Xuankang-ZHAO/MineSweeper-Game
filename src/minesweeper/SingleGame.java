@@ -84,10 +84,11 @@ public class SingleGame extends JFrame {
         b1.setLocation(5,singlePanel.getHeight()+button1.getHeight()+5);
         panel.add(b1);
         b1.addActionListener(e -> {
-            GamePanel.gamePanel.reGame();
+            singlePanel.reGame();
             this.unopened=xCount*yCount;
             this.opened=0;
             this.seconds=0;
+            update();
         });
 
         JButton b2=new JButton("开始界面");
