@@ -50,6 +50,7 @@ public class InitialWindow extends JFrame implements ActionListener {
         this.add(TitleLabel);
 
 
+
         newButton = new JButton("创建新的游戏");
         newButton.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         newButton.setBounds(350, 200, 150, 45);
