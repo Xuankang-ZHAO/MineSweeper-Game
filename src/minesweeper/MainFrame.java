@@ -421,8 +421,20 @@ public class MainFrame extends JFrame {
             } else if (TopicSelect.topicSelect.getSss() == 3) {
                 new Story3();
             }
-
         });
+
+        JLabel round = new JLabel();
+        round.setText(String.format("每回合点击次数:%s", ModeSelect.modeSelect.getTurnsNum()));
+        round.setBackground(Color.white);
+        round.setOpaque(true);
+        round.setSize(150, 35);
+        round.setLocation(GamePanel.gamePanel.getWidth() + 10, 320);
+        round.setForeground(Color.BLACK);
+       round.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        panel.add(round);
+
+
+
     }
 
     public int getxCount() {
