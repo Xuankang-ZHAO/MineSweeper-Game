@@ -4,89 +4,79 @@ import Music.BombedMusic;
 import Music.ClickedMusic;
 import Music.FlagMusic;
 import Music.WrongMusic;
-import controller.GameController;
 import entity.GridStatus;
-import minesweeper.GamePanel;
 import minesweeper.MainFrame;
+import minesweeper.SingleGame;
 import resources.ImageResource;
 import selectMode.TopicSelect;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GridComponent extends BasicComponent {
-    public static GridComponent gridComponent;
+public class SingleComponent extends BasicComponent{
 
-    public static int gridSize = 35;//设置格子的尺寸大小
-    //public static int count=0;//用于设定回合数
-    private int xCount = MainFrame.mainFrame.getxCount();
-    private int yCount = MainFrame.mainFrame.getyCount();
-    private int mineNUm = MainFrame.mainFrame.getMineCount();
-
-    public static int counter;//用于防止第一步踩到雷
+    public static int gridSize = 35;
     private int row;//格子的横坐标
     private int col;//格子的纵坐标
     private int value;//用于记住该component下标记是雷或者探测得到的雷数的数字
-
     private GridStatus status = GridStatus.Covered;//初始默认打开状态都是覆盖
     private int content = 0;
+    public static int counter;//用于防止第一步踩到雷
 
 
-    public GridComponent(int x, int y, int num) {
+    public SingleComponent(int x, int y, int num){
         this.setSize(gridSize, gridSize);//设置component组件的大小
         this.row = x;//记住component所在的行
         this.col = y;//记住component所在的列
         this.value = num;//记住该component下标记是雷或者探测得到的雷数的数字
-    }
 
+    }
     @Override
     public void onMouseLeftClicked() {
         System.out.printf("Gird (%d,%d) is left-clicked.\n", row, col);
-        if (this.status == GridStatus.Covered) {
+
+        if(this.status==GridStatus.Covered){
             if (counter == 0 && value == -1) {
-                MainFrame.mainFrame.dispose();
-                MainFrame m=new MainFrame(xCount, yCount, mineNUm);
-                m.setVisible(true);
-                m.getController().setCount(-1);
-            } else {
-                if (value == -1) {
+                SingleGame.singleGame.dispose();
+                SingleGame s=new SingleGame();
+                s.setVisible(true);
+            }else {
+                if(value==-1){
                     setStatus(GridStatus.Bombed);
+                    SingleGame.singleGame.minus();
+                    SingleGame.singleGame.plus();
+                    SingleGame.singleGame.stop();
+                    JOptionPane.showMessageDialog(null, "您点中了苦力怕，请重新开始游戏", "提示", JOptionPane.PLAIN_MESSAGE);
                     new BombedMusic();
-                    MainFrame.controller.getOnTurn().addMistake();
-                    MainFrame.controller.getOnTurn().costScore();
-                } else {
-                    new ClickedMusic();
-                    GamePanel.gamePanel.openCell(row, col);
+                }else {
                     setStatus(GridStatus.Clicked);
+                    SingleGame.singleGame.minus();
+                    SingleGame.singleGame.plus();
+                    new ClickedMusic();
                 }
-                counter++;
             }
-            MainFrame.controller.nextTurn();
         }
-        //TODO: 在左键点击一个格子的时候，还需要做什么？
     }
 
     @Override
     public void onMouseRightClicked() {
         System.out.printf("Gird (%d,%d) is right-clicked.\n", row, col);
-        if (this.status == GridStatus.Covered) {
-            if (value == -1) {
+        if (this.status == GridStatus.Covered){
+            if(value==-1){
                 setStatus(GridStatus.Flag);
+                SingleGame.singleGame.minus();
+                SingleGame.singleGame.plus();
                 new FlagMusic();
-                MainFrame.controller.getOnTurn().addScore();
-            } else {
+            }else {
                 setStatus(GridStatus.Wrong);
+                SingleGame.singleGame.minus();
+                SingleGame.singleGame.plus();
+                SingleGame.singleGame.stop();
+                JOptionPane.showMessageDialog(null, "标记错误，请重新开始游戏", "提示", JOptionPane.PLAIN_MESSAGE);
                 new WrongMusic();
-                System.out.println("打印1");
-                MainFrame.controller.getOnTurn().addMistake();
-                MainFrame.controller.getOnTurn().costScore();
             }
-            counter++;
-
-            MainFrame.controller.nextTurn();
         }
 
-        //TODO: 在右键点击一个格子的时候，还需要做什么？
     }
 
     public void draw(Graphics g) {
@@ -181,7 +171,6 @@ public class GridComponent extends BasicComponent {
         }
     }
 
-
     public void setContent(int content) {
         this.content = content;
     }
@@ -201,5 +190,4 @@ public class GridComponent extends BasicComponent {
         this.status = status;
         repaint();
     }
-
 }

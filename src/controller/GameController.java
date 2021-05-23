@@ -124,9 +124,11 @@ public class GameController {
 
         if (MainFrame.mainFrame.getSeconds() == 0) {
             if (onTurn == p1) {
+                EndGame();
                 onTurn = p2;
                 System.out.println("now it is"+p2.getUserName()+"turn"+"时间到了强制转换");
             }else {
+                EndGame();
                 onTurn = p1;
                 System.out.println("now it is"+p1.getUserName()+"turn"+"时间到了强制转换");
             }
