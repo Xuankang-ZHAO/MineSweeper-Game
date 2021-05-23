@@ -1,6 +1,7 @@
 package minesweeper;
 
 import components.GridComponent;
+import components.SingleComponent;
 import openWindow.InitialWindow;
 import selectMode.TopicSelect;
 import selectMode.set1;
@@ -85,10 +86,13 @@ public class SingleGame extends JFrame {
         panel.add(b1);
         b1.addActionListener(e -> {
             singlePanel.reGame();
+            SingleComponent.counter=0;
             this.unopened=xCount*yCount;
             this.opened=0;
             this.seconds=0;
             update();
+            updateTime();
+            timer.start();
         });
 
         JButton b2=new JButton("开始界面");
@@ -138,5 +142,9 @@ public class SingleGame extends JFrame {
     public void update(){
         this.button1.setText("待开"+unopened);
         this.button2.setText("已开"+opened);
+    }
+
+    public void updateTime(){
+        this.button3.setText("用时"+seconds+"s");
     }
 }
