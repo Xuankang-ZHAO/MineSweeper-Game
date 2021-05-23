@@ -15,15 +15,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
-    public  static GameController controller;
+    public static GameController controller;
     private int xCount;
     private int yCount;
     private int mineCount;
     private ArrayList<ArrayList<Integer>> saveOfMines;
     private int clickTimes = 0;
     public static MainFrame mainFrame;
-    private   int inputSeconds ;
-    int seconds ;
+    private int inputSeconds;
+    int seconds;
     JLabel photo = new JLabel();
     JLabel currentPlayer = new JLabel();
     JLabel clickTime = new JLabel();
@@ -39,16 +39,16 @@ public class MainFrame extends JFrame {
         this.xCount = xCount;
         this.yCount = yCount;
         this.mineCount = mineCount;
-        this.inputSeconds= ModeSelect.modeSelect.getTime();
-        this.seconds=inputSeconds;
+        this.inputSeconds = ModeSelect.modeSelect.getTime();
+        this.seconds = inputSeconds;
 
         this.setTitle("我的世界联名扫雷");
         this.setLayout(null);//清空布局管理器
         this.setSize(yCount * GridComponent.gridSize + 200, xCount * GridComponent.gridSize + 200);
         this.setLocationRelativeTo(null);
 
-        Player p1 = new Player(ModeSelect.modeSelect.getPlayerName1(),0,0);
-        Player p2 = new Player(ModeSelect.modeSelect.getPlayerName2(),0,0);
+        Player p1 = new Player(ModeSelect.modeSelect.getPlayerName1(), 0, 0);
+        Player p2 = new Player(ModeSelect.modeSelect.getPlayerName2(), 0, 0);
 
         controller = new GameController(p1, p2);
         GamePanel gamePanel = new GamePanel(xCount, yCount, mineCount);
@@ -142,8 +142,8 @@ public class MainFrame extends JFrame {
         }
         this.mineCount = tempCount;
 
-        this.inputSeconds=Integer.parseInt(InitialWindow.window.getCopyOfTime().get(1));
-        this.seconds=Integer.parseInt(InitialWindow.window.getCopyOfTime().get(0));
+        this.inputSeconds = Integer.parseInt(InitialWindow.window.getCopyOfTime().get(1));
+        this.seconds = Integer.parseInt(InitialWindow.window.getCopyOfTime().get(0));
 
         new TopicSelect();
         TopicSelect.topicSelect.setSss(2);
@@ -398,9 +398,9 @@ public class MainFrame extends JFrame {
             playerUpdate();
         });
 
-        JButton clickBtn6=new JButton("重玩");
-        clickBtn6.setSize(100,20);
-        clickBtn6.setLocation(340,GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
+        JButton clickBtn6 = new JButton("重玩");
+        clickBtn6.setSize(100, 20);
+        clickBtn6.setLocation(340, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
         panel.add(clickBtn6);
         clickBtn6.addActionListener(e -> {
             GamePanel.gamePanel.reGame();
@@ -445,7 +445,7 @@ public class MainFrame extends JFrame {
         this.seconds = seconds;
     }
 
-    public  int getInputSeconds() {
+    public int getInputSeconds() {
         return inputSeconds;
     }
 
