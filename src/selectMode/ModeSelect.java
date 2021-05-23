@@ -310,6 +310,10 @@ public class ModeSelect extends JFrame implements ActionListener, MouseListener 
             timeText.setBorder(null);
         }
     }
+
+    public void setTurnsNum(int turnsNum) {
+        this.turnsNum = turnsNum;
+    }
 }
 
 

@@ -148,8 +148,15 @@ public class MainFrame extends JFrame {
         this.inputSeconds = Integer.parseInt(InitialWindow.window.getCopyOfTime().get(1));
         this.seconds = Integer.parseInt(InitialWindow.window.getCopyOfTime().get(0));
 
-        new TopicSelect();
-        TopicSelect.topicSelect.setSss(2);
+        TopicSelect t=new TopicSelect();
+        t.setSss(2);
+        t.dispose();
+
+
+        ModeSelect m=new ModeSelect();
+        m.setTurnsNum(Integer.parseInt(InitialWindow.window.getCopyOfName().get(4)));
+        m.dispose();
+
 
 
         controller = new GameController();
@@ -418,6 +425,8 @@ public class MainFrame extends JFrame {
             ScoreBoard.scoreBoard.reScore();
             getController().reControl();
             playerUpdate();
+            clickTimeUpdate();
+            pictureUpdate();
         });
 
         JButton story = new JButton("游戏情节");

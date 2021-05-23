@@ -336,6 +336,6 @@ public class GameController {
 
     public void reControl() {
         this.onTurn = p1;
-        this.count = -1;
+        this.count = 0;
     }
 }
