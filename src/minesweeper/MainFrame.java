@@ -366,6 +366,7 @@ public class MainFrame extends JFrame {
             playerUpdate();
             clickTimeUpdate();
             pictureUpdate();
+            CoveredMineUpdate();
         });
 
         JButton story = new JButton("游戏情节");

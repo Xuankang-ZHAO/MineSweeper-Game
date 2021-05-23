@@ -77,7 +77,7 @@ public class GridComponent extends BasicComponent {
                 new WrongMusic();
                 System.out.println("打印1");
                 MainFrame.controller.getOnTurn().addMistake();
-                //MainFrame.controller.getOnTurn().costScore();
+                MainFrame.controller.getOnTurn().costScore();
             }
             counter++;
 
