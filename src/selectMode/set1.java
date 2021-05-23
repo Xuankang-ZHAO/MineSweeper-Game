@@ -21,6 +21,7 @@ public class set1 extends JFrame implements ActionListener, MouseListener {
 //    private JTextField turnsText;
 
     private JButton loginButton;
+    private JButton single;
     private JButton backButton;
     private JLabel xCountLabel;
     private JLabel yCountLabel;
@@ -82,9 +83,9 @@ public class set1 extends JFrame implements ActionListener, MouseListener {
         mineText.addMouseListener(this);
         this.add(mineText);
 
-        loginButton = new JButton("开启");
+        loginButton = new JButton("开启双人");
         loginButton.setFont(new Font("黑体", Font.BOLD, 18));
-        loginButton.setBounds(20, 310, 100, 35);
+        loginButton.setBounds(20, 310, 150, 35);
         loginButton.setOpaque(false);
         loginButton.setContentAreaFilled(false);
         loginButton.setForeground(Color.BLACK);
@@ -114,9 +115,41 @@ public class set1 extends JFrame implements ActionListener, MouseListener {
             }
         });
 
+        single = new JButton("开启单人");
+        single.setFont(new Font("黑体", Font.BOLD, 18));
+        single.setBounds(200, 310, 150, 35);
+        single.setOpaque(false);
+        single.setContentAreaFilled(false);
+        single.setForeground(Color.BLACK);
+        this.add(single);
+        single.addActionListener(e -> {
+            if (check() == 0) {
+                this.xCount = Integer.parseInt(xCountText.getText());
+                this.yCount = Integer.parseInt(yCountText.getText());
+                this.mineNum = Integer.parseInt(mineText.getText());
+                this.turnsNum = ModeSelect.modeSelect.getTurnsNum();
+                dispose();
+                new NewGame();
+            } else if (check() == 1) {
+                JOptionPane.showMessageDialog(null, "请输入不超过24的数字", "雷区x设置不合理", JOptionPane.WARNING_MESSAGE);
+            } else if (check() == 2) {
+                JOptionPane.showMessageDialog(null, "请输入不超过30的数字", "雷区y设置不合理", JOptionPane.WARNING_MESSAGE);
+            } else if (check() == 3) {
+                JOptionPane.showMessageDialog(null, "请输入不超过总格子数一半的数字", "雷数设置不合理", JOptionPane.WARNING_MESSAGE);
+            } else if (check() == 4) {
+                JOptionPane.showMessageDialog(null, "x不能超过24，y不能超过30", "雷区x和y设置不合理", JOptionPane.WARNING_MESSAGE);
+            } else if (check() == 5) {
+                JOptionPane.showMessageDialog(null, "x不能超过24，雷数不能超过总格子数一半", "雷区x与雷数设置不合理", JOptionPane.WARNING_MESSAGE);
+            } else if (check() == 6) {
+                JOptionPane.showMessageDialog(null, "y不能超过30，雷数不能超过总格子数一半", "雷区y与雷数设置不合理", JOptionPane.WARNING_MESSAGE);
+            } else if (check() == 7) {
+                JOptionPane.showMessageDialog(null, "x不能超过24,y不能超过30，雷数不能超过总格子数一半", "雷区x、y与雷数设置不合理", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+
         backButton = new JButton("返回");
         backButton.setFont(new Font("黑体", Font.BOLD, 18));
-        backButton.setBounds(150, 310, 100, 35);
+        backButton.setBounds(380, 310, 100, 35);
         backButton.setOpaque(false);
         backButton.setContentAreaFilled(false);
         backButton.setForeground(Color.BLACK);

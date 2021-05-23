@@ -45,17 +45,17 @@ public class GameController {
 
     //读取游戏存档状态时的游戏控制器
     public GameController() {
-        int p1Score=InitialWindow.window.getCopyOfScore().get(0).get(0);
-        int p1Mis=InitialWindow.window.getCopyOfScore().get(0).get(1);
-        int p2Score=InitialWindow.window.getCopyOfScore().get(1).get(0);
-        int p2Mis=InitialWindow.window.getCopyOfScore().get(1).get(1);
-        this.p1 = new Player(InitialWindow.window.getCopyOfName().get(0),p1Score,p1Mis);
-        this.p2 = new Player(InitialWindow.window.getCopyOfName().get(1),p2Score,p2Mis);
-        if(InitialWindow.window.getCopyOfName().get(2).equals(p1.getUserName())){
+        int p1Score = InitialWindow.window.getCopyOfScore().get(0).get(0);
+        int p1Mis = InitialWindow.window.getCopyOfScore().get(0).get(1);
+        int p2Score = InitialWindow.window.getCopyOfScore().get(1).get(0);
+        int p2Mis = InitialWindow.window.getCopyOfScore().get(1).get(1);
+        this.p1 = new Player(InitialWindow.window.getCopyOfName().get(0), p1Score, p1Mis);
+        this.p2 = new Player(InitialWindow.window.getCopyOfName().get(1), p2Score, p2Mis);
+        if (InitialWindow.window.getCopyOfName().get(2).equals(p1.getUserName())) {
             this.onTurn = p1;
         }
-        if(InitialWindow.window.getCopyOfName().get(2).equals(p2.getUserName())){
-            this.onTurn=p2;
+        if (InitialWindow.window.getCopyOfName().get(2).equals(p2.getUserName())) {
+            this.onTurn = p2;
         }
         this.count = Integer.parseInt(InitialWindow.window.getCopyOfName().get(3));
         this.turns = Integer.parseInt(InitialWindow.window.getCopyOfName().get(4));
@@ -125,10 +125,10 @@ public class GameController {
         if (MainFrame.mainFrame.getSeconds() == 0) {
             if (onTurn == p1) {
                 onTurn = p2;
-                System.out.println("now it is"+p2.getUserName()+"turn"+"时间到了强制转换");
-            }else {
+                System.out.println("now it is" + p2.getUserName() + "turn" + "时间到了强制转换");
+            } else {
                 onTurn = p1;
-                System.out.println("now it is"+p1.getUserName()+"turn"+"时间到了强制转换");
+                System.out.println("now it is" + p1.getUserName() + "turn" + "时间到了强制转换");
             }
             count = 0;
             MainFrame.mainFrame.setSeconds(MainFrame.mainFrame.getInputSeconds());
@@ -280,6 +280,7 @@ public class GameController {
 
     /**
      * 该存档用于存玩家名称以及当前玩家名称以及当前玩家所处的第几回合以及玩家们约定的几个回合交换以及避免首发触雷的counter
+     *
      * @param s
      * @throws IOException
      */
@@ -304,6 +305,7 @@ public class GameController {
 
     /**
      * 该方法用于存计时器数据，第一个存的是当前的时间，第二个存的是约定的时间
+     *
      * @param s
      * @throws IOException
      */
@@ -314,7 +316,7 @@ public class GameController {
         }
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write(MainFrame.mainFrame.getSeconds() + "\t");
-        fileWriter.write(MainFrame.mainFrame.getInputSeconds()+"\t");
+        fileWriter.write(MainFrame.mainFrame.getInputSeconds() + "\t");
         fileWriter.close();
     }
 
@@ -326,8 +328,8 @@ public class GameController {
         return p2;
     }
 
-    public void reControl(){
-        this.onTurn=p1;
-        this.count=-1;
+    public void reControl() {
+        this.onTurn = p1;
+        this.count = -1;
     }
 }
