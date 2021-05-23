@@ -30,7 +30,6 @@ public class GameController {
 
     private int turns;//玩家们约定几个回合一次交换
     private int count;////当前玩家正处于turns的第几个回合
-    private int record;//记录当前玩家
 
 
     //新游戏时初始化游戏的游戏控制器
@@ -89,34 +88,34 @@ public class GameController {
      */
     public void nextTurn() {
         if (MainFrame.mainFrame.getSeconds() > 0) {
-            //这段啥都不影响，就是为了换头像用的!
-            if (onTurn == p1) {
-                record = 1;
-            } else if (onTurn == p2) {
-                record = 2;
-            }
-            MainFrame.mainFrame.playerUpdate();
-            //之上
             if (onTurn == p1 && count < turns - 1) {
                 count++;
                 onTurn = p1;
+                MainFrame.mainFrame.clickTimeUpdate();
             } else if (onTurn == p1 && count >= turns - 1) {
                 if (count == turns - 1) {
                     EndGame();
-                }//结束游戏or转换turn
+                }
                 MainFrame.mainFrame.setSeconds(MainFrame.mainFrame.getInputSeconds());
                 onTurn = p2;
                 count = 0;
+                MainFrame.mainFrame.clickTimeUpdate();
+                MainFrame.mainFrame.playerUpdate();
+                MainFrame.mainFrame.pictureUpdate();
             } else if (onTurn == p2 && count < turns - 1) {
                 count++;
                 onTurn = p2;
+                MainFrame.mainFrame.clickTimeUpdate();
             } else if (onTurn == p2 && count >= turns - 1) {
                 if (count == turns - 1) {
                     EndGame();
-                }//结束游戏or转换turn
+                }
                 MainFrame.mainFrame.setSeconds(MainFrame.mainFrame.getInputSeconds());
                 onTurn = p1;
                 count = 0;
+                MainFrame.mainFrame.clickTimeUpdate();
+                MainFrame.mainFrame.playerUpdate();
+                MainFrame.mainFrame.pictureUpdate();
             }
             System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
             System.out.println("正常转换");
@@ -125,16 +124,18 @@ public class GameController {
             if (onTurn == p1) {
                 EndGame();
                 onTurn = p2;
-                record = 2;
-                count=0;
+                count=1;
                 MainFrame.mainFrame.playerUpdate();
+                MainFrame.mainFrame.clickTimeUpdate();
+                MainFrame.mainFrame.pictureUpdate();
                 System.out.println("now it is" + p2.getUserName() + "turn" + "时间到了强制转换");
             } else {
                 EndGame();
                 onTurn = p1;
-                record = 1;
-                count=0;
+                count=1;
                 MainFrame.mainFrame.playerUpdate();
+                MainFrame.mainFrame.clickTimeUpdate();
+                MainFrame.mainFrame.pictureUpdate();
                 System.out.println("now it is" + p1.getUserName() + "turn" + "时间到了强制转换");
             }
 
@@ -206,10 +207,6 @@ public class GameController {
 
     public Player getOnTurn() {
         return onTurn;
-    }
-
-    public int getRecord() {
-        return record;
     }
 
     /**

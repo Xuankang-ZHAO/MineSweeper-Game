@@ -72,8 +72,9 @@ public class MainFrame extends JFrame {
         panel.add(gamePanel);
         panel.add(scoreBoard);
         button();
-        panel.add(currentPlayer);
-        panel.add(clickTime);
+        playerUpdate();
+        clickTimeUpdate();
+        pictureUpdate();
         panel.setOpaque(false);
 
         //this.setVisible(true);
@@ -115,6 +116,8 @@ public class MainFrame extends JFrame {
         panel.add(scoreBoard);
         button();
         playerUpdate();
+        clickTimeUpdate();
+        pictureUpdate();
         panel.setOpaque(false);
 
         this.setVisible(true);
@@ -165,21 +168,24 @@ public class MainFrame extends JFrame {
         panel.add(gamePanel);
         panel.add(scoreBoard);
         button();
-        panel.add(currentPlayer);
-        panel.add(clickTime);
-        if (controller.getRecord() == 1) {
-            Image playerPhoto1 = ImageResource.playerPhoto1Plus.getImage();
-            ImageIcon afterChange = changeImage(150, 230, playerPhoto1, true);
-            photo.setIcon(afterChange);
-            photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
-            panel.add(photo);
-        } else if (controller.getRecord() == 2) {
-            Image playerPhoto2 = ImageResource.playerPhoto2Plus.getImage();
-            ImageIcon afterChange = changeImage(150, 230, playerPhoto2, true);
-            photo.setIcon(afterChange);
-            photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
-            panel.add(photo);
-        }
+        playerUpdate();
+        clickTimeUpdate();
+        pictureUpdate();
+//        panel.add(currentPlayer);
+//        panel.add(clickTime);
+//        if (controller.getRecord() == 1) {
+//            Image playerPhoto1 = ImageResource.playerPhoto1Plus.getImage();
+//            ImageIcon afterChange = changeImage(150, 230, playerPhoto1, true);
+//            photo.setIcon(afterChange);
+//            photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
+//            panel.add(photo);
+//        } else if (controller.getRecord() == 2) {
+//            Image playerPhoto2 = ImageResource.playerPhoto2Plus.getImage();
+//            ImageIcon afterChange = changeImage(150, 230, playerPhoto2, true);
+//            photo.setIcon(afterChange);
+//            photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
+//            panel.add(photo);
+//        }
         panel.setOpaque(false);
 
 
@@ -196,8 +202,10 @@ public class MainFrame extends JFrame {
         currentPlayer.setForeground(Color.BLACK);
         currentPlayer.setFont(new Font("times new roman", Font.PLAIN, 20));
         panel.add(currentPlayer);
+    }
 
-        clickTime.setText(String.format("已单击次数:%s", controller.getCount() + 1));
+    public void clickTimeUpdate() {
+        clickTime.setText(String.format("已单击次数:%s", controller.getCount()));
         clickTime.setBackground(Color.white);
         clickTime.setOpaque(true);
         clickTime.setSize(150, 35);
@@ -205,15 +213,17 @@ public class MainFrame extends JFrame {
         clickTime.setForeground(Color.BLACK);
         clickTime.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         panel.add(clickTime);
+    }
 
+    public void pictureUpdate() {
         if (TopicSelect.topicSelect.getSss() == 1) {
-            if (controller.getRecord() == 1) {
+            if(controller.getOnTurn()== controller.getP1()){
                 Image playerPhoto1 = ImageResource.playerPhoto1Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto1, true);
                 photo.setIcon(afterChange);
                 photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
                 panel.add(photo);
-            } else if (controller.getRecord() == 2) {
+            } else if (controller.getOnTurn()== controller.getP2()) {
                 Image playerPhoto2 = ImageResource.playerPhoto2Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto2, true);
                 photo.setIcon(afterChange);
@@ -221,13 +231,13 @@ public class MainFrame extends JFrame {
                 panel.add(photo);
             }
         } else if (TopicSelect.topicSelect.getSss() == 2) {
-            if (controller.getRecord() == 1) {
+            if (controller.getOnTurn()== controller.getP1()) {
                 Image playerPhoto3 = ImageResource.playerPhoto3Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto3, true);
                 photo.setIcon(afterChange);
                 photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
                 panel.add(photo);
-            } else if (controller.getRecord() == 2) {
+            } else if (controller.getOnTurn()== controller.getP2()) {
                 Image playerPhoto4 = ImageResource.playerPhoto4Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto4, true);
                 photo.setIcon(afterChange);
@@ -235,13 +245,13 @@ public class MainFrame extends JFrame {
                 panel.add(photo);
             }
         } else if (TopicSelect.topicSelect.getSss() == 3) {
-            if (controller.getRecord() == 1) {
+            if (controller.getOnTurn()== controller.getP1()) {
                 Image playerPhoto5 = ImageResource.playerPhoto5Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto5, true);
                 photo.setIcon(afterChange);
                 photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
                 panel.add(photo);
-            } else if (controller.getRecord() == 2) {
+            } else if (controller.getOnTurn()== controller.getP2()) {
                 Image playerPhoto6 = ImageResource.playerPhoto6Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto6, true);
                 photo.setIcon(afterChange);
@@ -250,6 +260,7 @@ public class MainFrame extends JFrame {
             }
         }
     }
+
 
     private static ImageIcon changeImage(int cWidth, int cHeight, Image image, boolean isRatio) {
         //将图片等比缩放到容器矩形内
@@ -430,9 +441,8 @@ public class MainFrame extends JFrame {
         round.setSize(150, 35);
         round.setLocation(GamePanel.gamePanel.getWidth() + 10, 320);
         round.setForeground(Color.BLACK);
-       round.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        round.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         panel.add(round);
-
 
 
     }
