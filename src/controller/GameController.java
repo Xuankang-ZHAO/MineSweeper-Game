@@ -179,7 +179,7 @@ public class GameController {
 
         System.out.println("testPoint1");
         if(coveredMine==0){
-            if (bombedMine == gamePanel.getMineCount() && p1.getScore() == p2.getScore()) {
+            if (p1.getScore() == p2.getScore()) {
                 if (p1.getMistake() < p2.getMistake()) {
                     a = 1;
                     System.out.println("The winner is p1.");
