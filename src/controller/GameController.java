@@ -153,8 +153,8 @@ public class GameController {
     }
 
     public void EndGame() {
-        int coveredMine = 0;
-        int bombedMine = 0;
+        int coveredMine = 0;//未揭晓的雷数
+        int bombedMine = 0;//揭晓的雷数
         for (int i = 0; i < gamePanel.getxCount(); i++) {
             for (int j = 0; j < gamePanel.getyCount(); j++) {
                 //检查未揭晓的雷数
@@ -163,45 +163,52 @@ public class GameController {
                 }
                 //检查揭晓的雷数
                 if (gamePanel.getChessboard()[i][j] == -1 && gamePanel.getMineField()[i][j].getStatus() == GridStatus.Bombed
-                        || gamePanel.getMineField()[i][j].getStatus() == GridStatus.Flag || gamePanel.getMineField()[i][j].getStatus() == GridStatus.Wrong) {
+                        || gamePanel.getMineField()[i][j].getStatus() == GridStatus.Flag ) {
                     bombedMine++;
                 }
             }
         }
         int a = 0;
-        if (p1.getScore() > p2.getScore() && p1.getScore() - p2.getScore() > coveredMine) {
-            a = 1;
-            System.out.println("The winner is p1.");
-        } else if (p2.getScore() > p1.getScore() && p2.getScore() - p1.getScore() > coveredMine) {
-            a = 2;
-            System.out.println("The winner is p2.");
-        }
-        if (bombedMine == gamePanel.getMineCount() && p1.getScore() == p2.getScore()) {
-            if (p1.getMistake() < p2.getMistake()) {
+            if (p1.getScore() > p2.getScore() && p1.getScore() - p2.getScore() > coveredMine) {
                 a = 1;
                 System.out.println("The winner is p1.");
-            }
-            if (p2.getMistake() < p1.getMistake()) {
+            } else if (p2.getScore() > p1.getScore() && p2.getScore() - p1.getScore() > coveredMine) {
                 a = 2;
                 System.out.println("The winner is p2.");
             }
-            if (p1.getMistake() == p2.getMistake()) {
-                a = 3;
-                System.out.println("The game ended in a tie.");
+
+        System.out.println("testPoint1");
+        if(coveredMine==0){
+            if (bombedMine == gamePanel.getMineCount() && p1.getScore() == p2.getScore()) {
+                if (p1.getMistake() < p2.getMistake()) {
+                    a = 1;
+                    System.out.println("The winner is p1.");
+                }
+                if (p2.getMistake() < p1.getMistake()) {
+                    a = 2;
+                    System.out.println("The winner is p2.");
+                }
+                if (p1.getMistake() == p2.getMistake()) {
+                    a = 3;
+                    System.out.println("The game ended in a tie.");
+                }
             }
         }
+
+
+
         if (a == 1) {
             JOptionPane.showMessageDialog(null, "The winner is p1.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
-            MainFrame.mainFrame.dispose();
-            new InitialWindow();
+//            MainFrame.mainFrame.dispose();
+//            new InitialWindow();
         } else if (a == 2) {
             JOptionPane.showMessageDialog(null, "The winner is p2.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
-            MainFrame.mainFrame.dispose();
-            new InitialWindow();
+            //MainFrame.mainFrame.dispose();
+            //new InitialWindow();
         } else if (a == 3) {
             JOptionPane.showMessageDialog(null, "The game ended in a tie.", "Congratulations", JOptionPane.PLAIN_MESSAGE);
-            MainFrame.mainFrame.dispose();
-            new InitialWindow();
+           // MainFrame.mainFrame.dispose();
+           // new InitialWindow();
         }
     }
 
