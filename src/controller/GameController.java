@@ -90,7 +90,7 @@ public class GameController {
         scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
         gamePanel.updateCurrentState();//回合结束更新棋子们的打开状态
         scoreBoard.updatePlayerScores();//回合结束更新玩家的分数和失误次数表，用于存档
-
+        MainFrame.mainFrame.CoveredMineUpdate();
         if (MainFrame.mainFrame.getSeconds() > 0) {
             if (onTurn == p1 && count < turns - 1) {
                 count++;
@@ -123,12 +123,11 @@ public class GameController {
             }
             System.out.println("Now it is " + onTurn.getUserName() + "'s turn.");
             System.out.println("正常转换");
-        }
-        else if (MainFrame.mainFrame.getSeconds() == 0) {
+        } else if (MainFrame.mainFrame.getSeconds() == 0) {
             if (onTurn == p1) {
                 EndGame();
                 onTurn = p2;
-                count=1;
+                count = 1;
                 MainFrame.mainFrame.playerUpdate();
                 MainFrame.mainFrame.clickTimeUpdate();
                 MainFrame.mainFrame.pictureUpdate();
@@ -136,7 +135,7 @@ public class GameController {
             } else {
                 EndGame();
                 onTurn = p1;
-                count=1;
+                count = 1;
                 MainFrame.mainFrame.playerUpdate();
                 MainFrame.mainFrame.clickTimeUpdate();
                 MainFrame.mainFrame.pictureUpdate();
@@ -206,6 +205,21 @@ public class GameController {
         }
     }
 
+    //单纯检查未揭晓雷数
+    public int checkCoveredMine() {
+        int coveredMine = 0;
+        for (int i = 0; i < gamePanel.getxCount(); i++) {
+            for (int j = 0; j < gamePanel.getyCount(); j++) {
+                //检查未揭晓的雷数
+                if (gamePanel.getChessboard()[i][j] == -1 && gamePanel.getMineField()[i][j].getStatus() == GridStatus.Covered) {
+                    coveredMine++;
+                }
+            }
+        }
+        System.out.println(coveredMine);
+        return coveredMine;
+    }
+
 
     public Player getOnTurn() {
         return onTurn;
@@ -235,6 +249,7 @@ public class GameController {
     public void setCount(int count) {
         this.count = count;
     }
+
 
     //存档,传入一个arraylist，其中元素为Integer 形式的二维数组，以代表棋盘的状态
     //todo:传入一个参数，以明确这是要存哪个档

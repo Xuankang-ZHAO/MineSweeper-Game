@@ -27,6 +27,7 @@ public class MainFrame extends JFrame {
     JLabel photo = new JLabel();
     JLabel currentPlayer = new JLabel();
     JLabel clickTime = new JLabel();
+    JLabel label1 = new JLabel();
     JPanel panel = (JPanel) this.getContentPane();
     ImageIcon back;
 
@@ -75,6 +76,7 @@ public class MainFrame extends JFrame {
         playerUpdate();
         clickTimeUpdate();
         pictureUpdate();
+        CoveredMineUpdate();
         panel.setOpaque(false);
 
         //this.setVisible(true);
@@ -107,15 +109,14 @@ public class MainFrame extends JFrame {
         this.inputSeconds = Integer.parseInt(InitialWindow.window.getCopyOfTime().get(1));
         this.seconds = Integer.parseInt(InitialWindow.window.getCopyOfTime().get(0));
 
-        TopicSelect t=new TopicSelect();
+        TopicSelect t = new TopicSelect();
         t.setSss(2);
         t.dispose();
 
 
-        ModeSelect m=new ModeSelect();
+        ModeSelect m = new ModeSelect();
         m.setTurnsNum(Integer.parseInt(InitialWindow.window.getCopyOfName().get(4)));
         m.dispose();
-
 
 
         controller = new GameController();
@@ -137,6 +138,7 @@ public class MainFrame extends JFrame {
         playerUpdate();
         clickTimeUpdate();
         pictureUpdate();
+        CoveredMineUpdate();
 
         panel.setOpaque(false);
 
@@ -169,13 +171,13 @@ public class MainFrame extends JFrame {
 
     public void pictureUpdate() {
         if (TopicSelect.topicSelect.getSss() == 1) {
-            if(controller.getOnTurn()== controller.getP1()){
+            if (controller.getOnTurn() == controller.getP1()) {
                 Image playerPhoto1 = ImageResource.playerPhoto1Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto1, true);
                 photo.setIcon(afterChange);
                 photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
                 panel.add(photo);
-            } else if (controller.getOnTurn()== controller.getP2()) {
+            } else if (controller.getOnTurn() == controller.getP2()) {
                 Image playerPhoto2 = ImageResource.playerPhoto2Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto2, true);
                 photo.setIcon(afterChange);
@@ -183,13 +185,13 @@ public class MainFrame extends JFrame {
                 panel.add(photo);
             }
         } else if (TopicSelect.topicSelect.getSss() == 2) {
-            if (controller.getOnTurn()== controller.getP1()) {
+            if (controller.getOnTurn() == controller.getP1()) {
                 Image playerPhoto3 = ImageResource.playerPhoto3Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto3, true);
                 photo.setIcon(afterChange);
                 photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
                 panel.add(photo);
-            } else if (controller.getOnTurn()== controller.getP2()) {
+            } else if (controller.getOnTurn() == controller.getP2()) {
                 Image playerPhoto4 = ImageResource.playerPhoto4Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto4, true);
                 photo.setIcon(afterChange);
@@ -197,13 +199,13 @@ public class MainFrame extends JFrame {
                 panel.add(photo);
             }
         } else if (TopicSelect.topicSelect.getSss() == 3) {
-            if (controller.getOnTurn()== controller.getP1()) {
+            if (controller.getOnTurn() == controller.getP1()) {
                 Image playerPhoto5 = ImageResource.playerPhoto5Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto5, true);
                 photo.setIcon(afterChange);
                 photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
                 panel.add(photo);
-            } else if (controller.getOnTurn()== controller.getP2()) {
+            } else if (controller.getOnTurn() == controller.getP2()) {
                 Image playerPhoto6 = ImageResource.playerPhoto6Plus.getImage();
                 ImageIcon afterChange = changeImage(150, 230, playerPhoto6, true);
                 photo.setIcon(afterChange);
@@ -211,6 +213,17 @@ public class MainFrame extends JFrame {
                 panel.add(photo);
             }
         }
+    }
+
+    public void CoveredMineUpdate() {
+        label1.setText(String.format("待开雷数 %s", controller.checkCoveredMine()));
+        label1.setBackground(Color.white);
+        label1.setOpaque(true);
+        label1.setSize(100, 20);
+        label1.setLocation(340, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
+        label1.setForeground(Color.BLACK);
+        label1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        panel.add(label1);
     }
 
 
@@ -284,23 +297,9 @@ public class MainFrame extends JFrame {
             }
         });
 
-
-
-
-
-        JButton clickBtn3 = new JButton("开始界面");
-        clickBtn3.setSize(100, 20);
-        clickBtn3.setLocation(110, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
-        panel.add(clickBtn3);
-        clickBtn3.addActionListener(e -> {
-            dispose();
-            new InitialWindow();
-        });
-
-
         JButton clickBtn4 = new JButton("透视雷场");
         clickBtn4.setSize(100, 20);
-        clickBtn4.setLocation(110, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
+        clickBtn4.setLocation(5, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
         panel.add(clickBtn4);
         clickBtn4.addActionListener(e -> {
             if (clickTimes == 0) {
@@ -311,6 +310,15 @@ public class MainFrame extends JFrame {
                 clickTimes--;
             }
             repaint();
+        });
+
+        JButton clickBtn3 = new JButton("开始界面");
+        clickBtn3.setSize(100, 20);
+        clickBtn3.setLocation(110, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
+        panel.add(clickBtn3);
+        clickBtn3.addActionListener(e -> {
+            dispose();
+            new InitialWindow();
         });
 
 
@@ -346,14 +354,14 @@ public class MainFrame extends JFrame {
 
         JButton clickBtn6 = new JButton("重玩");
         clickBtn6.setSize(100, 20);
-        clickBtn6.setLocation(340, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
+        clickBtn6.setLocation(110, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
         panel.add(clickBtn6);
         clickBtn6.addActionListener(e -> {
             timer.stop();
             GamePanel.gamePanel.reGame();
             ScoreBoard.scoreBoard.reScore();
             getController().reControl();
-            seconds=inputSeconds;
+            seconds = inputSeconds;
             time.setText(seconds + "s left");
             playerUpdate();
             clickTimeUpdate();
