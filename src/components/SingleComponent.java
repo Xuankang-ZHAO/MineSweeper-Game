@@ -43,15 +43,17 @@ public class SingleComponent extends BasicComponent{
             }else {
                 if(value==-1){
                     setStatus(GridStatus.Bombed);
-                    SingleGame.singleGame.minus();
-                    SingleGame.singleGame.plus();
+                    SingleGame.singleGame.setUnopened(SingleGame.singleGame.getUnopened()-1);
+                    SingleGame.singleGame.setOpened(SingleGame.singleGame.getOpened()+1);
+                    SingleGame.singleGame.update();
                     SingleGame.singleGame.stop();
                     JOptionPane.showMessageDialog(null, "您点中了苦力怕，请重新开始游戏", "提示", JOptionPane.PLAIN_MESSAGE);
                     new BombedMusic();
                 }else {
                     setStatus(GridStatus.Clicked);
-                    SingleGame.singleGame.minus();
-                    SingleGame.singleGame.plus();
+                    SingleGame.singleGame.setUnopened(SingleGame.singleGame.getUnopened()-1);
+                    SingleGame.singleGame.setOpened(SingleGame.singleGame.getOpened()+1);
+                    SingleGame.singleGame.update();
                     new ClickedMusic();
                 }
             }
@@ -64,13 +66,15 @@ public class SingleComponent extends BasicComponent{
         if (this.status == GridStatus.Covered){
             if(value==-1){
                 setStatus(GridStatus.Flag);
-                SingleGame.singleGame.minus();
-                SingleGame.singleGame.plus();
+                SingleGame.singleGame.setUnopened(SingleGame.singleGame.getUnopened()-1);
+                SingleGame.singleGame.setOpened(SingleGame.singleGame.getOpened()+1);
+                SingleGame.singleGame.update();
                 new FlagMusic();
             }else {
                 setStatus(GridStatus.Wrong);
-                SingleGame.singleGame.minus();
-                SingleGame.singleGame.plus();
+                SingleGame.singleGame.setUnopened(SingleGame.singleGame.getUnopened()-1);
+                SingleGame.singleGame.setOpened(SingleGame.singleGame.getOpened()+1);
+                SingleGame.singleGame.update();
                 SingleGame.singleGame.stop();
                 JOptionPane.showMessageDialog(null, "标记错误，请重新开始游戏", "提示", JOptionPane.PLAIN_MESSAGE);
                 new WrongMusic();

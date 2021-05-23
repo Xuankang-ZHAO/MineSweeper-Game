@@ -6,6 +6,7 @@ import selectMode.TopicSelect;
 import selectMode.set1;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +22,9 @@ public class SingleGame extends JFrame {
     JPanel panel = (JPanel) this.getContentPane();
     public static SingleGame singleGame;
     Timer timer;
+    JButton button1;
+    JButton button2;
+    JButton button3;
 
 
     public SingleGame(){
@@ -30,13 +34,14 @@ public class SingleGame extends JFrame {
         this.mineCount=set1.set1.getMineNum();
         this.unopened=xCount*yCount;
         this.opened=0;
+        this.seconds=0;
 
         this.setTitle("我的世界联名扫雷");
         this.setLayout(null);//清空布局管理器
         this.setSize(yCount * GridComponent.gridSize + 200, xCount * GridComponent.gridSize + 200);
         this.setLocationRelativeTo(null);
 
-        GamePanel gamePanel = new GamePanel(xCount, yCount, mineCount);
+        SinglePanel singlePanel = new SinglePanel(xCount, yCount, mineCount);
 
         if (TopicSelect.topicSelect.getSss() == 1) {
             this.back = new ImageIcon("resouces/pictures/背景1.jpg");
@@ -51,39 +56,43 @@ public class SingleGame extends JFrame {
         label.setBounds(0, 0, this.getWidth(), this.getHeight());
         this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
 
-        panel.add(gamePanel);
+        panel.add(singlePanel);
         panel.setOpaque(false);
 
 
-        JLabel label1=new JLabel("待开:"+unopened);
-        label1.setSize(110,30);
-        label1.setLocation(5,gamePanel.getHeight());
-        panel.add(label1);
+        this.button1=new JButton("待开:"+unopened);
+        button1.setSize(110,30);
+        button1.setLocation(5,singlePanel.getHeight());
+        button1.setFocusPainted(false);
+        panel.add(button1);
 
-        JLabel label2=new JLabel("已开:"+opened);
-        label2.setSize(110,30);
-        label2.setLocation(120,gamePanel.getHeight());
-        panel.add(label2);
+        this.button2=new JButton("已开:"+opened);
+        button2.setSize(110,30);
+        button2.setLocation(120,singlePanel.getHeight());
+        button2.setFocusPainted(false);
+        panel.add(button2);
 
-        JLabel label3=new JLabel("用时"+seconds+"s");
-        label3.setSize(110,30);
-        label3.setLocation(235,gamePanel.getHeight());
-        panel.add(label3);
+        this.button3=new JButton("用时"+seconds+"s");
+        button3.setSize(110,30);
+        button3.setLocation(235,singlePanel.getHeight());
+        button3.setFocusPainted(false);
+        panel.add(button3);
+
 
         JButton b1=new JButton("重玩");
         b1.setSize(110,30);
-        b1.setLocation(5,gamePanel.getHeight()+label1.getHeight()+5);
+        b1.setLocation(5,singlePanel.getHeight()+button1.getHeight()+5);
         panel.add(b1);
         b1.addActionListener(e -> {
             GamePanel.gamePanel.reGame();
-            unopened=xCount*yCount;
-            opened=0;
-            seconds=0;
+            this.unopened=xCount*yCount;
+            this.opened=0;
+            this.seconds=0;
         });
 
         JButton b2=new JButton("开始界面");
         b2.setSize(110,30);
-        b2.setLocation(120,gamePanel.getHeight()+label.getHeight()+5);
+        b2.setLocation(120,singlePanel.getHeight()+button1.getHeight()+5);
         panel.add(b2);
         b2.addActionListener(e -> {
             this.dispose();
@@ -94,6 +103,7 @@ public class SingleGame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 seconds++;
+                button3.setText("用时"+seconds+"s");
             }
         });
         timer.start();
@@ -103,14 +113,29 @@ public class SingleGame extends JFrame {
 
 
     }
-    public void minus(){
-        unopened--;
-    }
-    public void plus(){
-        opened++;
-    }
+
     public void stop(){
         timer.stop();
     }
 
+    public int getUnopened() {
+        return unopened;
+    }
+
+    public void setUnopened(int unopened) {
+        this.unopened = unopened;
+    }
+
+    public int getOpened() {
+        return opened;
+    }
+
+    public void setOpened(int opened) {
+        this.opened = opened;
+    }
+
+    public void update(){
+        this.button1.setText("待开"+unopened);
+        this.button2.setText("已开"+opened);
+    }
 }

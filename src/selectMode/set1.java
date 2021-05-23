@@ -2,6 +2,7 @@ package selectMode;
 
 
 import ModeOfGame.NewGame;
+import minesweeper.SingleGame;
 import openWindow.InitialWindow;
 
 import javax.swing.*;
@@ -129,7 +130,7 @@ public class set1 extends JFrame implements ActionListener, MouseListener {
                 this.mineNum = Integer.parseInt(mineText.getText());
                 this.turnsNum = ModeSelect.modeSelect.getTurnsNum();
                 dispose();
-                new NewGame();
+                new SingleGame();
             } else if (check() == 1) {
                 JOptionPane.showMessageDialog(null, "请输入不超过24的数字", "雷区x设置不合理", JOptionPane.WARNING_MESSAGE);
             } else if (check() == 2) {
