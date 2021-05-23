@@ -82,47 +82,6 @@ public class MainFrame extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    //读取存储的雷场开始游戏
-    public MainFrame(ArrayList<ArrayList<Integer>> saveOfMines) {
-        mainFrame = this;
-        //todo: change the count of xCount, yCount and mineCount by passing parameters from constructor
-        //下面写的是确定大小的雷区的参数
-        this.saveOfMines = saveOfMines;
-        this.xCount = saveOfMines.size();
-        this.yCount = saveOfMines.get(0).size();
-
-        this.setTitle("我的世界联名扫雷");
-        this.setLayout(null);//清空布局管理器
-        this.setSize(yCount * GridComponent.gridSize + 200, xCount * GridComponent.gridSize + 200);
-        this.setLocationRelativeTo(null);
-
-        Player p1 = new Player();
-        Player p2 = new Player();
-
-        controller = new GameController(p1, p2);
-        GamePanel gamePanel = new GamePanel(saveOfMines);
-        controller.setGamePanel(gamePanel);
-        ScoreBoard scoreBoard = new ScoreBoard(p1, p2, xCount, yCount);
-        controller.setScoreBoard(scoreBoard);
-
-        back = new ImageIcon("resouces/pictures/背景1.jpg");
-        JLabel label = new JLabel(back);
-        this.getLayeredPane().setLayout(null);
-        label.setBounds(0, 0, mainFrame.getWidth(), mainFrame.getHeight());
-        this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
-
-
-        panel.add(gamePanel);
-        panel.add(scoreBoard);
-        button();
-        playerUpdate();
-        clickTimeUpdate();
-        pictureUpdate();
-        panel.setOpaque(false);
-
-        this.setVisible(true);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }
 
     //读取游戏存档开始游戏
     public MainFrame() {

@@ -1,7 +1,6 @@
 package openWindow;
 
 import ModeOfGame.ReadGame;
-import ModeOfGame.ReadMine;
 import Music.playMusic;
 import selectMode.TopicSelect;
 
@@ -44,16 +43,16 @@ public class InitialWindow extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
 
         TitleLabel = new JLabel("Minemine");
-        TitleLabel.setBounds(360, 70, 200, 55);
+        TitleLabel.setBounds(360, 100, 200, 55);
         TitleLabel.setForeground(Color.BLACK);
-        TitleLabel.setFont(new Font("times new roman", Font.ITALIC, 30));
+        TitleLabel.setFont(new Font("times new roman", Font.ITALIC, 40));
         this.add(TitleLabel);
 
 
 
         newButton = new JButton("创建新的游戏");
-        newButton.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        newButton.setBounds(350, 200, 150, 45);
+        newButton.setFont(new Font("微软雅黑", Font.PLAIN, 25));
+        newButton.setBounds(350, 205, 200, 50);
         newButton.setForeground(Color.BLACK);
         newButton.setOpaque(false);
         newButton.setContentAreaFilled(false);
@@ -62,8 +61,8 @@ public class InitialWindow extends JFrame implements ActionListener {
 
 
         getSaveBtn1 = new JButton("进入游戏存档");
-        getSaveBtn1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        getSaveBtn1.setBounds(350, 260, 150, 35);
+        getSaveBtn1.setFont(new Font("微软雅黑", Font.PLAIN, 25));
+        getSaveBtn1.setBounds(350, 305, 200, 50);
         getSaveBtn1.setForeground(Color.BLACK);
         getSaveBtn1.setOpaque(false);
         getSaveBtn1.setContentAreaFilled(false);
@@ -114,34 +113,10 @@ public class InitialWindow extends JFrame implements ActionListener {
         });
 
 
-        getSaveBTn2 = new JButton("进入存档雷场");
-        getSaveBTn2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        getSaveBTn2.setBounds(350, 320, 150, 35);
-        getSaveBTn2.setForeground(Color.BLACK);
-        getSaveBTn2.setOpaque(false);
-        getSaveBTn2.setContentAreaFilled(false);
-        this.add(getSaveBTn2);
-        getSaveBTn2.addActionListener(this);
-        getSaveBTn2.addActionListener(e -> {
-            String fileName = JOptionPane.showInputDialog(this, "Input the name you want to read");
-            System.out.println("fileName :" + fileName);
-            try {
-                ArrayList<ArrayList<Integer>> copyOfMine = new ArrayList<>(readInitialDataToFile(fileName));
-                this.copyOfMine = copyOfMine;
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-                JOptionPane.showMessageDialog(null, "找不到您要的存档，请更换存档名再试", "提示", JOptionPane.PLAIN_MESSAGE);
-                new InitialWindow();
-            }
-
-            dispose();
-            new ReadMine();
-        });
-
 
         cancelButton = new JButton("退出游戏");
-        cancelButton.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        cancelButton.setBounds(350, 380, 150, 35);
+        cancelButton.setFont(new Font("微软雅黑", Font.PLAIN, 25));
+        cancelButton.setBounds(350, 405, 200, 50);
         cancelButton.setOpaque(false);
         cancelButton.setContentAreaFilled(false);
         cancelButton.setForeground(Color.BLACK);
