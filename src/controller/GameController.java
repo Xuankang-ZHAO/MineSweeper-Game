@@ -87,6 +87,10 @@ public class GameController {
      * 在这里执行每个回合结束时需要进行的操作。
      */
     public void nextTurn() {
+        scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
+        gamePanel.updateCurrentState();//回合结束更新棋子们的打开状态
+        scoreBoard.updatePlayerScores();//回合结束更新玩家的分数和失误次数表，用于存档
+
         if (MainFrame.mainFrame.getSeconds() > 0) {
             if (onTurn == p1 && count < turns - 1) {
                 count++;
@@ -146,9 +150,7 @@ public class GameController {
 //        System.out.println(p1.getMistake());
 //        System.out.println(p2.getScore());
 //        System.out.println(p2.getMistake());
-        scoreBoard.update();//回合结束更新分数表，用于游戏界面上的语句显示
-        gamePanel.updateCurrentState();//回合结束更新棋子们的打开状态
-        scoreBoard.updatePlayerScores();//回合结束更新玩家的分数和失误次数表，用于存档
+
     }
 
     public void EndGame() {

@@ -137,21 +137,7 @@ public class MainFrame extends JFrame {
         playerUpdate();
         clickTimeUpdate();
         pictureUpdate();
-//        panel.add(currentPlayer);
-//        panel.add(clickTime);
-//        if (controller.getRecord() == 1) {
-//            Image playerPhoto1 = ImageResource.playerPhoto1Plus.getImage();
-//            ImageIcon afterChange = changeImage(150, 230, playerPhoto1, true);
-//            photo.setIcon(afterChange);
-//            photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
-//            panel.add(photo);
-//        } else if (controller.getRecord() == 2) {
-//            Image playerPhoto2 = ImageResource.playerPhoto2Plus.getImage();
-//            ImageIcon afterChange = changeImage(150, 230, playerPhoto2, true);
-//            photo.setIcon(afterChange);
-//            photo.setBounds(GamePanel.gamePanel.getWidth() + 10, 30, 150, 230);
-//            panel.add(photo);
-//        }
+
         panel.setOpaque(false);
 
 
@@ -256,7 +242,7 @@ public class MainFrame extends JFrame {
 
 
     public void button() {
-        JButton clickBtn1 = new JButton("存档进度");
+        JButton clickBtn1 = new JButton("存档");
         clickBtn1.setSize(100, 20);
         clickBtn1.setLocation(5, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
         //clickBtn1.setLocation(gamePanel.getWidth(),  gamePanel.getHeight()+scoreBoard.getHeight()+10);
@@ -299,24 +285,7 @@ public class MainFrame extends JFrame {
         });
 
 
-        JButton clickBtn2 = new JButton("存档雷场");
-        clickBtn2.setSize(100, 20);
-        clickBtn2.setLocation(5, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight() + clickBtn1.getHeight() + 5);
-        //clickBtn2.setLocation(gamePanel.getWidth(), gamePanel.getHeight()+scoreBoard.getHeight() + clickBtn1.getHeight() + 5);
-        panel.add(clickBtn2);
-        clickBtn2.addActionListener(e -> {
-            String fileName = JOptionPane.showInputDialog(this, "Name your game archive");
-            System.out.println("fileName :" + fileName);
 
-            //controller.readFileData(fileName);
-            //存档
-            //存雷场
-            try {
-                controller.writeInitialDataToFile(fileName);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
 
 
         JButton clickBtn3 = new JButton("开始界面");
@@ -380,9 +349,12 @@ public class MainFrame extends JFrame {
         clickBtn6.setLocation(340, GamePanel.gamePanel.getHeight() + controller.getScoreBoard().getHeight());
         panel.add(clickBtn6);
         clickBtn6.addActionListener(e -> {
+            timer.stop();
             GamePanel.gamePanel.reGame();
             ScoreBoard.scoreBoard.reScore();
             getController().reControl();
+            seconds=inputSeconds;
+            time.setText(seconds + "s left");
             playerUpdate();
             clickTimeUpdate();
             pictureUpdate();
