@@ -2,6 +2,7 @@ package minesweeper;
 
 import components.GridComponent;
 import components.SingleComponent;
+import entity.GridStatus;
 import openWindow.InitialWindow;
 import selectMode.TopicSelect;
 import selectMode.set1;
@@ -140,7 +141,16 @@ public class SingleGame extends JFrame {
     }
 
     public void update(){
+        unopened=0;
+        for (int i=0;i<xCount;i++){
+            for (int j=0;j<yCount;j++){
+                if(SinglePanel.singlePanel.getMineField()[i][j].getStatus().equals(GridStatus.Covered)){
+                    unopened++;
+                }
+            }
+        }
         this.button1.setText("待开"+unopened);
+        opened=xCount*yCount-unopened;
         this.button2.setText("已开"+opened);
     }
 
