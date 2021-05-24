@@ -58,11 +58,11 @@ public class MainFrame extends JFrame {
         controller.setScoreBoard(scoreBoard);
 
         if (TopicSelect.topicSelect.getSss() == 1) {
-            back = new ImageIcon("resouces/pictures/背景1.jpg");
+            back = new ImageIcon("F:\\2021年春季学期\\JAVA\\project\\SweepMine-Tiga\\resouces\\pictures\\背景1.jpg");
         } else if (TopicSelect.topicSelect.getSss() == 2) {
-            back = new ImageIcon("resouces/pictures/背景2.jpg");
+            back = new ImageIcon("F:\\2021年春季学期\\JAVA\\project\\SweepMine-Tiga\\resouces\\pictures\\背景2.jpg");
         } else if (TopicSelect.topicSelect.getSss() == 3) {
-            back = new ImageIcon("resouces/pictures/背景3.jpg");
+            back = new ImageIcon("F:\\2021年春季学期\\JAVA\\project\\SweepMine-Tiga\\resouces\\pictures\\背景3.jpg");
         }
 
         JLabel label = new JLabel(back);
@@ -125,7 +125,7 @@ public class MainFrame extends JFrame {
         ScoreBoard scoreBoard = new ScoreBoard();
         controller.setScoreBoard(scoreBoard);
 
-        back = new ImageIcon("resouces/pictures/背景1.jpg");
+        back = new ImageIcon("F:\\2021年春季学期\\JAVA\\project\\SweepMine-Tiga\\resouces\\pictures\\背景1.jpg");
         JLabel label = new JLabel(back);
         this.getLayeredPane().setLayout(null);
         label.setBounds(0, 0, mainFrame.getWidth(), mainFrame.getHeight());

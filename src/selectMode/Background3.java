@@ -11,7 +11,7 @@ public class Background3 extends JPanel {
 
     public Background3() {
         try {
-            image = ImageIO.read(new File("resouces/pictures/沙漠地貌.PNG"));
+            image = ImageIO.read(new File("F:\\2021年春季学期\\JAVA\\project\\SweepMine-Tiga\\resouces\\pictures\\沙漠地貌.PNG"));
         } catch (IOException e) {
             e.printStackTrace();
         }

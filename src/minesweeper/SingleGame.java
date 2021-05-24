@@ -45,11 +45,11 @@ public class SingleGame extends JFrame {
         SinglePanel singlePanel = new SinglePanel(xCount, yCount, mineCount);
 
         if (TopicSelect.topicSelect.getSss() == 1) {
-            this.back = new ImageIcon("resouces/pictures/背景1.jpg");
+            this.back = new ImageIcon("F:\\2021年春季学期\\JAVA\\project\\SweepMine-Tiga\\resouces\\pictures\\背景1.jpg");
         } else if (TopicSelect.topicSelect.getSss() == 2) {
-            this.back = new ImageIcon("resouces/pictures/背景2.jpg");
+            this.back = new ImageIcon("F:\\2021年春季学期\\JAVA\\project\\SweepMine-Tiga\\resouces\\pictures\\背景2.jpg");
         } else if (TopicSelect.topicSelect.getSss() == 3) {
-            this.back = new ImageIcon("resouces/pictures/背景3.jpg");
+            this.back = new ImageIcon("F:\\2021年春季学期\\JAVA\\project\\SweepMine-Tiga\\resouces\\pictures\\背景3.jpg");
         }
 
         JLabel label = new JLabel(back);

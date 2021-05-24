@@ -12,7 +12,7 @@ public class Story2 extends JFrame {
         this.setTitle("游戏情节");
         this.setSize(600, 400);
         this.setLocationRelativeTo(null);
-        ImageIcon back = new ImageIcon("resouces/pictures/背景2.jpg");
+        ImageIcon back = new ImageIcon("F:\\2021年春季学期\\JAVA\\project\\SweepMine-Tiga\\resouces\\pictures\\背景2.jpg");
         JLabel label = new JLabel(back);
         JPanel panel = (JPanel) this.getContentPane();
         this.getLayeredPane().setLayout(null);

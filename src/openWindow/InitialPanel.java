@@ -11,7 +11,7 @@ public class InitialPanel extends JPanel {
     public InitialPanel()
     {
         try {
-            image= ImageIO.read(new File("resouces/pictures/背景.PNG"));
+            image= ImageIO.read(new File("F:\\2021年春季学期\\JAVA\\project\\SweepMine-Tiga\\resouces\\pictures\\背景.PNG"));
         } catch (IOException e) {
             e.printStackTrace();
         }
