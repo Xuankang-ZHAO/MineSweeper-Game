@@ -1,4 +1,4 @@
-package resources;
+package imResources;
 
 import javax.swing.*;
 import java.awt.*;

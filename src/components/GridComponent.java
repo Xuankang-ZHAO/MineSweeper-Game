@@ -7,7 +7,7 @@ import Music.WrongMusic;
 import entity.GridStatus;
 import minesweeper.GamePanel;
 import minesweeper.MainFrame;
-import resources.ImageResource;
+import imResources.ImageResource;
 import selectMode.TopicSelect;
 
 import java.awt.*;

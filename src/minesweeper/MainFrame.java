@@ -4,7 +4,7 @@ import components.GridComponent;
 import controller.GameController;
 import entity.Player;
 import openWindow.InitialWindow;
-import resources.ImageResource;
+import imResources.ImageResource;
 import selectMode.*;
 
 import javax.swing.*;
