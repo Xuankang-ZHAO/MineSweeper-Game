@@ -1,1 +1,1 @@
-This is the final project of our Java course. 
+This is the final project of my Java course at SUSTECH. Thanks for my teammate Zhe Ding and her great contribution to this project.
